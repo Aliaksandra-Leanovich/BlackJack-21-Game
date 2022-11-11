@@ -1,19 +1,23 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { LinkTemplate } from "../components/LinkTemplate";
 import { routes } from "../routes/routes";
-import { useAppSelector } from "../store/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
 import { getUserInfo } from "../store/selectors/userSelector";
+import { fetchDeckId } from "../store/slices/deckIdSlice";
 
 const HomePage = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchDeckId());
+  }, [dispatch]);
+
   const { isAuthorized } = useAppSelector(getUserInfo);
-  const navigate = useNavigate();
-  const handleBack = () => {
-    navigate(-1);
-  };
+
   if (typeof isAuthorized !== null) {
     return (
       <div>
-        {/* <Button handleClick={handleBack}>Back</Button> */}
         <LinkTemplate to={routes.ACCOUNT}>Account</LinkTemplate>
         <LinkTemplate to={routes.GAME}>Start Game</LinkTemplate>
       </div>

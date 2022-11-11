@@ -13,7 +13,6 @@ const Account = () => {
   };
 
   if (typeof isAuthorized !== null) {
-    // return <Navigate to={routes.ACCOUNT} />;
     return (
       <div>
         <Button handleClick={handleBack}>Back</Button>

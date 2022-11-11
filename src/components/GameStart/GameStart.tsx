@@ -1,33 +1,39 @@
 import { useState } from "react";
 import "../../App.css";
-import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
-import { getCards } from "../../store/selectors/cardsSelector";
-import { fetchCards } from "../../store/slices/cardsSlice";
 import { ICard } from "../../store/types";
 import { Button } from "../Button";
-import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../store/hooks/hooks";
+import { getDeckId } from "../../store/selectors/deckIdSelectors";
+import { cardsApi } from "../../services/CardsService";
 
 const GameStart = () => {
-  const [allCards, setAllCards] = useState<ICard[]>([]);
+  const navigate = useNavigate();
+  const { deckId } = useAppSelector(getDeckId);
+  const [cards, setCards] = useState<ICard[]>([]);
 
-  const dispatch = useAppDispatch();
-  const { cards } = useAppSelector(getCards);
-
-  const onSubmit = () => {
-    dispatch(fetchCards());
-    setAllCards(allCards?.concat(cards));
+  const handleBack = () => {
+    navigate(-1);
   };
 
-  console.log(cards);
+  const getNewCard = async () => {
+    const api = await cardsApi.getCard(deckId);
+    setCards(cards.concat(api));
+  };
+
+  const onSubmit = () => {
+    getNewCard();
+  };
 
   return (
     <div>
+      <Button handleClick={handleBack}>Back</Button>
       <Button type="submit" handleClick={onSubmit}>
         New Card
       </Button>
 
-      {allCards?.map((card) => (
-        <li key={uuidv4()}>
+      {cards.map((card) => (
+        <li key={card.code}>
           <p>{card.value}</p>
           <img src={card.image} alt={card.code} className="card" />
         </li>

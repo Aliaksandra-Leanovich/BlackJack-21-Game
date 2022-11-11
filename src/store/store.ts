@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cardsSlice from "./slices/cardsSlice";
+import deckIdSlice from "./slices/deckIdSlice";
 import userSlice from "./slices/userSlices";
 
 const store = configureStore({
-  reducer: { cards: cardsSlice, user: userSlice },
+  reducer: { user: userSlice, deckId: deckIdSlice },
 });
 
 export default store;

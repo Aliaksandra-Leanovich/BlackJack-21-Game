@@ -17,3 +17,14 @@ export interface UsersState {
   cards: ICard[];
   status: RequestStatusType;
 }
+export interface IDeckApi {
+  success: boolean;
+  deck_id: string;
+  shuffled: boolean;
+  remaining: number;
+}
+
+export interface IDeckIdState {
+  deckId: string;
+  status: RequestStatusType;
+}
