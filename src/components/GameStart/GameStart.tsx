@@ -51,7 +51,10 @@ const GameStart = () => {
     setPoints(points);
   };
 
-  const getNewCard = async (cards: any, setCards: any) => {
+  const getNewCard = async (
+    cards: ICard[],
+    setCards: (points: ICard[]) => void
+  ) => {
     const api = await cardsApi.getCard(deckId);
     setCards(cards.concat(api));
   };
