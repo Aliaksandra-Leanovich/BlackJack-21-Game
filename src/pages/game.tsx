@@ -1,4 +1,4 @@
-import GameStart from "../components/GameStart/GameStart";
+import { GameStart } from "../components/GameStart/GameStart";
 import { useAppSelector } from "../store/hooks/hooks";
 import { getUserInfo } from "../store/selectors/userSelector";
 

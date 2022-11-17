@@ -2,4 +2,5 @@ import { ButtonHTMLAttributes } from "react";
 
 export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   handleClick?: () => void;
+  disabled?: any;
 }

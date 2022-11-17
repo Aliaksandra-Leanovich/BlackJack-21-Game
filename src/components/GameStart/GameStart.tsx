@@ -11,9 +11,11 @@ import {
 import { cardsApi } from "../../services/CardsService";
 import { Spinner } from "../Spinner";
 
-const GameStart = () => {
+export const GameStart = () => {
   const navigate = useNavigate();
   const { deckId } = useAppSelector(getDeckId);
+  const [gameStatus, setGameStatus] = useState("Are you ready?");
+  const [inProgress, setInProgress] = useState(true);
   const status = useAppSelector(getDeckIdStatus);
   const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
   const [cardsForDealer, setCardsForDealer] = useState<ICard[]>([]);
@@ -27,7 +29,9 @@ const GameStart = () => {
   useEffect(() => {
     countPoints(cardsForDealer, setCountDealer);
     countPoints(cardsForPlayer, setCountPlayer);
+    stay();
   }, [cardsForDealer, cardsForPlayer]);
+
   const countPoints = (cards: ICard[], setPoints: (points: number) => void) => {
     let points = 0;
     cards.map((card: ICard) => {
@@ -51,6 +55,14 @@ const GameStart = () => {
     setPoints(points);
   };
 
+  const getInitialCards = async (
+    cards: ICard[],
+    setCards: (points: ICard[]) => void
+  ) => {
+    const api = await cardsApi.getInitialCards(deckId);
+    setCards(cards.concat(api));
+  };
+
   const getNewCard = async (
     cards: ICard[],
     setCards: (points: ICard[]) => void
@@ -62,28 +74,62 @@ const GameStart = () => {
   const onSubmit = () => {
     getNewCard(cardsForPlayer, setCardsForPlayer);
     getNewCard(cardsForDealer, setCardsForDealer);
+    console.log(cardsForDealer);
+  };
+  const onFirstSubmit = () => {
+    getInitialCards(cardsForPlayer, setCardsForPlayer);
+    getInitialCards(cardsForDealer, setCardsForDealer);
   };
 
+  const stay = () => {
+    if (countPlayer > 21 && countPlayer > countDealer) {
+      setInProgress(false);
+      setGameStatus("Player Wins!");
+    }
+    if (countDealer > 21 && countDealer > countPlayer) {
+      setInProgress(false);
+      setGameStatus("Dealer Wins!");
+    }
+    if (countPlayer == 21) {
+      setInProgress(false);
+      setGameStatus("Player Wins!");
+    }
+    if (countDealer == 21) {
+      setInProgress(false);
+      setGameStatus("Dealer Wins!");
+    }
+    if (countPlayer === countDealer && countPlayer >= 21 && countDealer >= 21) {
+      setInProgress(false);
+      setGameStatus("Tie!");
+    }
+    return " ";
+  };
   return (
     <div>
       <Button handleClick={handleBack}>Back</Button>
-      <Button type="submit" handleClick={onSubmit}>
+      <Button
+        type="submit"
+        handleClick={onFirstSubmit}
+        disabled={cardsForDealer.length > 0 ? true : false}
+      >
+        Start
+      </Button>
+      <Button
+        type="submit"
+        handleClick={onSubmit}
+        disabled={cardsForDealer.length > 0 && inProgress ? false : true}
+      >
         New Card
       </Button>
       <div>
+        <p>{inProgress}</p>
+        <p>{gameStatus}</p>
         <p>Player's points: {countPlayer}</p>
         <p>Dealer's points: {countDealer}</p>
       </div>
       <div style={{ display: "flex" }}>
         {cardsForPlayer.map((card) => (
           <li key={card.code}>
-            <p>{card.value}</p>
-            <img src={card.image} alt={card.code} className="card" />
-          </li>
-        ))}
-        {cardsForDealer.map((card) => (
-          <li key={card.code}>
-            <p>{card.value}</p>
             <img src={card.image} alt={card.code} className="card" />
           </li>
         ))}
@@ -91,5 +137,3 @@ const GameStart = () => {
     </div>
   );
 };
-
-export default GameStart;

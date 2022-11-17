@@ -7,6 +7,10 @@ class CardsService {
     baseURL: this.API_URL,
   });
 
+  public async getInitialCards(deckId: string): Promise<ICard[]> {
+    const { data } = await this.api.get<ICardsApi>(`/${deckId}/draw/?count=2`);
+    return data.cards;
+  }
   public async getCard(deckId: string): Promise<ICard[]> {
     const { data } = await this.api.get<ICardsApi>(`/${deckId}/draw/?count=1`);
     return data.cards;
