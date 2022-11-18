@@ -22,7 +22,6 @@ const SignUpForm = () => {
     dispatch(setUserEmail(data.email));
     dispatch(setUserName(data.name));
     // dispatch(setUserPassword(data.password));
-    localStorage.setItem("user", data.email);
     navigate(routes.HOME);
   };
   return (

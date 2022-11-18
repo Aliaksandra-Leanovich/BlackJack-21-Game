@@ -4,7 +4,7 @@ import { routes } from "../routes/routes";
 import { useAppSelector } from "../store/hooks/hooks";
 import { getUserInfo } from "../store/selectors/userSelector";
 
-const Account = () => {
+export const Account = () => {
   const { name, budget } = useAppSelector(getUserInfo);
   const { isAuthorized } = useAppSelector(getUserInfo);
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Account = () => {
     navigate(-1);
   };
 
-  if (typeof isAuthorized !== null) {
+  if (isAuthorized) {
     return (
       <div>
         <Button handleClick={handleBack}>Back</Button>
@@ -23,5 +23,3 @@ const Account = () => {
   }
   return <Navigate to={routes.SIGNUP} />;
 };
-
-export default Account;

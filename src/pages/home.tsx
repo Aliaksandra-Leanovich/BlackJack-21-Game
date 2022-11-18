@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
 import { getUserInfo } from "../store/selectors/userSelector";
 import { fetchDeckId } from "../store/slices/deckIdSlice";
 
-const HomePage = () => {
+export const HomePage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const HomePage = () => {
 
   const { isAuthorized } = useAppSelector(getUserInfo);
 
-  if (typeof isAuthorized !== null) {
+  if (isAuthorized) {
     return (
       <div>
         <LinkTemplate to={routes.ACCOUNT}>Account</LinkTemplate>
@@ -25,5 +25,3 @@ const HomePage = () => {
   }
   return <Navigate to={routes.SIGNUP} />;
 };
-
-export default HomePage;

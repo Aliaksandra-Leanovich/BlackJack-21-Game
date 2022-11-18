@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IUserStore {
-  isAuthorized: string | null;
+  isAuthorized: boolean;
   email: string | undefined;
   name?: string | undefined;
   password: string | undefined;
@@ -9,7 +9,7 @@ interface IUserStore {
 }
 
 const initialState: IUserStore = {
-  isAuthorized: null,
+  isAuthorized: false, //change!
   email: undefined,
   name: undefined,
   password: undefined,
@@ -21,7 +21,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUserEmail: (state, action) => {
-      state.isAuthorized = localStorage.getItem("user");
+      state.isAuthorized = true;
       state.email = action.payload;
     },
     setUserName: (state, action) => {
@@ -35,7 +35,7 @@ const userSlice = createSlice({
     },
 
     unsetUser: (state) => {
-      state.isAuthorized = null;
+      state.isAuthorized = false;
       state.email = undefined;
     },
   },

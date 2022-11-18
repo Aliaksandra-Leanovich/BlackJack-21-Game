@@ -13,7 +13,7 @@ const initialState = {
 } as IDeckIdState;
 
 const deckIdSlice = createSlice({
-  name: "deckId",
+  name: "deck",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
