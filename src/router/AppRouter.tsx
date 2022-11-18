@@ -6,11 +6,11 @@ import HomePage from "../pages/home";
 import SignUpPage from "../pages/signup";
 import { routes } from "../routes/routes";
 
-const AppRouter = () => {
+export const AppRouter = () => {
   return (
     <Routes>
       <Route path={routes.HOME} element={<MainTemplate />}>
-        <Route path={routes.HOME} element={<HomePage />} />
+        <Route index element={<HomePage />} />
         <Route path={routes.SIGNUP} element={<SignUpPage />} />
         <Route path={routes.GAME} element={<GamePage />} />
         <Route path={routes.ACCOUNT} element={<Account />} />
@@ -18,5 +18,3 @@ const AppRouter = () => {
     </Routes>
   );
 };
-
-export default AppRouter;

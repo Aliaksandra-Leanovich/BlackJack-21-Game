@@ -59,7 +59,7 @@ export const GameStart = () => {
     cards: ICard[],
     setCards: (points: ICard[]) => void
   ) => {
-    const api = await cardsApi.getInitialCards(deckId);
+    const api = await cardsApi.getCard(deckId, 2);
     setCards(cards.concat(api));
   };
 
@@ -67,7 +67,7 @@ export const GameStart = () => {
     cards: ICard[],
     setCards: (points: ICard[]) => void
   ) => {
-    const api = await cardsApi.getCard(deckId);
+    const api = await cardsApi.getCard(deckId, 1);
     setCards(cards.concat(api));
   };
 
@@ -82,19 +82,25 @@ export const GameStart = () => {
   };
 
   const stay = () => {
-    if (countPlayer > 21 && countPlayer > countDealer) {
-      setInProgress(false);
-      setGameStatus("Player Wins!");
-    }
-    if (countDealer > 21 && countDealer > countPlayer) {
+    if (countDealer < 21 && countPlayer > 21) {
       setInProgress(false);
       setGameStatus("Dealer Wins!");
     }
-    if (countPlayer == 21) {
+
+    if (countPlayer < 21 && countDealer > 21) {
       setInProgress(false);
       setGameStatus("Player Wins!");
     }
-    if (countDealer == 21) {
+    if (countPlayer > 21 && countDealer > 21) {
+      setInProgress(false);
+      setGameStatus("Tie!");
+    }
+
+    if (countPlayer === 21) {
+      setInProgress(false);
+      setGameStatus("Player Wins!");
+    }
+    if (countDealer === 21) {
       setInProgress(false);
       setGameStatus("Dealer Wins!");
     }
