@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import { cardsApi } from "../../services/CardsService";
@@ -11,18 +11,18 @@ import { getUserHand, getUserPoints } from "../../store/selectors/userSelector";
 import { ICard } from "../../store/types";
 import { Button } from "../Button";
 import { PlayerHand } from "../PlayerHand/PlayerHand";
-import { countPoints } from "./count";
 
 export const GameStart = () => {
   const navigate = useNavigate();
   const status = useAppSelector(getDeckIdStatus);
+
   const hand = useAppSelector(getUserHand);
   const points = useAppSelector(getUserPoints);
   const { deckId } = useAppSelector(getDeckId);
+
   const [gameStatus, setGameStatus] = useState<string>("");
   const [inProgress, setInProgress] = useState(false);
   const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
-  // const [countPlayer, setCountPlayer] = useState(0);
   const [countDealer, setCountDealer] = useState(0);
 
   const handleBack = () => {
@@ -30,9 +30,8 @@ export const GameStart = () => {
   };
 
   // useEffect(() => {
-  //   // countPoints(hand, setCountPlayer);
   //   getGameResult();
-  // }, [hand]);
+  // }, []);
 
   const getInitialCards = async (
     cards: ICard[],

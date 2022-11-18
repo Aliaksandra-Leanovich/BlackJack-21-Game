@@ -2,7 +2,7 @@ import axios from "axios";
 import { ICard, ICardsApi } from "../store/types";
 
 class CardsService {
-  private readonly API_URL = "https://deckofcardsapi.com/api/deck";
+  private readonly API_URL = import.meta.env.CH_APP_API_URL;
   private api = axios.create({
     baseURL: this.API_URL,
   });
