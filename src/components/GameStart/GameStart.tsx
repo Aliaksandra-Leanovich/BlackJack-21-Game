@@ -7,53 +7,32 @@ import {
   getDeckId,
   getDeckIdStatus,
 } from "../../store/selectors/deckIdSelectors";
-import { getUserHand } from "../../store/selectors/userSelector";
+import { getUserHand, getUserPoints } from "../../store/selectors/userSelector";
 import { ICard } from "../../store/types";
 import { Button } from "../Button";
 import { PlayerHand } from "../PlayerHand/PlayerHand";
+import { countPoints } from "./count";
 
 export const GameStart = () => {
   const navigate = useNavigate();
   const status = useAppSelector(getDeckIdStatus);
   const hand = useAppSelector(getUserHand);
+  const points = useAppSelector(getUserPoints);
   const { deckId } = useAppSelector(getDeckId);
   const [gameStatus, setGameStatus] = useState<string>("");
   const [inProgress, setInProgress] = useState(false);
   const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
-  const [countPlayer, setCountPlayer] = useState(0);
+  // const [countPlayer, setCountPlayer] = useState(0);
   const [countDealer, setCountDealer] = useState(0);
 
   const handleBack = () => {
     navigate(-1);
   };
 
-  useEffect(() => {
-    countPoints(hand, setCountPlayer);
-    getGameResult();
-  }, [hand]);
-
-  const countPoints = (cards: ICard[], setPoints: (points: number) => void) => {
-    let points = 0;
-    cards.map((card: ICard) => {
-      switch (card.value) {
-        case "KING":
-          points = points + 4;
-          break;
-        case "ACE":
-          points = points + 11;
-          break;
-        case "JACK":
-          points = points + 2;
-          break;
-        case "QUEEN":
-          points = points + 3;
-          break;
-        default:
-          points = +card.value + points;
-      }
-    });
-    setPoints(points);
-  };
+  // useEffect(() => {
+  //   // countPoints(hand, setCountPlayer);
+  //   getGameResult();
+  // }, [hand]);
 
   const getInitialCards = async (
     cards: ICard[],
@@ -80,35 +59,35 @@ export const GameStart = () => {
     getInitialCards(cardsForPlayer, setCardsForPlayer);
   };
 
-  const getGameResult = () => {
-    if (countDealer < 21 && countPlayer > 21) {
-      setInProgress(false);
-      setGameStatus("fineshed");
-    }
+  // const getGameResult = () => {
+  //   if (countDealer < 21 && countPlayer > 21) {
+  //     setInProgress(false);
+  //     setGameStatus("fineshed");
+  //   }
 
-    if (countPlayer < 21 && countDealer > 21) {
-      setInProgress(false);
-      setGameStatus("fineshed");
-    }
-    if (countPlayer > 21 && countDealer > 21) {
-      setInProgress(false);
-      setGameStatus("fineshed");
-    }
+  //   if (countPlayer < 21 && countDealer > 21) {
+  //     setInProgress(false);
+  //     setGameStatus("fineshed");
+  //   }
+  //   if (countPlayer > 21 && countDealer > 21) {
+  //     setInProgress(false);
+  //     setGameStatus("fineshed");
+  //   }
 
-    if (countPlayer === 21) {
-      setInProgress(false);
-      setGameStatus("fineshed");
-    }
-    if (countDealer === 21) {
-      setInProgress(false);
-      setGameStatus("fineshed");
-    }
-    if (countPlayer === countDealer && countPlayer >= 21 && countDealer >= 21) {
-      setInProgress(false);
-      setGameStatus("fineshed");
-    }
-    return " ";
-  };
+  //   if (countPlayer === 21) {
+  //     setInProgress(false);
+  //     setGameStatus("fineshed");
+  //   }
+  //   if (countDealer === 21) {
+  //     setInProgress(false);
+  //     setGameStatus("fineshed");
+  //   }
+  //   if (countPlayer === countDealer && countPlayer >= 21 && countDealer >= 21) {
+  //     setInProgress(false);
+  //     setGameStatus("fineshed");
+  //   }
+  //   return " ";
+  // };
   return (
     <div>
       <Button handleClick={handleBack}>Back</Button>
@@ -129,7 +108,7 @@ export const GameStart = () => {
       <div>
         <p>{inProgress}</p>
         {/* <div>{inProgress ? <p>Good luck!</p> : <p>The winner is...</p>}</div> */}
-        <p>Player's points: {countPlayer}</p>
+        <p>Player's points: {points}</p>
         <p>Dealer's points: {countDealer}</p>
       </div>
       <PlayerHand cards={cardsForPlayer} />

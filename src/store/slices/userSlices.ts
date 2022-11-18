@@ -7,7 +7,7 @@ interface IUserStore {
   name?: string | undefined;
   // password: string | undefined;
   hand: ICard[];
-  // points: number;
+  points: number;
   budget: number;
 }
 
@@ -16,7 +16,7 @@ const initialState: IUserStore = {
   email: undefined,
   name: undefined,
   hand: [],
-  // points: 0,
+  points: 0,
   // password: undefined,
   budget: 10000,
 };
@@ -39,9 +39,9 @@ const userSlice = createSlice({
         ...state.hand.filter((item) => item.code !== payload.code),
       ];
     },
-    // setUserPoints: (state, action) => {
-    //   state.points = action.payload;
-    // },
+    setUserPoints: (state, action) => {
+      state.points = action.payload;
+    },
     // setUserPassword: (state, action) => {
     //   state.password = action.payload;
     // },
@@ -55,6 +55,11 @@ const userSlice = createSlice({
     },
   },
 });
-export const { setUserEmail, setUserName, unsetUser, setUserHand } =
-  userSlice.actions;
+export const {
+  setUserEmail,
+  setUserName,
+  unsetUser,
+  setUserPoints,
+  setUserHand,
+} = userSlice.actions;
 export default userSlice.reducer;

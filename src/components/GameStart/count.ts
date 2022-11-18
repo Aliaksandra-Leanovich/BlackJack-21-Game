@@ -1,9 +1,6 @@
 import { ICard } from "../../store/types";
 
-export const countPoints = (
-  cards: ICard[],
-  setPoints: (points: number) => void
-) => {
+export const countPoints = (cards: ICard[]) => {
   let points = 0;
   cards.map((card: ICard) => {
     switch (card.value) {
@@ -23,5 +20,5 @@ export const countPoints = (
         points = +card.value + points;
     }
   });
-  setPoints(points);
+  return points;
 };
