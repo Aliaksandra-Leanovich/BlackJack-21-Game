@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react";
-import "../../App.css";
-import { ICard } from "../../store/types";
-import { Button } from "../Button";
 import { useNavigate } from "react-router-dom";
+import "../../App.css";
+import { cardsApi } from "../../services/CardsService";
 import { useAppSelector } from "../../store/hooks/hooks";
 import {
   getDeckId,
   getDeckIdStatus,
 } from "../../store/selectors/deckIdSelectors";
-import { cardsApi } from "../../services/CardsService";
-import { Spinner } from "../Spinner";
+import { getUserHand } from "../../store/selectors/userSelector";
+import { ICard } from "../../store/types";
+import { Button } from "../Button";
+import { PlayerHand } from "../PlayerHand/PlayerHand";
 
 export const GameStart = () => {
   const navigate = useNavigate();
-  const { deckId } = useAppSelector(getDeckId);
-  const [gameStatus, setGameStatus] = useState("Are you ready?");
-  const [inProgress, setInProgress] = useState(true);
   const status = useAppSelector(getDeckIdStatus);
+  const hand = useAppSelector(getUserHand);
+  const { deckId } = useAppSelector(getDeckId);
+  const [gameStatus, setGameStatus] = useState<string>("");
+  const [inProgress, setInProgress] = useState(false);
   const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
-  const [cardsForDealer, setCardsForDealer] = useState<ICard[]>([]);
   const [countPlayer, setCountPlayer] = useState(0);
   const [countDealer, setCountDealer] = useState(0);
 
@@ -27,10 +28,9 @@ export const GameStart = () => {
   };
 
   useEffect(() => {
-    countPoints(cardsForDealer, setCountDealer);
-    countPoints(cardsForPlayer, setCountPlayer);
+    countPoints(hand, setCountPlayer);
     getGameResult();
-  }, [cardsForDealer, cardsForPlayer]);
+  }, [hand]);
 
   const countPoints = (cards: ICard[], setPoints: (points: number) => void) => {
     let points = 0;
@@ -73,40 +73,39 @@ export const GameStart = () => {
 
   const onSubmit = () => {
     getNewCard(cardsForPlayer, setCardsForPlayer);
-    getNewCard(cardsForDealer, setCardsForDealer);
-    console.log(cardsForDealer);
   };
   const onFirstSubmit = () => {
+    setGameStatus("inprogress");
+    setInProgress(true);
     getInitialCards(cardsForPlayer, setCardsForPlayer);
-    getInitialCards(cardsForDealer, setCardsForDealer);
   };
 
   const getGameResult = () => {
     if (countDealer < 21 && countPlayer > 21) {
       setInProgress(false);
-      setGameStatus("Dealer Wins!");
+      setGameStatus("fineshed");
     }
 
     if (countPlayer < 21 && countDealer > 21) {
       setInProgress(false);
-      setGameStatus("Player Wins!");
+      setGameStatus("fineshed");
     }
     if (countPlayer > 21 && countDealer > 21) {
       setInProgress(false);
-      setGameStatus("Tie!");
+      setGameStatus("fineshed");
     }
 
     if (countPlayer === 21) {
       setInProgress(false);
-      setGameStatus("Player Wins!");
+      setGameStatus("fineshed");
     }
     if (countDealer === 21) {
       setInProgress(false);
-      setGameStatus("Dealer Wins!");
+      setGameStatus("fineshed");
     }
     if (countPlayer === countDealer && countPlayer >= 21 && countDealer >= 21) {
       setInProgress(false);
-      setGameStatus("Tie!");
+      setGameStatus("fineshed");
     }
     return " ";
   };
@@ -116,30 +115,24 @@ export const GameStart = () => {
       <Button
         type="submit"
         handleClick={onFirstSubmit}
-        disabled={cardsForDealer.length > 0 ? true : false}
+        disabled={hand.length > 0 ? true : false}
       >
         Start
       </Button>
       <Button
         type="submit"
         handleClick={onSubmit}
-        disabled={cardsForDealer.length > 0 && inProgress ? false : true}
+        disabled={hand.length > 0 && inProgress ? false : true}
       >
         New Card
       </Button>
       <div>
         <p>{inProgress}</p>
-        <p>{gameStatus}</p>
+        {/* <div>{inProgress ? <p>Good luck!</p> : <p>The winner is...</p>}</div> */}
         <p>Player's points: {countPlayer}</p>
         <p>Dealer's points: {countDealer}</p>
       </div>
-      <div style={{ display: "flex" }}>
-        {cardsForPlayer.map((card) => (
-          <li key={card.code}>
-            <img src={card.image} alt={card.code} className="card" />
-          </li>
-        ))}
-      </div>
+      <PlayerHand cards={cardsForPlayer} />
     </div>
   );
 };
