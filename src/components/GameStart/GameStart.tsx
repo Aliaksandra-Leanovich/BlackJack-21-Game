@@ -29,7 +29,7 @@ export const GameStart = () => {
   useEffect(() => {
     countPoints(cardsForDealer, setCountDealer);
     countPoints(cardsForPlayer, setCountPlayer);
-    stay();
+    getGameResult();
   }, [cardsForDealer, cardsForPlayer]);
 
   const countPoints = (cards: ICard[], setPoints: (points: number) => void) => {
@@ -81,7 +81,7 @@ export const GameStart = () => {
     getInitialCards(cardsForDealer, setCardsForDealer);
   };
 
-  const stay = () => {
+  const getGameResult = () => {
     if (countDealer < 21 && countPlayer > 21) {
       setInProgress(false);
       setGameStatus("Dealer Wins!");
