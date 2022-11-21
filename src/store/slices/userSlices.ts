@@ -59,6 +59,7 @@ export const {
   setUserEmail,
   setUserName,
   unsetUser,
+  setBudget,
   setUserPoints,
   setUserHand,
 } = userSlice.actions;
