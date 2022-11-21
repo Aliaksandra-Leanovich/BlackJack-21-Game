@@ -3,15 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import { cardsApi } from "../../services/CardsService";
 import { useAppSelector } from "../../store/hooks/hooks";
-import {
-  getDeckId,
-  getDeckIdStatus,
-} from "../../store/selectors/deckIdSelectors";
-import {
-  getUserHand,
-  getUserInfo,
-  getUserPoints,
-} from "../../store/selectors/userSelector";
+import { getDeckId } from "../../store/selectors/deckIdSelectors";
+import { getUserInfo, getUserPoints } from "../../store/selectors/userSelector";
 import { ICard } from "../../store/types";
 import { Button } from "../Button";
 import { PlayerHand } from "../PlayerHand/PlayerHand";
@@ -19,13 +12,12 @@ import { countPoints } from "./count";
 
 export const GameStart = () => {
   const navigate = useNavigate();
-  const status = useAppSelector(getDeckIdStatus);
 
-  const handPlayer = useAppSelector(getUserHand);
   const pointsPlayer = useAppSelector(getUserPoints);
   const { deckId } = useAppSelector(getDeckId);
-  const [bet, setBate] = useState(100);
   const { budget } = useAppSelector(getUserInfo);
+
+  const [bet, setBate] = useState(100);
   const [gameStatus, setGameStatus] = useState<
     "idle" | "inprogress" | "finished" | "notstarted" | ""
   >("notstarted");
@@ -38,7 +30,9 @@ export const GameStart = () => {
   const handleBack = () => {
     navigate(-1);
   };
+
   const countBudget = () => {};
+
   useEffect(() => {
     setCountDealer(countPoints(cardsForDealer));
     getGameResult();
@@ -60,6 +54,13 @@ export const GameStart = () => {
     setCards(cards.concat(api));
   };
 
+  const onFirstSubmit = () => {
+    setGameStatus("inprogress");
+    setInProgress(true);
+    getInitialCards(cardsForPlayer, setCardsForPlayer);
+    getInitialCards(cardsForDealer, setCardsForDealer);
+  };
+
   const onSubmit = () => {
     getNewCard(cardsForPlayer, setCardsForPlayer);
     getNewCard(cardsForDealer, setCardsForDealer);
@@ -68,12 +69,6 @@ export const GameStart = () => {
     setStopGame();
     setInProgress(false);
     setGameStatus("finished");
-  };
-  const onFirstSubmit = () => {
-    setGameStatus("inprogress");
-    setInProgress(true);
-    getInitialCards(cardsForPlayer, setCardsForPlayer);
-    getInitialCards(cardsForDealer, setCardsForDealer);
   };
 
   const setStopGame = () => {
