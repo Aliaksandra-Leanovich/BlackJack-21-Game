@@ -1,23 +1,30 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import { cardsApi } from "../../services/CardsService";
-import { useAppSelector } from "../../store/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { getDeckId } from "../../store/selectors/deckIdSelectors";
-import { getUserInfo, getUserPoints } from "../../store/selectors/userSelector";
+import {
+  getUserBudget,
+  getUserPoints,
+} from "../../store/selectors/userSelector";
+import { setBudget } from "../../store/slices/userSlices";
 import { ICard } from "../../store/types";
 import { Button } from "../Button";
+import { Input } from "../Input";
 import { PlayerHand } from "../PlayerHand/PlayerHand";
 import { countPoints } from "./count";
 
 export const GameStart = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const pointsPlayer = useAppSelector(getUserPoints);
   const { deckId } = useAppSelector(getDeckId);
-  const { budget } = useAppSelector(getUserInfo);
+  let budget = useAppSelector(getUserBudget);
 
-  const [bet, setBate] = useState(100);
+  let [bet, setBet] = useState<number>(100);
   const [gameStatus, setGameStatus] = useState<
     "idle" | "inprogress" | "finished" | "notstarted" | ""
   >("notstarted");
@@ -27,16 +34,17 @@ export const GameStart = () => {
   const [cardsForDealer, setCardsForDealer] = useState<ICard[]>([]);
   const [countDealer, setCountDealer] = useState(0);
 
+  const { register, getValues } = useForm();
+
   const handleBack = () => {
     navigate(-1);
   };
 
-  const countBudget = () => {};
-
   useEffect(() => {
     setCountDealer(countPoints(cardsForDealer));
     getGameResult();
-  }, [cardsForDealer]);
+    countBudget();
+  }, [cardsForDealer, winner, setBet]);
 
   const getInitialCards = async (
     cards: ICard[],
@@ -55,6 +63,7 @@ export const GameStart = () => {
   };
 
   const onFirstSubmit = () => {
+    setBet(Number(getValues("bet")));
     setGameStatus("inprogress");
     setInProgress(true);
     getInitialCards(cardsForPlayer, setCardsForPlayer);
@@ -111,22 +120,20 @@ export const GameStart = () => {
 
     return " ";
   };
+
+  const countBudget = () => {
+    if (winner === "player") {
+      dispatch(setBudget((budget = budget + bet)));
+    }
+    if (winner === "dealer") {
+      dispatch(setBudget((budget = budget - bet)));
+    }
+  };
+
   return (
     <div>
       <Button handleClick={handleBack}>Back</Button>
-      <Button
-        type="submit"
-        handleClick={onFirstSubmit}
-        disabled={
-          gameStatus === "inprogress"
-            ? true
-            : false || gameStatus !== "finished"
-            ? false
-            : true
-        }
-      >
-        Start
-      </Button>
+
       <Button
         type="submit"
         handleClick={onSubmit}
@@ -153,6 +160,28 @@ export const GameStart = () => {
       >
         Stop
       </Button>
+      <form>
+        <Input
+          type="number"
+          placeholder="Enter your bet"
+          label="bet"
+          register={register}
+        />
+        <Button
+          type="submit"
+          handleClick={onFirstSubmit}
+          disabled={
+            gameStatus === "inprogress"
+              ? true
+              : false || gameStatus !== "finished"
+              ? false
+              : true
+          }
+        >
+          Bet
+        </Button>
+      </form>
+
       <div>
         <p>{inProgress}</p>
 
@@ -163,6 +192,7 @@ export const GameStart = () => {
             <p>The winner is... {winner}</p>
           )}
         </div>
+        <p>Your bet is {bet}</p>
         <p>Player's points: {pointsPlayer}</p>
         <p>Dealer's points: {countDealer}</p>
       </div>

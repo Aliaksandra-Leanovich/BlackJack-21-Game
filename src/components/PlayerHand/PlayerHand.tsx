@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
-import { getUserHand, getUserPoints } from "../../store/selectors/userSelector";
+import { getUserHand } from "../../store/selectors/userSelector";
 import { setUserHand, setUserPoints } from "../../store/slices/userSlices";
 import { ICard } from "../../store/types";
 import { countPoints } from "../GameStart/count";
