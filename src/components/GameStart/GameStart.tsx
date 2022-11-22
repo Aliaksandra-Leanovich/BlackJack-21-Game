@@ -156,7 +156,7 @@ export const GameStart = () => {
             <p>The winner is... {winner}</p>
           )}
         </div>
-        {/* <p>Your bet is {bet}</p> */}
+
         <p>Player's points: {pointsPlayer}</p>
         <p>Dealer's points: {countDealer}</p>
       </div>

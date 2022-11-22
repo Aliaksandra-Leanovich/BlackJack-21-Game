@@ -14,13 +14,16 @@ interface IProps {
 
 export const BetForm = ({ winner, disabled, onFirstSubmit }: IProps) => {
   const dispatch = useAppDispatch();
-  let [bet, setBet] = useState<number>(100);
-  const { register, getValues, reset } = useForm();
   let budget = useAppSelector(getUserBudget);
+
+  let [bet, setBet] = useState<number>(0);
+
+  const { register, getValues, reset, handleSubmit } = useForm();
 
   useEffect(() => {
     countBudget();
   }, [winner, setBet, dispatch]);
+
   const countBudget = () => {
     if (winner === "player") {
       dispatch(setBudget((budget = budget + bet)));
@@ -29,22 +32,30 @@ export const BetForm = ({ winner, disabled, onFirstSubmit }: IProps) => {
       dispatch(setBudget((budget = budget - bet)));
     }
   };
-  const handleSubmit = () => {
+
+  const onSubmit = () => {
+    onFirstSubmit();
     setBet(Number(getValues("bet")));
     reset();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Input
-        type="number"
-        placeholder="Enter your bet"
-        label="bet"
-        register={register}
-      />
-      <Button type="submit" disabled={disabled} handleClick={onFirstSubmit}>
-        Bet
-      </Button>
-    </form>
+    <>
+      {bet === 0 ? (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            type="number"
+            placeholder="Enter your bet"
+            label="bet"
+            register={register}
+          />
+          <Button type="submit" disabled={disabled}>
+            Bet
+          </Button>
+        </form>
+      ) : (
+        <p>Your bet is {bet}</p>
+      )}
+    </>
   );
 };
