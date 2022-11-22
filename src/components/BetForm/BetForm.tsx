@@ -42,7 +42,7 @@ export const BetForm = ({ winner, disabled, onFirstSubmit }: IProps) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setState(parseInt(e.target.value));
   };
-  console.log(state);
+
   return (
     <>
       {bet === 0 ? (
