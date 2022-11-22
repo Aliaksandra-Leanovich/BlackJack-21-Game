@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { getUserBudget } from "../../store/selectors/userSelector";
@@ -32,23 +32,33 @@ export const BetForm = ({ winner, disabled, onFirstSubmit }: IProps) => {
       dispatch(setBudget((budget = budget - bet)));
     }
   };
+  const [state, setState] = useState<number>(50);
 
   const onSubmit = () => {
     onFirstSubmit();
     setBet(Number(getValues("bet")));
     reset();
   };
-
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setState(parseInt(e.target.value));
+  };
+  console.log(state);
   return (
     <>
       {bet === 0 ? (
         <form onSubmit={handleSubmit(onSubmit)}>
+          <label>Enter You Bet</label>
           <Input
-            type="number"
-            placeholder="Enter your bet"
+            min={100}
+            max={budget}
+            type="range"
+            value={state}
+            onChange={handleChange}
+            step={100}
             label="bet"
             register={register}
           />
+          <p>{state}</p>
           <Button type="submit" disabled={disabled}>
             Bet
           </Button>

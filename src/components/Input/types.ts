@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import { ChangeEvent, InputHTMLAttributes } from "react";
 import { FieldError, FieldValues } from "react-hook-form";
 import { Path, UseFormRegister } from "react-hook-form";
 
@@ -16,4 +16,6 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: Path<IFormValues>;
   register: UseFormRegister<IRegister>;
   errors?: FieldError | undefined;
+
+  onChange?: (e: any) => void;
 }
