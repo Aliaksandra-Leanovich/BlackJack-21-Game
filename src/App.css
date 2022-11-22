@@ -40,3 +40,10 @@
 .read-the-docs {
   color: #888;
 }
+
+.block-start {
+  display: block;
+}
+.block-start-hidden {
+  display: none;
+}

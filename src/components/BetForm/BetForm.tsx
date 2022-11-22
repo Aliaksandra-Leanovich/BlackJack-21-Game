@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { getUserBudget } from "../../store/selectors/userSelector";
@@ -8,35 +8,32 @@ import { Input } from "../Input";
 
 interface IProps {
   winner: string;
+  gameStatus: string;
   onFirstSubmit: () => void;
-  disabled: boolean;
 }
 
-export const BetForm = ({ winner, disabled, onFirstSubmit }: IProps) => {
+export const BetForm = ({ winner, gameStatus, onFirstSubmit }: IProps) => {
   const dispatch = useAppDispatch();
   let budget = useAppSelector(getUserBudget);
 
-  let [bet, setBet] = useState<number>(0);
-
-  const { register, getValues, reset, handleSubmit } = useForm();
+  const { register, reset, handleSubmit } = useForm();
 
   useEffect(() => {
     countBudget();
-  }, [winner, setBet, dispatch]);
+  }, [winner, dispatch]);
 
   const countBudget = () => {
     if (winner === "player") {
-      dispatch(setBudget((budget = budget + bet)));
+      dispatch(setBudget((budget = budget + state)));
     }
     if (winner === "dealer") {
-      dispatch(setBudget((budget = budget - bet)));
+      dispatch(setBudget((budget = budget - state)));
     }
   };
   const [state, setState] = useState<number>(50);
 
   const onSubmit = () => {
     onFirstSubmit();
-    setBet(Number(getValues("bet")));
     reset();
   };
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +42,7 @@ export const BetForm = ({ winner, disabled, onFirstSubmit }: IProps) => {
 
   return (
     <>
-      {bet === 0 ? (
+      {gameStatus === "start" ? (
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Enter You Bet</label>
           <Input
@@ -59,12 +56,10 @@ export const BetForm = ({ winner, disabled, onFirstSubmit }: IProps) => {
             register={register}
           />
           <p>{state}</p>
-          <Button type="submit" disabled={disabled}>
-            Bet
-          </Button>
+          <Button type="submit">Bet</Button>
         </form>
       ) : (
-        <p>Your bet is {bet}</p>
+        <p>Your bet is {state}</p>
       )}
     </>
   );

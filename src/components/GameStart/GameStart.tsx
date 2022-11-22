@@ -5,6 +5,11 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { getDeckId } from "../../store/selectors/deckIdSelectors";
 import { getUserPoints } from "../../store/selectors/userSelector";
 import { fetchDeckId } from "../../store/slices/deckIdSlice";
+import {
+  setUserHand,
+  setUserPoints,
+  unsetUserHand,
+} from "../../store/slices/userSlices";
 
 import { ICard } from "../../store/types";
 import { BetForm } from "../BetForm/BetForm";
@@ -19,10 +24,9 @@ export const GameStart = () => {
   const { deckId } = useAppSelector(getDeckId);
 
   const [gameStatus, setGameStatus] = useState<
-    "idle" | "inprogress" | "finished" | "notstarted" | ""
+    "inprogress" | "finished" | "notstarted" | "start"
   >("notstarted");
   const [winner, setWinner] = useState<"dealer" | "player" | "tie" | "">("");
-  const [inProgress, setInProgress] = useState(false);
   const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
   const [cardsForDealer, setCardsForDealer] = useState<ICard[]>([]);
   const [countDealer, setCountDealer] = useState(0);
@@ -31,7 +35,7 @@ export const GameStart = () => {
     dispatch(fetchDeckId());
     setCountDealer(countPoints(cardsForDealer));
     getGameResult();
-  }, [cardsForDealer, dispatch]);
+  }, [cardsForDealer, dispatch, cardsForPlayer]);
 
   const getInitialCards = async (
     cards: ICard[],
@@ -48,10 +52,15 @@ export const GameStart = () => {
     const api = await cardsApi.getCard(deckId, 1);
     setCards(cards.concat(api));
   };
-
+  const onStartSubmit = () => {
+    setCountDealer(0);
+    setGameStatus("start");
+    dispatch(unsetUserHand());
+    setCardsForDealer([]);
+    setCardsForPlayer([]);
+  };
   const onFirstSubmit = () => {
     setGameStatus("inprogress");
-    setInProgress(true);
     getInitialCards(cardsForPlayer, setCardsForPlayer);
     getInitialCards(cardsForDealer, setCardsForDealer);
   };
@@ -62,12 +71,11 @@ export const GameStart = () => {
   };
   const onStopSubmit = () => {
     setStopGame();
-    setInProgress(false);
     setGameStatus("finished");
   };
 
   const setStopGame = () => {
-    if (pointsPlayer < 21) {
+    if (pointsPlayer < 21 && pointsPlayer > 0) {
       if (countDealer < 21) {
         if (pointsPlayer > countDealer) {
           setWinner("player");
@@ -82,7 +90,6 @@ export const GameStart = () => {
 
   const getGameResult = () => {
     if (pointsPlayer > 21) {
-      setInProgress(false);
       setGameStatus("finished");
       if (countDealer > 21) {
         if (countDealer < pointsPlayer) {
@@ -96,9 +103,9 @@ export const GameStart = () => {
     }
 
     if (pointsPlayer === 21) {
-      setInProgress(false);
       setGameStatus("finished");
       setWinner("player");
+
       if (countDealer === 21) {
         setWinner("tie");
       }
@@ -109,57 +116,71 @@ export const GameStart = () => {
 
   return (
     <div>
-      <Button
-        type="submit"
-        handleClick={onSubmit}
-        disabled={
-          gameStatus === "notstarted"
-            ? true
-            : false || gameStatus !== "finished"
-            ? false
-            : true
-        }
-      >
-        New Card
-      </Button>
-      <Button
-        type="submit"
-        handleClick={onStopSubmit}
-        disabled={
-          gameStatus === "notstarted"
-            ? true
-            : false || gameStatus !== "finished"
-            ? false
-            : true
-        }
-      >
-        Stop
-      </Button>
-      <BetForm
-        winner={winner}
-        disabled={
-          gameStatus === "inprogress"
-            ? true
-            : false || gameStatus !== "finished"
-            ? false
-            : true
-        }
-        onFirstSubmit={onFirstSubmit}
-      />
       <div>
-        <p>{inProgress}</p>
-
-        <div>
-          {gameStatus !== "finished" ? (
-            <p>Good luck!</p>
-          ) : (
-            <p>The winner is... {winner}</p>
-          )}
-        </div>
+        {gameStatus === "finished" ? (
+          <p>The winner is... {winner}</p>
+        ) : (
+          <p>Good luck!</p>
+        )}
+      </div>
+      <div
+        className={
+          gameStatus === "notstarted" || gameStatus === "finished"
+            ? "block-start"
+            : "block-start-hidden"
+        }
+      >
+        <Button type="submit" handleClick={onStartSubmit}>
+          START NEW GAME
+        </Button>
+      </div>
+      <div
+        className={
+          gameStatus === "start" ? "block-start" : "block-start-hidden "
+        }
+      >
+        <BetForm
+          winner={winner}
+          onFirstSubmit={onFirstSubmit}
+          gameStatus={gameStatus}
+        />
+      </div>
+      <div
+        className={
+          gameStatus === "inprogress" ? "block-start" : "block-start-hidden "
+        }
+      >
+        <Button
+          type="submit"
+          handleClick={onSubmit}
+          disabled={
+            gameStatus === "notstarted"
+              ? true
+              : false || gameStatus !== "finished"
+              ? false
+              : true
+          }
+        >
+          New Card
+        </Button>
+        <Button
+          type="submit"
+          handleClick={onStopSubmit}
+          disabled={
+            gameStatus === "notstarted"
+              ? true
+              : false || gameStatus !== "finished"
+              ? false
+              : true
+          }
+        >
+          Stop
+        </Button>
 
         <p>Player's points: {pointsPlayer}</p>
         <p>Dealer's points: {countDealer}</p>
       </div>
+
       <PlayerHand cards={cardsForPlayer} />
     </div>
   );
