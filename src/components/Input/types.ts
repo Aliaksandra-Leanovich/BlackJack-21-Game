@@ -17,5 +17,5 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   register: UseFormRegister<IRegister>;
   errors?: FieldError | undefined;
 
-  onChange?: (e: any) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
