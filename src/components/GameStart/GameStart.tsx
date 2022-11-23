@@ -55,7 +55,7 @@ export const GameStart = () => {
 
   const getDealersHand = () => {
     if (gameStatus === "finished") {
-      for (let i = 0; i < 21; i++) {
+      for (let i = 0; i <= 21; i++) {
         getNewCards(cardsForDealer, setCardsForDealer, 1);
         setCountDealer(countPoints(cardsForDealer));
       }
@@ -110,6 +110,7 @@ export const GameStart = () => {
 
     return " ";
   };
+  console.log(countDealer, pointsPlayer);
 
   return (
     <div>
@@ -175,10 +176,26 @@ export const GameStart = () => {
         </Button>
 
         <p>Player's points: {pointsPlayer}</p>
-        <p>Dealer's points: {countDealer}</p>
       </div>
 
       <PlayerHand cards={cardsForPlayer} />
+      <div>
+        {gameStatus === "finished" && countDealer > 0 ? (
+          <div>
+            <p>Dealer's points: {countDealer}</p>
+            <p>Player's points: {pointsPlayer}</p>
+            {/* <ul>
+              {cardsForDealer.map((card) => (
+                <li key={card.code}>
+                  <img src={card.image} alt={card.code} className="card" />
+                </li>
+              ))}
+            </ul> */}
+          </div>
+        ) : (
+          " "
+        )}
+      </div>
     </div>
   );
 };
