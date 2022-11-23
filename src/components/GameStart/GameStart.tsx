@@ -11,6 +11,7 @@ import { BetForm } from "../BetForm/BetForm";
 import { Button } from "../Button";
 import { PlayerHand } from "../PlayerHand/PlayerHand";
 import { countPoints } from "./count";
+import { GameStatus } from "./types";
 
 export const GameStart = () => {
   const dispatch = useAppDispatch();
@@ -21,10 +22,12 @@ export const GameStart = () => {
   const [countDealer, setCountDealer] = useState(0);
   const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
   const [cardsForDealer, setCardsForDealer] = useState<ICard[]>([]);
-  const [winner, setWinner] = useState<"dealer" | "player" | "tie" | "">("");
-  const [gameStatus, setGameStatus] = useState<
-    "inprogress" | "finished" | "notstarted" | "start"
-  >("notstarted");
+  const [winner, setWinner] = useState<"dealer" | "player" | "tie" | null>(
+    null
+  );
+  const [gameStatus, setGameStatus] = useState<GameStatus>(
+    GameStatus.notstarted
+  );
 
   useEffect(() => {
     dispatch(fetchDeckId());
@@ -42,14 +45,15 @@ export const GameStart = () => {
   };
 
   const onStartSubmit = () => {
+    setWinner(null);
     setCountDealer(0);
-    setGameStatus("start");
+    setGameStatus(GameStatus.start);
     dispatch(unsetUserHand());
     setCardsForDealer([]);
     setCardsForPlayer([]);
   };
   const onFirstSubmit = () => {
-    setGameStatus("inprogress");
+    setGameStatus(GameStatus.inprogress);
     getNewCards(cardsForPlayer, setCardsForPlayer, 2);
   };
 
@@ -67,7 +71,7 @@ export const GameStart = () => {
   };
 
   const onStopSubmit = () => {
-    setGameStatus("finished");
+    setGameStatus(GameStatus.finished);
     getDealersHand();
     setStopGame();
     getGameResult();
@@ -89,7 +93,7 @@ export const GameStart = () => {
 
   const getGameResult = () => {
     if (pointsPlayer > 21) {
-      setGameStatus("finished");
+      setGameStatus(GameStatus.finished);
       if (countDealer > 21) {
         if (countDealer < pointsPlayer) {
           setWinner("dealer");
@@ -101,7 +105,7 @@ export const GameStart = () => {
       }
     }
     if (pointsPlayer === 21) {
-      setGameStatus("finished");
+      setGameStatus(GameStatus.finished);
       setWinner("player");
       if (countDealer === 21) {
         setWinner("tie");

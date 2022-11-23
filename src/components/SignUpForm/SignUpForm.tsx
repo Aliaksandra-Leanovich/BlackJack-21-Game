@@ -21,7 +21,6 @@ const SignUpForm = () => {
     const data = getValues();
     dispatch(setUserEmail(data.email));
     dispatch(setUserPassword(data.password));
-    console.log(data.email);
     localStorage.setItem("user", data.email);
     navigate(routes.HOME);
   };
