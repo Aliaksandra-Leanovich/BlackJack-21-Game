@@ -49,6 +49,7 @@ const userSlice = createSlice({
     unsetUser: (state) => {
       state.isAuthorized = null;
       state.email = "";
+      state.password = "";
     },
   },
 });
