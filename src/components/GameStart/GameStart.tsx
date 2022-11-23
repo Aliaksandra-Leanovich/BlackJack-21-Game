@@ -28,7 +28,7 @@ export const GameStart = () => {
 
   useEffect(() => {
     dispatch(fetchDeckId());
-    dealer();
+    getDealersHand();
     getGameResult();
   }, [pointsPlayer, cardsForDealer, dispatch, cardsForPlayer, gameStatus]);
 
@@ -53,8 +53,8 @@ export const GameStart = () => {
     getNewCards(cardsForPlayer, setCardsForPlayer, 2);
   };
 
-  const dealer = () => {
-    //count dealer not working => result of game is wrong
+  const getDealersHand = () => {
+    //dealers hand is empty => points of dealer is 0  => result of game is wrong
     if (gameStatus === "finished") {
       for (let i = 21; i < countDealer; i++) {
         getNewCards(cardsForDealer, setCardsForDealer, 1);
@@ -69,7 +69,7 @@ export const GameStart = () => {
 
   const onStopSubmit = () => {
     setGameStatus("finished");
-    dealer();
+    getDealersHand();
     setStopGame();
     getGameResult();
   };
