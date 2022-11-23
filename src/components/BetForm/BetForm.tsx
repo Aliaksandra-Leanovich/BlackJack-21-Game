@@ -46,7 +46,7 @@ export const BetForm = ({ winner, gameStatus, onFirstSubmit }: IProps) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Enter You Bet</label>
           <Input
-            min={100}
+            min={100} //range to working
             max={budget}
             type="range"
             value={state}

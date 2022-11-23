@@ -54,6 +54,7 @@ export const GameStart = () => {
   };
 
   const dealer = () => {
+    //count dealer not working => result of game is wrong
     if (gameStatus === "finished") {
       for (let i = 21; i < countDealer; i++) {
         getNewCards(cardsForDealer, setCardsForDealer, 1);
