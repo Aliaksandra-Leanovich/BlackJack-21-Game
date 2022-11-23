@@ -5,11 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { getDeckId } from "../../store/selectors/deckIdSelectors";
 import { getUserPoints } from "../../store/selectors/userSelector";
 import { fetchDeckId } from "../../store/slices/deckIdSlice";
-import {
-  setUserHand,
-  setUserPoints,
-  unsetUserHand,
-} from "../../store/slices/userSlices";
+import { unsetUserHand } from "../../store/slices/userSlices";
 
 import { ICard } from "../../store/types";
 import { BetForm } from "../BetForm/BetForm";
@@ -33,23 +29,16 @@ export const GameStart = () => {
 
   useEffect(() => {
     dispatch(fetchDeckId());
-    setCountDealer(countPoints(cardsForDealer));
+    dealer();
     getGameResult();
-  }, [cardsForDealer, dispatch, cardsForPlayer]);
+  }, [pointsPlayer, cardsForDealer, dispatch, cardsForPlayer, gameStatus]);
 
-  const getInitialCards = async (
+  const getNewCards = async (
     cards: ICard[],
-    setCards: (points: ICard[]) => void
+    setCards: (points: ICard[]) => void,
+    count: number
   ) => {
-    const api = await cardsApi.getCard(deckId, 2);
-    setCards(cards.concat(api));
-  };
-
-  const getNewCard = async (
-    cards: ICard[],
-    setCards: (points: ICard[]) => void
-  ) => {
-    const api = await cardsApi.getCard(deckId, 1);
+    const api = await cardsApi.getCard(deckId, count);
     setCards(cards.concat(api));
   };
   const onStartSubmit = () => {
@@ -61,17 +50,25 @@ export const GameStart = () => {
   };
   const onFirstSubmit = () => {
     setGameStatus("inprogress");
-    getInitialCards(cardsForPlayer, setCardsForPlayer);
-    getInitialCards(cardsForDealer, setCardsForDealer);
+    getNewCards(cardsForPlayer, setCardsForPlayer, 2);
   };
 
+  const dealer = () => {
+    if (gameStatus === "finished") {
+      for (let i = 21; i < countDealer; i++) {
+        getNewCards(cardsForDealer, setCardsForDealer, 1);
+      }
+      setCountDealer(countPoints(cardsForDealer));
+    }
+  };
   const onSubmit = () => {
-    getNewCard(cardsForPlayer, setCardsForPlayer);
-    getNewCard(cardsForDealer, setCardsForDealer);
+    getNewCards(cardsForPlayer, setCardsForPlayer, 1);
   };
   const onStopSubmit = () => {
-    setStopGame();
     setGameStatus("finished");
+    dealer();
+    setStopGame();
+    getGameResult();
   };
 
   const setStopGame = () => {
@@ -101,11 +98,9 @@ export const GameStart = () => {
         setWinner("dealer");
       }
     }
-
     if (pointsPlayer === 21) {
       setGameStatus("finished");
       setWinner("player");
-
       if (countDealer === 21) {
         setWinner("tie");
       }
@@ -113,6 +108,7 @@ export const GameStart = () => {
 
     return " ";
   };
+  console.log(countDealer, cardsForDealer);
 
   return (
     <div>
