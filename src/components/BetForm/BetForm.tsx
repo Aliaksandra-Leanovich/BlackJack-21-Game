@@ -30,11 +30,10 @@ export const BetForm = ({ winner, gameStatus, onFirstSubmit }: IProps) => {
       dispatch(setBudget((budget = budget - state)));
     }
   };
-  const [state, setState] = useState<number>(50);
+  const [state, setState] = useState<number>(5000);
 
   const onSubmit = () => {
     onFirstSubmit();
-    reset();
   };
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setState(parseInt(e.target.value));

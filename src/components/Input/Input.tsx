@@ -6,14 +6,22 @@ export const Input = ({
   errors,
   onChange,
   label,
+  value,
+  min,
+  max,
+  step,
   register,
 }: IInputProps) => {
   return (
     <div>
       <input
+        min={min}
+        max={max}
+        step={step}
         type={type}
+        value={value}
         placeholder={placeholder}
-        {...register(label)}
+        {...register}
         onChange={onChange}
       />
     </div>
