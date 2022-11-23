@@ -6,7 +6,6 @@ import { getDeckId } from "../../store/selectors/deckIdSelectors";
 import { getUserPoints } from "../../store/selectors/userSelector";
 import { fetchDeckId } from "../../store/slices/deckIdSlice";
 import { unsetUserHand } from "../../store/slices/userSlices";
-
 import { ICard } from "../../store/types";
 import { BetForm } from "../BetForm/BetForm";
 import { Button } from "../Button";
@@ -19,13 +18,13 @@ export const GameStart = () => {
   const pointsPlayer = useAppSelector(getUserPoints);
   const { deckId } = useAppSelector(getDeckId);
 
+  const [countDealer, setCountDealer] = useState(0);
+  const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
+  const [cardsForDealer, setCardsForDealer] = useState<ICard[]>([]);
+  const [winner, setWinner] = useState<"dealer" | "player" | "tie" | "">("");
   const [gameStatus, setGameStatus] = useState<
     "inprogress" | "finished" | "notstarted" | "start"
   >("notstarted");
-  const [winner, setWinner] = useState<"dealer" | "player" | "tie" | "">("");
-  const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
-  const [cardsForDealer, setCardsForDealer] = useState<ICard[]>([]);
-  const [countDealer, setCountDealer] = useState(0);
 
   useEffect(() => {
     dispatch(fetchDeckId());
@@ -41,6 +40,7 @@ export const GameStart = () => {
     const api = await cardsApi.getCard(deckId, count);
     setCards(cards.concat(api));
   };
+
   const onStartSubmit = () => {
     setCountDealer(0);
     setGameStatus("start");
@@ -61,9 +61,11 @@ export const GameStart = () => {
       setCountDealer(countPoints(cardsForDealer));
     }
   };
+
   const onSubmit = () => {
     getNewCards(cardsForPlayer, setCardsForPlayer, 1);
   };
+
   const onStopSubmit = () => {
     setGameStatus("finished");
     dealer();
