@@ -36,8 +36,7 @@ export const GameStart = () => {
   useEffect(() => {
     dispatch(fetchDeckId());
     getDealersHand();
-    getGameResult();
-  }, [pointsPlayer, dispatch, cardsForPlayer, gameStatus]);
+  }, [pointsPlayer, dispatch, gameStatus]);
 
   const getNewCards = async (
     cards: ICard[],
@@ -77,27 +76,25 @@ export const GameStart = () => {
   const onStopSubmit = () => {
     setGameStatus(GameStatus.finished);
     getDealersHand();
-    setStopGame();
-    getGameResult();
+    if (countDealer > 0) {
+      setStopGame();
+    }
   };
 
   const setStopGame = () => {
-    if (pointsPlayer < 21 && pointsPlayer > 0) {
+    setGameStatus(GameStatus.finished);
+    if (pointsPlayer < 21) {
       if (countDealer < 21) {
-        if (pointsPlayer > countDealer) {
-          setWinner("player");
-        } else {
+        if (pointsPlayer < countDealer) {
           setWinner("dealer");
+        } else {
+          setWinner("player");
         }
       } else {
         setWinner("player");
       }
     }
-  };
-
-  const getGameResult = () => {
     if (pointsPlayer > 21) {
-      setGameStatus(GameStatus.finished);
       if (countDealer > 21) {
         if (countDealer < pointsPlayer) {
           setWinner("dealer");
@@ -109,7 +106,6 @@ export const GameStart = () => {
       }
     }
     if (pointsPlayer === 21) {
-      setGameStatus(GameStatus.finished);
       setWinner("player");
       if (countDealer === 21) {
         setWinner("tie");
@@ -118,7 +114,7 @@ export const GameStart = () => {
 
     return " ";
   };
-
+  console.log(countDealer, pointsPlayer, gameStatus);
   return (
     <div>
       {}
