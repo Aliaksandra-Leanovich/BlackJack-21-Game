@@ -1,21 +1,26 @@
+import React from "react";
 import { IInputProps } from "./types";
 
-export const Input = ({
+export const InputRange = ({
   type,
   placeholder,
-  errors,
   onChange,
-  label,
-  register,
+  value,
+  min,
+  max,
+  step,
 }: IInputProps) => {
   return (
-    <div>
+    <>
       <input
+        min={min}
+        max={max}
+        step={step}
         type={type}
+        value={value}
         placeholder={placeholder}
-        {...register(label)}
         onChange={onChange}
       />
-    </div>
+    </>
   );
 };

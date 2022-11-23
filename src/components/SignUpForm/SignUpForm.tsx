@@ -2,10 +2,10 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes/routes";
 import { useAppDispatch } from "../../store/hooks/hooks";
-import { setUserEmail, setUserName } from "../../store/slices/userSlices";
+import { setUserEmail, setUserPassword } from "../../store/slices/userSlices";
 import { Button } from "../Button";
 import { Input } from "../Input";
-import { IFormInput } from "./types";
+import { IRegister } from "../Input/types";
 
 const SignUpForm = () => {
   const dispatch = useAppDispatch();
@@ -15,25 +15,20 @@ const SignUpForm = () => {
     getValues,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>();
+  } = useForm<IRegister>();
 
   const onSubmit = () => {
     const data = getValues();
     dispatch(setUserEmail(data.email));
-    dispatch(setUserName(data.name));
-    // dispatch(setUserPassword(data.password));
+    dispatch(setUserPassword(data.password));
+    console.log(data.email);
+    localStorage.setItem("user", data.email);
     navigate(routes.HOME);
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          type="text"
-          label="name"
-          errors={errors.name}
-          register={register}
-          placeholder="Enter your name"
-        />
         <Input
           type="email"
           label="email"
@@ -41,13 +36,13 @@ const SignUpForm = () => {
           register={register}
           placeholder="Enter your email"
         />
-        {/* <Input
+        <Input
           type="password"
           label="password"
           errors={errors.password}
           register={register}
           placeholder="Enter your password"
-        /> */}
+        />
         <Button type="submit">submit</Button>
       </form>
     </div>

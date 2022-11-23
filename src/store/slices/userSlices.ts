@@ -2,22 +2,20 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ICard } from "../types";
 
 interface IUserStore {
-  isAuthorized: boolean;
-  email: string | undefined;
-  name?: string | undefined;
-  // password: string | undefined;
+  isAuthorized: string | null;
+  email: string;
+  password: string;
   hand: ICard[] | [];
   points: number;
   budget: number;
 }
 
 const initialState: IUserStore = {
-  isAuthorized: false, //change!
-  email: undefined,
-  name: undefined,
+  isAuthorized: null,
+  email: "",
   hand: [],
   points: 0,
-  // password: undefined,
+  password: "",
   budget: 10000,
 };
 
@@ -26,13 +24,9 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUserEmail: (state, action) => {
-      state.isAuthorized = true;
+      state.isAuthorized = localStorage.getItem("user");
       state.email = action.payload;
     },
-    setUserName: (state, action) => {
-      state.name = action.payload;
-    },
-
     setUserHand: (state, { payload }: PayloadAction<ICard>) => {
       state.hand = [
         { ...payload },
@@ -45,26 +39,26 @@ const userSlice = createSlice({
     setUserPoints: (state, action) => {
       state.points = action.payload;
     },
-    // setUserPassword: (state, action) => {
-    //   state.password = action.payload;
-    // },
+    setUserPassword: (state, action) => {
+      state.password = action.payload;
+    },
     setBudget: (state, action) => {
       state.budget = action.payload;
     },
 
     unsetUser: (state) => {
-      state.isAuthorized = false;
-      state.email = undefined;
+      state.isAuthorized = null;
+      state.email = "";
     },
   },
 });
 export const {
   setUserEmail,
-  setUserName,
   unsetUser,
   unsetUserHand,
   setBudget,
   setUserPoints,
+  setUserPassword,
   setUserHand,
 } = userSlice.actions;
 export default userSlice.reducer;

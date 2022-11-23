@@ -5,18 +5,18 @@ import { useAppSelector } from "../store/hooks/hooks";
 import { getUserInfo } from "../store/selectors/userSelector";
 
 export const Account = () => {
-  const { name, budget } = useAppSelector(getUserInfo);
+  const { email, budget } = useAppSelector(getUserInfo);
   const { isAuthorized } = useAppSelector(getUserInfo);
   const navigate = useNavigate();
   const handleBack = () => {
     navigate(-1);
   };
 
-  if (isAuthorized) {
+  if (isAuthorized !== null) {
     return (
       <div>
         <Button handleClick={handleBack}>Back</Button>
-        <p>{name}</p>
+        <p>{email}</p>
         <p>{budget}</p>
       </div>
     );
