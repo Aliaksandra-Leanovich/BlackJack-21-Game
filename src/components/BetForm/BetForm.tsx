@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { getUserBudget } from "../../store/selectors/userSelector";
 import { setBudget } from "../../store/slices/userSlices";
 import { Button } from "../Button";
-import { Input } from "../Input";
 import { InputRange } from "../InputRange/InputRange";
 import { IBetFormProps } from "./types";
 

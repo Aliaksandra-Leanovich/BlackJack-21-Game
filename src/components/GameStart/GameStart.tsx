@@ -3,7 +3,10 @@ import "../../App.css";
 import { cardsApi } from "../../services/CardsService";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { getDeckId } from "../../store/selectors/deckIdSelectors";
-import { getUserPoints } from "../../store/selectors/userSelector";
+import {
+  getUserBudget,
+  getUserPoints,
+} from "../../store/selectors/userSelector";
 import { fetchDeckId } from "../../store/slices/deckIdSlice";
 import { unsetUserHand } from "../../store/slices/userSlices";
 import { ICard } from "../../store/types";
@@ -18,6 +21,7 @@ export const GameStart = () => {
 
   const pointsPlayer = useAppSelector(getUserPoints);
   const { deckId } = useAppSelector(getDeckId);
+  const budget = useAppSelector(getUserBudget);
 
   const [countDealer, setCountDealer] = useState(0);
   const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
@@ -117,6 +121,7 @@ export const GameStart = () => {
 
   return (
     <div>
+      {}
       <div>
         {gameStatus === "finished" ? (
           <p>The winner is... {winner}</p>
@@ -131,9 +136,17 @@ export const GameStart = () => {
             : "block-start-hidden"
         }
       >
-        <Button type="submit" handleClick={onStartSubmit}>
-          START NEW GAME
-        </Button>
+        {budget === 0 ? (
+          <>
+            <p>sorry, you dont have money left</p>
+          </>
+        ) : (
+          <>
+            <Button type="submit" handleClick={onStartSubmit}>
+              START NEW GAME
+            </Button>
+          </>
+        )}
       </div>
       <div
         className={
