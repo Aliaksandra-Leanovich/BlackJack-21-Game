@@ -30,7 +30,7 @@ export const GameStart = () => {
     dispatch(fetchDeckId());
     getDealersHand();
     getGameResult();
-  }, [pointsPlayer, cardsForDealer, dispatch, cardsForPlayer, gameStatus]);
+  }, [pointsPlayer, dispatch, cardsForPlayer, gameStatus]);
 
   const getNewCards = async (
     cards: ICard[],
@@ -54,12 +54,11 @@ export const GameStart = () => {
   };
 
   const getDealersHand = () => {
-    //dealers hand is empty => points of dealer is 0  => result of game is wrong
     if (gameStatus === "finished") {
-      for (let i = 21; i < countDealer; i++) {
+      for (let i = 0; i < 21; i++) {
         getNewCards(cardsForDealer, setCardsForDealer, 1);
+        setCountDealer(countPoints(cardsForDealer));
       }
-      setCountDealer(countPoints(cardsForDealer));
     }
   };
 
@@ -111,7 +110,6 @@ export const GameStart = () => {
 
     return " ";
   };
-  console.log(countDealer, cardsForDealer);
 
   return (
     <div>
