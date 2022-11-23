@@ -7,7 +7,7 @@ import { getUserInfo } from "../store/selectors/userSelector";
 import { useNavigate } from "react-router-dom";
 
 export const GamePage = () => {
-  const { name, budget } = useAppSelector(getUserInfo);
+  const { budget } = useAppSelector(getUserInfo);
   const navigate = useNavigate();
 
   const { isAuthorized } = useAppSelector(getUserInfo);
@@ -16,11 +16,10 @@ export const GamePage = () => {
     navigate(-1);
   };
 
-  if (isAuthorized) {
+  if (isAuthorized !== null) {
     return (
       <div>
         <div>
-          <p>{name}</p>
           <p>{budget}</p>
           <Button handleClick={handleBack}>Back</Button>
         </div>
