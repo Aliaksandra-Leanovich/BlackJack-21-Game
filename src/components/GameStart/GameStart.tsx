@@ -114,7 +114,6 @@ export const GameStart = () => {
 
     return " ";
   };
-  console.log(countDealer, pointsPlayer);
 
   return (
     <div>

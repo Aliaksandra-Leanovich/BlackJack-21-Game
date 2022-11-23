@@ -16,25 +16,22 @@ export const BetForm = ({
   const dispatch = useAppDispatch();
   let budget = useAppSelector(getUserBudget);
 
-  const { register, handleSubmit } = useForm();
+  const { handleSubmit } = useForm();
 
   const [state, setState] = useState<number>(5000);
 
   useEffect(() => {
-    countBudget();
+    if (gameStatus === "finished" && winner !== "dealer") {
+      dispatch(setBudget((budget = budget + state)));
+    }
   }, [winner, dispatch]);
 
   const countBudget = () => {
-    if (winner === "dealer") {
-      dispatch(setBudget((budget = budget - state)));
-    } else if (winner === "tie") {
-      dispatch(setBudget((budget = budget)));
-    } else {
-      dispatch(setBudget((budget = budget + state)));
-    }
+    dispatch(setBudget((budget = budget - state)));
   };
 
   const onSubmit = () => {
+    countBudget();
     onFirstSubmit();
   };
 
