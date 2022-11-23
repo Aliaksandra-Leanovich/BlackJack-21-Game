@@ -5,18 +5,19 @@ import { getUserBudget } from "../../store/selectors/userSelector";
 import { setBudget } from "../../store/slices/userSlices";
 import { Button } from "../Button";
 import { Input } from "../Input";
+import { IBetFormProps } from "./types";
 
-interface IProps {
-  winner: string;
-  gameStatus: string;
-  onFirstSubmit: () => void;
-}
-
-export const BetForm = ({ winner, gameStatus, onFirstSubmit }: IProps) => {
+export const BetForm = ({
+  winner,
+  gameStatus,
+  onFirstSubmit,
+}: IBetFormProps) => {
   const dispatch = useAppDispatch();
   let budget = useAppSelector(getUserBudget);
 
-  const { register, reset, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();
+
+  const [state, setState] = useState<number>(5000);
 
   useEffect(() => {
     countBudget();
@@ -30,7 +31,6 @@ export const BetForm = ({ winner, gameStatus, onFirstSubmit }: IProps) => {
       dispatch(setBudget((budget = budget - state)));
     }
   };
-  const [state, setState] = useState<number>(5000);
 
   const onSubmit = () => {
     onFirstSubmit();
@@ -45,7 +45,7 @@ export const BetForm = ({ winner, gameStatus, onFirstSubmit }: IProps) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Enter You Bet</label>
           <Input
-            min={100} //range to working
+            min={100}
             max={budget}
             type="range"
             value={state}
