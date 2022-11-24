@@ -17,11 +17,11 @@ export const BetForm = ({
 
   const { handleSubmit } = useForm();
 
-  const [state, setState] = useState<number>(5000);
+  const [state, setState] = useState<number>(budget);
 
   useEffect(() => {
     if (gameStatus === "finished" && winner !== "dealer") {
-      dispatch(setBudget((budget = budget + state)));
+      dispatch(setBudget((budget = budget + state * 2)));
     }
   }, [winner, dispatch]);
 
@@ -52,7 +52,9 @@ export const BetForm = ({
             step={100}
           />
           <p>{state}</p>
-          <Button type="submit">Bet</Button>
+          <Button type="submit" disabled={budget < state ? true : false}>
+            Bet
+          </Button>
         </form>
       ) : (
         <p>Your bet is {state}</p>

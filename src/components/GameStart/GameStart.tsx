@@ -36,7 +36,7 @@ export const GameStart = () => {
   useEffect(() => {
     dispatch(fetchDeckId());
     getDealersHand();
-  }, [pointsPlayer, dispatch, gameStatus]);
+  }, [pointsPlayer, dispatch, cardsForPlayer, gameStatus]);
 
   const getNewCards = async (
     cards: ICard[],
@@ -55,6 +55,7 @@ export const GameStart = () => {
     setCardsForDealer([]);
     setCardsForPlayer([]);
   };
+
   const onFirstSubmit = () => {
     setGameStatus(GameStatus.inprogress);
     getNewCards(cardsForPlayer, setCardsForPlayer, 2);
@@ -62,7 +63,7 @@ export const GameStart = () => {
 
   const getDealersHand = () => {
     if (gameStatus === "finished") {
-      for (let i = 0; i <= 21; i++) {
+      for (let i = 1; i < 21; i++) {
         getNewCards(cardsForDealer, setCardsForDealer, 1);
         setCountDealer(countPoints(cardsForDealer));
       }
@@ -76,13 +77,10 @@ export const GameStart = () => {
   const onStopSubmit = () => {
     setGameStatus(GameStatus.finished);
     getDealersHand();
-    if (countDealer > 0) {
-      setStopGame();
-    }
+    setStopGame();
   };
 
   const setStopGame = () => {
-    setGameStatus(GameStatus.finished);
     if (pointsPlayer < 21) {
       if (countDealer < 21) {
         if (pointsPlayer < countDealer) {
@@ -117,7 +115,6 @@ export const GameStart = () => {
   console.log(countDealer, pointsPlayer, gameStatus);
   return (
     <div>
-      {}
       <div>
         {gameStatus === "finished" ? (
           <p>The winner is... {winner}</p>
@@ -132,7 +129,7 @@ export const GameStart = () => {
             : "block-start-hidden"
         }
       >
-        {budget === 0 ? (
+        {budget < 0 ? (
           <>
             <p>sorry, you dont have money left</p>
           </>
@@ -164,11 +161,9 @@ export const GameStart = () => {
           type="submit"
           handleClick={onSubmit}
           disabled={
-            gameStatus === "notstarted"
+            gameStatus === "notstarted" || gameStatus === "finished"
               ? true
-              : false || gameStatus !== "finished"
-              ? false
-              : true
+              : false
           }
         >
           New Card
@@ -177,11 +172,9 @@ export const GameStart = () => {
           type="submit"
           handleClick={onStopSubmit}
           disabled={
-            gameStatus === "notstarted"
+            gameStatus === "notstarted" || gameStatus === "finished"
               ? true
-              : false || gameStatus !== "finished"
-              ? false
-              : true
+              : false
           }
         >
           Stop
