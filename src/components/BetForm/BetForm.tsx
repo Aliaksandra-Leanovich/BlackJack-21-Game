@@ -1,11 +1,10 @@
-import React from "react";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
-import { getUserBudget } from "../../store/selectors/userSelector";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { getUserBudget } from "../../store/selectors";
 import { setBudget } from "../../store/slices/userSlices";
 import { Button } from "../Button";
-import { InputRange } from "../InputRange/InputRange";
+import { InputRange } from "../InputRange";
 import { IBetFormProps } from "./types";
 
 export const BetForm = ({
@@ -37,7 +36,7 @@ export const BetForm = ({
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setState(parseInt(event.target.value));
-  }
+  };
   // eslint-enable-react-in-jsx-scope
   return (
     <>

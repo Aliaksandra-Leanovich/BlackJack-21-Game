@@ -1,7 +1,6 @@
-import React from "react";
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
-import { getUserHand } from "../../store/selectors/userSelector";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { getUserHand } from "../../store/selectors";
 import { setUserHand, setUserPoints } from "../../store/slices/userSlices";
 import { ICard } from "../../store/types";
 import { countPoints } from "../Game/count";

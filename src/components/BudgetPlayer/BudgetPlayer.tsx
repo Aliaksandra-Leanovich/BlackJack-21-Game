@@ -1,6 +1,5 @@
-import React from "react";
-import { useAppSelector } from "../../store/hooks/hooks";
-import { getUserInfo } from "../../store/selectors/userSelector";
+import { useAppSelector } from "../../store/hooks";
+import { getUserInfo } from "../../store/selectors";
 
 export const BudgetPlayer = () => {
   const { budget } = useAppSelector(getUserInfo);
