@@ -1,3 +1,4 @@
+import React from "react";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
@@ -36,8 +37,8 @@ export const BetForm = ({
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setState(parseInt(event.target.value));
-  };
-
+  }
+  // eslint-enable-react-in-jsx-scope
   return (
     <>
       {gameStatus === "start" ? (
