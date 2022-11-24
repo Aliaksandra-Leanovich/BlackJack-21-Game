@@ -28,3 +28,12 @@ export interface IDeckIdState {
   deckId: string;
   status: RequestStatusType;
 }
+export interface IPlayer {
+  name: string;
+  id: string;
+  points: string;
+}
+
+export interface IPlayers {
+  players: IPlayer[];
+}

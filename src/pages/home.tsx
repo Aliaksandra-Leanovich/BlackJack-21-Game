@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import { LinkTemplate } from "../components/LinkTemplate";
 import { routes } from "../routes/routes";
 import { useAppSelector } from "../store/hooks/hooks";
+import { getPlayers } from "../store/selectors/playersSelectors";
 import { getUserInfo } from "../store/selectors/userSelector";
 
 export const HomePage = () => {
