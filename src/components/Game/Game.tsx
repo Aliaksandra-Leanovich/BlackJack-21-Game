@@ -34,14 +34,14 @@ export const Game = () => {
     GameStatus.notstarted
   );
 
-  const getDealersHand = async (initialScore: number = 0): Promise<number> => {
+  const setDealersHand = async (initialScore: number = 0): Promise<number> => {
     const card: ICard[] = await getNewCard(1);
     const cardScore = getCardScore(card[0]);
 
     const actualScore = initialScore + cardScore;
 
     if (actualScore < 21) {
-      return getDealersHand(actualScore);
+      return setDealersHand(actualScore);
     }
 
     return actualScore;
@@ -76,7 +76,7 @@ export const Game = () => {
   const onStopSubmit = async () => {
     setGameStatus(GameStatus.finished);
 
-    const dealerScore = await getDealersHand();
+    const dealerScore = await setDealersHand();
 
     setCountDealer(dealerScore);
     setStopGame();
