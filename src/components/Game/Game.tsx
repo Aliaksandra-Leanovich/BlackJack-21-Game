@@ -18,7 +18,7 @@ import { Button } from "../Button";
 import { PlayerHand } from "../PlayerHand/PlayerHand";
 import { getCardScore } from "./count";
 import { GameStatus } from "./types";
-import { createArrayOfAllPlayers } from "./winner";
+// import { createArrayOfAllPlayers } from "./winner";
 
 export const Game = () => {
   const dispatch = useAppDispatch();
@@ -80,7 +80,7 @@ export const Game = () => {
     const dealerScore = await setDealersHand();
 
     setCountDealer(dealerScore);
-    createArrayOfAllPlayers(countDealer);
+    // createArrayOfAllPlayers(countDealer);
     setStopGame();
   };
 
