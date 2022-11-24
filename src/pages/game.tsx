@@ -1,7 +1,7 @@
 import { Navigate, useNavigate } from "react-router-dom";
 import { BudgetPlayer } from "../components/BudgetPlayer/BudgetPlayer";
 import { Button } from "../components/Button";
-import { GameStart } from "../components/GameStart/GameStart";
+import { Game } from "../components/Game/Game";
 import { routes } from "../routes/routes";
 import { useAppSelector } from "../store/hooks/hooks";
 import { getUserInfo } from "../store/selectors/userSelector";
@@ -22,7 +22,7 @@ export const GamePage = () => {
           <Button handleClick={handleBack}>Back</Button>
         </div>
         <BudgetPlayer />
-        <GameStart />
+        <Game />
       </div>
     );
   }

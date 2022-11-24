@@ -17,7 +17,7 @@ import { PlayerHand } from "../PlayerHand/PlayerHand";
 import { getCardScore } from "./count";
 import { GameStatus } from "./types";
 
-export const GameStart = () => {
+export const Game = () => {
   const dispatch = useAppDispatch();
 
   const pointsPlayer = useAppSelector(getUserPoints);
