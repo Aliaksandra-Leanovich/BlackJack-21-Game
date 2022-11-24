@@ -13,7 +13,7 @@ import { ICard } from "../../store/types";
 import { BetForm } from "../BetForm/BetForm";
 import { Button } from "../Button";
 import { PlayerHand } from "../PlayerHand/PlayerHand";
-import { countPoints } from "./count";
+import { getCardScore } from "./count";
 import { GameStatus } from "./types";
 
 export const GameStart = () => {
@@ -33,18 +33,25 @@ export const GameStart = () => {
     GameStatus.notstarted
   );
 
+  const getDealersHand = async (initialScore: number = 0): Promise<number> => {
+    const card: ICard[] = await getNewCard(1);
+    const cardScore = getCardScore(card[0]);
+
+    const actualScore = initialScore + cardScore;
+
+    if (actualScore < 21) {
+      return getDealersHand(actualScore);
+    }
+
+    return actualScore;
+  };
+
   useEffect(() => {
     dispatch(fetchDeckId());
-    getDealersHand();
-  }, [pointsPlayer, dispatch, cardsForPlayer, gameStatus]);
+  }, [pointsPlayer, dispatch, gameStatus]);
 
-  const getNewCards = async (
-    cards: ICard[],
-    setCards: (points: ICard[]) => void,
-    count: number
-  ) => {
-    const api = await cardsApi.getCard(deckId, count);
-    setCards(cards.concat(api));
+  const getNewCard = async (count: number) => {
+    return cardsApi.getCard(deckId, count);
   };
 
   const onStartSubmit = () => {
@@ -56,27 +63,21 @@ export const GameStart = () => {
     setCardsForPlayer([]);
   };
 
-  const onFirstSubmit = () => {
+  const onFirstSubmit = async () => {
     setGameStatus(GameStatus.inprogress);
-    getNewCards(cardsForPlayer, setCardsForPlayer, 2);
+    setCardsForPlayer(await getNewCard(2));
   };
 
-  const getDealersHand = () => {
-    if (gameStatus === "finished") {
-      for (let i = 1; i < 21; i++) {
-        getNewCards(cardsForDealer, setCardsForDealer, 1);
-        setCountDealer(countPoints(cardsForDealer));
-      }
-    }
+  const onSubmit = async () => {
+    setCardsForPlayer(await getNewCard(1));
   };
 
-  const onSubmit = () => {
-    getNewCards(cardsForPlayer, setCardsForPlayer, 1);
-  };
-
-  const onStopSubmit = () => {
+  const onStopSubmit = async () => {
     setGameStatus(GameStatus.finished);
-    getDealersHand();
+
+    const dealerScore = await getDealersHand();
+
+    setCountDealer(dealerScore);
     setStopGame();
   };
 
@@ -112,7 +113,7 @@ export const GameStart = () => {
 
     return " ";
   };
-  console.log(countDealer, pointsPlayer, gameStatus);
+
   return (
     <div>
       <div>
