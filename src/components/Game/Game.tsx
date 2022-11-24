@@ -26,7 +26,6 @@ export const Game = () => {
 
   const [countDealer, setCountDealer] = useState(0);
   const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
-  const [cardsForDealer, setCardsForDealer] = useState<ICard[]>([]);
   const [winner, setWinner] = useState<"dealer" | "player" | "tie" | null>(
     null
   );
@@ -60,7 +59,6 @@ export const Game = () => {
     setCountDealer(0);
     setGameStatus(GameStatus.start);
     dispatch(unsetUserHand());
-    setCardsForDealer([]);
     setCardsForPlayer([]);
   };
 
@@ -191,13 +189,6 @@ export const Game = () => {
           <div>
             <p>Dealer's points: {countDealer}</p>
             <p>Player's points: {pointsPlayer}</p>
-            {/* <ul>
-              {cardsForDealer.map((card) => (
-                <li key={card.code}>
-                  <img src={card.image} alt={card.code} className="card" />
-                </li>
-              ))}
-            </ul> */}
           </div>
         ) : (
           " "
