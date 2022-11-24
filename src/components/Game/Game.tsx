@@ -4,8 +4,10 @@ import "../../App.css";
 import { cardsApi } from "../../services/CardsService";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { getDeckId } from "../../store/selectors/deckIdSelectors";
+import { getPlayers } from "../../store/selectors/playersSelectors";
 import {
   getUserBudget,
+  getUserInfo,
   getUserPoints,
 } from "../../store/selectors/userSelector";
 import { fetchDeckId } from "../../store/slices/deckIdSlice";
@@ -16,6 +18,7 @@ import { Button } from "../Button";
 import { PlayerHand } from "../PlayerHand/PlayerHand";
 import { getCardScore } from "./count";
 import { GameStatus } from "./types";
+import { createArrayOfAllPlayers } from "./winner";
 
 export const Game = () => {
   const dispatch = useAppDispatch();
@@ -77,6 +80,7 @@ export const Game = () => {
     const dealerScore = await setDealersHand();
 
     setCountDealer(dealerScore);
+    createArrayOfAllPlayers(countDealer);
     setStopGame();
   };
 
