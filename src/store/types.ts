@@ -37,3 +37,17 @@ export interface IPlayer {
 export interface IPlayers {
   players: IPlayer[];
 }
+
+export interface IDealer {
+  id: number;
+  name: string;
+  points: number;
+}
+export interface IUserStore {
+  isAuthorized: string | null;
+  email: string;
+  password: string;
+  hand: ICard[] | [];
+  points: number;
+  budget: number;
+}

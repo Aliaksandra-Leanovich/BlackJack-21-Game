@@ -4,7 +4,10 @@ import playersSlice from "./slices/playersSlice";
 import userSlice from "./slices/userSlices";
 
 const store = configureStore({
-  reducer: { user: userSlice, deckId: deckIdSlice, players: playersSlice },
+  reducer: {
+    user: userSlice,
+    deckId: deckIdSlice,
+  },
 });
 
 export default store;
