@@ -28,19 +28,6 @@ export const Game = () => {
     GameStatus.notstarted
   );
 
-  // const setDealersHand = async (initialScore: number = 0): Promise<number> => {
-  //   const card: ICard[] = await cardsApi.getNewCard(deckId, 1);
-  //   const cardScore = getCardScore(card[0]);
-
-  //   const actualScore = initialScore + cardScore;
-
-  //   if (actualScore < 21) {
-  //     return setDealersHand(actualScore);
-  //   }
-
-  //   return actualScore;
-  // };
-
   useEffect(() => {
     dispatch(fetchDeckId());
   }, [pointsPlayer, dispatch, gameStatus]);
