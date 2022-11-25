@@ -29,7 +29,7 @@ export const Game = () => {
   );
 
   const setDealersHand = async (initialScore: number = 0): Promise<number> => {
-    const card: ICard[] = await getNewCard(1);
+    const card: ICard[] = await cardsApi.getNewCard(deckId, 1);
     const cardScore = getCardScore(card[0]);
 
     const actualScore = initialScore + cardScore;
@@ -45,10 +45,6 @@ export const Game = () => {
     dispatch(fetchDeckId());
   }, [pointsPlayer, dispatch, gameStatus]);
 
-  const getNewCard = async (count: number) => {
-    return cardsApi.getCard(deckId, count);
-  };
-
   const onStartSubmit = () => {
     setWinner(null);
     setCountDealer(0);
@@ -59,11 +55,11 @@ export const Game = () => {
 
   const onFirstSubmit = async () => {
     setGameStatus(GameStatus.inprogress);
-    setCardsForPlayer(await getNewCard(2));
+    setCardsForPlayer(await cardsApi.getNewCard(deckId, 2));
   };
 
   const onSubmit = async () => {
-    setCardsForPlayer(await getNewCard(1));
+    setCardsForPlayer(await cardsApi.getNewCard(deckId, 1));
   };
 
   const onStopSubmit = async () => {

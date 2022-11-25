@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ICard, ICardsApi, IDeckApi } from "../store/types";
+import { IDeckApi } from "../store/types";
 
 class DeckService {
   private readonly API_URL = "https://deckofcardsapi.com/api/deck";

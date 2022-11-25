@@ -13,5 +13,8 @@ class CardsService {
     );
     return data.cards;
   }
+  public getNewCard = async (deckId: string, count: number) => {
+    return cardsApi.getCard(deckId, count);
+  };
 }
 export const cardsApi = new CardsService();
