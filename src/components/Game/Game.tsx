@@ -8,8 +8,8 @@ import { unsetUserHand } from "../../store/slices/userSlices";
 import { ICard } from "../../store/types";
 import { BetForm } from "../BetForm";
 import { Button } from "../Button";
+import { setDealersHand, setDealersPoints } from "./dealersPoints";
 import { PlayerHand } from "../PlayerHand";
-import { getCardScore } from "./count";
 import { GameStatus } from "./types";
 
 export const Game = () => {
@@ -28,18 +28,18 @@ export const Game = () => {
     GameStatus.notstarted
   );
 
-  const setDealersHand = async (initialScore: number = 0): Promise<number> => {
-    const card: ICard[] = await cardsApi.getNewCard(deckId, 1);
-    const cardScore = getCardScore(card[0]);
+  // const setDealersHand = async (initialScore: number = 0): Promise<number> => {
+  //   const card: ICard[] = await cardsApi.getNewCard(deckId, 1);
+  //   const cardScore = getCardScore(card[0]);
 
-    const actualScore = initialScore + cardScore;
+  //   const actualScore = initialScore + cardScore;
 
-    if (actualScore < 21) {
-      return setDealersHand(actualScore);
-    }
+  //   if (actualScore < 21) {
+  //     return setDealersHand(actualScore);
+  //   }
 
-    return actualScore;
-  };
+  //   return actualScore;
+  // };
 
   useEffect(() => {
     dispatch(fetchDeckId());
@@ -65,9 +65,7 @@ export const Game = () => {
   const onStopSubmit = async () => {
     setGameStatus(GameStatus.finished);
 
-    const dealerScore = await setDealersHand();
-
-    setCountDealer(dealerScore);
+    setCountDealer(await setDealersPoints(deckId));
 
     setStopGame();
   };
