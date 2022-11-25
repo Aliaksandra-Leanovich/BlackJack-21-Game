@@ -1,6 +1,6 @@
 import { cardsApi } from "../../services/CardsService";
 import { ICard } from "../../store/types";
-import { getCardScore } from "./count";
+import { getCardScore } from "./countPoints";
 
 export const setDealersHand = async (
   deckId: string,

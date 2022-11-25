@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getUserHand } from "../../store/selectors";
 import { setUserHand, setUserPoints } from "../../store/slices/userSlices";
 import { ICard } from "../../store/types";
-import { countPoints } from "../Game/count";
+import { countPoints } from "../Game/countPoints";
 
 interface IProps {
   cards: ICard[];
