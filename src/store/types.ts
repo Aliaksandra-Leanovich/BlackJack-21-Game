@@ -31,7 +31,7 @@ export interface IDeckIdState {
 export interface IPlayer {
   name: string;
   id: string;
-  points: string;
+  points: string | number;
 }
 
 export interface IPlayers {

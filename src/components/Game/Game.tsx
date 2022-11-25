@@ -2,14 +2,21 @@ import { useEffect, useState } from "react";
 import "../../App.css";
 import { cardsApi } from "../../services/CardsService";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { getDeckId, getUserBudget, getUserPoints } from "../../store/selectors";
+import {
+  getDeckId,
+  getPlayers,
+  getUserBudget,
+  getUserInfo,
+  getUserPoints,
+} from "../../store/selectors";
 import { fetchDeckId } from "../../store/slices/deckIdSlice";
 import { unsetUserHand } from "../../store/slices/userSlices";
-import { ICard } from "../../store/types";
+import { ICard, IPlayer } from "../../store/types";
 import { BetForm } from "../BetForm";
 import { Button } from "../Button";
 import { PlayerHand } from "../PlayerHand";
 import { getCardScore } from "./countPoints";
+import { v4 as uuidv4 } from "uuid";
 import { GameStatus } from "./types";
 
 export const Game = () => {
@@ -19,11 +26,12 @@ export const Game = () => {
   const { deckId } = useAppSelector(getDeckId);
   const budget = useAppSelector(getUserBudget);
 
+  const { email } = useAppSelector(getUserInfo);
+  const { players } = useAppSelector(getPlayers);
+
   const [countDealer, setCountDealer] = useState(0);
   const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
-  const [winner, setWinner] = useState<"dealer" | "player" | "tie" | null>(
-    null
-  );
+  const [winner, setWinner] = useState<IPlayer[]>();
   const [gameStatus, setGameStatus] = useState<GameStatus>(
     GameStatus.notstarted
   );
@@ -45,8 +53,33 @@ export const Game = () => {
     dispatch(fetchDeckId());
   }, [pointsPlayer, dispatch, gameStatus]);
 
+  const createArrayOfAllPlayers = () => {
+    const player = { name: email, id: uuidv4(), points: pointsPlayer };
+    const dealer = { name: "dealer", id: uuidv4(), points: countDealer };
+    return [player, dealer, ...players];
+  };
+
+  const findWinner = () => {
+    let winner: IPlayer[] = [];
+
+    const players = createArrayOfAllPlayers();
+
+    const lessThen21 = players.filter((player) => player.points < 21);
+    const equal21 = players.filter((player) => player.points === 21);
+    const moreThen21 = players.filter((player) => player.points > 21);
+
+    if (equal21.length > 0) {
+      return (winner = equal21);
+    } else if (equal21.length === 0 && lessThen21.length > 0) {
+      lessThen21.map((player) => {
+        Math.max(+player.points);
+      });
+    }
+    return winner;
+  };
+
   const onStartSubmit = () => {
-    setWinner(null);
+    setWinner([]);
     setCountDealer(0);
     setGameStatus(GameStatus.start);
     dispatch(unsetUserHand());
@@ -66,50 +99,22 @@ export const Game = () => {
     setGameStatus(GameStatus.finished);
 
     const dealerScore = await setDealersHand();
-
     setCountDealer(dealerScore);
 
-    setStopGame();
-  };
-
-  const setStopGame = () => {
-    if (pointsPlayer < 21) {
-      if (countDealer < 21) {
-        if (pointsPlayer < countDealer) {
-          setWinner("dealer");
-        } else {
-          setWinner("player");
-        }
-      } else {
-        setWinner("player");
-      }
-    }
-    if (pointsPlayer > 21) {
-      if (countDealer > 21) {
-        if (countDealer < pointsPlayer) {
-          setWinner("dealer");
-        } else if (countDealer > pointsPlayer) {
-          setWinner("player");
-        }
-      } else {
-        setWinner("dealer");
-      }
-    }
-    if (pointsPlayer === 21) {
-      setWinner("player");
-      if (countDealer === 21) {
-        setWinner("tie");
-      }
-    }
-
-    return " ";
+    setWinner(findWinner());
+    console.log(findWinner());
   };
 
   return (
     <div>
       <div>
         {gameStatus === "finished" ? (
-          <p>The winner is... {winner}</p>
+          <div>
+            The winner is...
+            {winner?.map((player) => (
+              <p>{player.name}</p>
+            ))}
+          </div>
         ) : (
           <p>Good luck!</p>
         )}
@@ -139,7 +144,7 @@ export const Game = () => {
         }
       >
         <BetForm
-          winner={winner}
+          // winner={winner}
           onFirstSubmit={onFirstSubmit}
           gameStatus={gameStatus}
         />

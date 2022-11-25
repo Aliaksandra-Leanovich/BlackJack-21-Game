@@ -7,6 +7,7 @@ const store = configureStore({
   reducer: {
     user: userSlice,
     deckId: deckIdSlice,
+    players: playersSlice,
   },
 });
 
