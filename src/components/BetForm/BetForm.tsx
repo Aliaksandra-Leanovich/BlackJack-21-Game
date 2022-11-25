@@ -37,7 +37,7 @@ export const BetForm = ({
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setState(parseInt(event.target.value));
   };
-  // eslint-enable-react-in-jsx-scope
+
   return (
     <>
       {gameStatus === "start" ? (
