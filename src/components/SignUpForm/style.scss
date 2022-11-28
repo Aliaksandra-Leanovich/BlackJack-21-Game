@@ -1,0 +1,25 @@
+.sign-up {
+  &__form {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 14px;
+
+    width: 300px;
+  }
+
+  &__input {
+    padding: 17px 15px;
+
+    width: 100%;
+
+    border-radius: 25px;
+  }
+
+  &__button {
+    background-color: #ffb703;
+    border-radius: 25px;
+
+    font-size: 20px;
+    font-weight: 500;
+  }
+}

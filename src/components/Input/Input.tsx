@@ -6,11 +6,13 @@ export const Input = ({
   errors,
   onChange,
   label,
+  className,
   register,
 }: IInputProps) => {
   return (
     <div>
       <input
+        className={className}
         type={type}
         placeholder={placeholder}
         {...register(label)}
