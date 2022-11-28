@@ -17,7 +17,6 @@ export const Account = () => {
 
   const handleLogout = () => {
     dispatch(unsetUser());
-    localStorage.setItem("user", "");
     navigate("/sign-up");
   };
 

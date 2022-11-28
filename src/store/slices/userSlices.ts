@@ -38,7 +38,7 @@ const userSlice = createSlice({
     },
 
     unsetUser: (state) => {
-      state.isAuthorized = null;
+      state.isAuthorized = localStorage.removeItem("user");
       state.email = "";
       state.password = "";
     },

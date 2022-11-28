@@ -55,7 +55,6 @@ export const Game = () => {
 
   const onStartSubmit = () => {
     setWinner([]);
-    // setCountDealer(0);
     setGameStatus(GameStatus.start);
     dispatch(unsetUserHand());
     setCardsForPlayer([]);
@@ -75,12 +74,9 @@ export const Game = () => {
 
     setCountDealer(await setDealersHand());
 
-    console.log(countDealer);
-
     setWinner(findWinner());
-    console.log(findWinner());
   };
-
+  console.log(gameStatus, countDealer);
   const createArrayOfAllPlayers = () => {
     const player = { name: email, id: uuidv4(), points: pointsPlayer };
     const dealer = { name: "dealer", id: uuidv4(), points: countDealer };
@@ -92,17 +88,20 @@ export const Game = () => {
 
     const players = createArrayOfAllPlayers();
 
-    const lessThan21 = players.filter((player) => player.points < 21);
-    const equal21 = players.filter((player) => player.points === 21);
-
+    const lessThan21 = players.filter((player) => player!.points < 21);
+    const equal21 = players.filter((player) => player!.points === 21);
+    console.log(players);
     if (equal21.length > 0) {
       return winner.concat(equal21);
     } else if (equal21.length === 0 && lessThan21.length > 0) {
-      const maxPoints = Math.max.apply(
-        Math,
-        lessThan21.map((players) => players.points)
+      const users = lessThan21.find(
+        (user) =>
+          user.points ===
+          Math.max.apply(
+            Math,
+            lessThan21.map((players) => players.points)
+          )
       );
-      const users = lessThan21.find((user) => user.points === maxPoints);
       return winner.concat(users!);
     }
     return winner;
@@ -115,7 +114,7 @@ export const Game = () => {
           <div>
             The winner is...
             {winner?.map((player) => (
-              <p>{player.name}</p>
+              <p key={player.id}>{player.name}</p>
             ))}
           </div>
         ) : (

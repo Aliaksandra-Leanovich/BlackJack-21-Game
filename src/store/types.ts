@@ -44,7 +44,7 @@ export interface IDealer {
   points: number;
 }
 export interface IUserStore {
-  isAuthorized: string | null;
+  isAuthorized: string | null | void;
   email: string;
   password: string;
   hand: ICard[] | [];
