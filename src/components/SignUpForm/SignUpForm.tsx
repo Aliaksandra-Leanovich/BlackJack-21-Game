@@ -46,7 +46,7 @@ const SignUpForm = () => {
           placeholder="Enter your password"
         />
         <Button className="sign-up__button" type="submit">
-          submit
+          Submit
         </Button>
       </form>
     </div>
