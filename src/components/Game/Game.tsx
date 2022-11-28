@@ -32,6 +32,7 @@ export const Game = () => {
   const [countDealer, setCountDealer] = useState(0);
   const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
   const [winner, setWinner] = useState<IPlayer[]>();
+  const [playerWin, setPlayerWin] = useState<boolean>();
   const [gameStatus, setGameStatus] = useState<GameStatus>(
     GameStatus.notstarted
   );
@@ -51,10 +52,11 @@ export const Game = () => {
 
   useEffect(() => {
     dispatch(fetchDeckId());
-  }, [pointsPlayer, dispatch, gameStatus]);
+  }, [dispatch]);
 
   const onStartSubmit = () => {
     setWinner([]);
+    setPlayerWin(false);
     setGameStatus(GameStatus.start);
     dispatch(unsetUserHand());
     setCardsForPlayer([]);
@@ -69,17 +71,26 @@ export const Game = () => {
     setCardsForPlayer(await cardsApi.getNewCard(deckId, 1));
   };
 
+  const setResultForPlayer = () => {
+    winner?.forEach((player) => {
+      player.name === email ? setPlayerWin(true) : setPlayerWin(false);
+    });
+    // do not changes into true
+  };
+
   const onStopSubmit = async () => {
     setGameStatus(GameStatus.finished);
 
     setCountDealer(await setDealersHand());
 
     setWinner(findWinner());
+
+    setResultForPlayer();
   };
-  console.log(gameStatus, countDealer);
+
   const createArrayOfAllPlayers = () => {
     const player = { name: email, id: uuidv4(), points: pointsPlayer };
-    const dealer = { name: "dealer", id: uuidv4(), points: countDealer };
+    const dealer = { name: "dealer", id: uuidv4(), points: countDealer }; //dealer do no rewrite his points
     return [player, dealer, ...players];
   };
 
@@ -90,11 +101,12 @@ export const Game = () => {
 
     const lessThan21 = players.filter((player) => player!.points < 21);
     const equal21 = players.filter((player) => player!.points === 21);
-    console.log(players);
+
     if (equal21.length > 0) {
       return winner.concat(equal21);
-    } else if (equal21.length === 0 && lessThan21.length > 0) {
-      const users = lessThan21.find(
+    }
+    if (equal21.length === 0 && lessThan21.length > 0) {
+      const users = lessThan21.filter(
         (user) =>
           user.points ===
           Math.max.apply(
@@ -102,7 +114,7 @@ export const Game = () => {
             lessThan21.map((players) => players.points)
           )
       );
-      return winner.concat(users!);
+      return winner.concat(users);
     }
     return winner;
   };
@@ -146,7 +158,7 @@ export const Game = () => {
         }
       >
         <BetForm
-          // winner={winner}
+          winner={playerWin}
           onFirstSubmit={onFirstSubmit}
           gameStatus={gameStatus}
         />

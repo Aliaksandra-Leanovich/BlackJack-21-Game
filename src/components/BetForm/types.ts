@@ -1,5 +1,5 @@
 export interface IBetFormProps {
-  winner?: string | null;
+  winner?: boolean;
   gameStatus: string;
   onFirstSubmit: () => void;
 }

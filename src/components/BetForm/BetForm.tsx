@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { getUserBudget } from "../../store/selectors";
+import { getUserBudget, getUserInfo } from "../../store/selectors";
 import { setBudget } from "../../store/slices/userSlices";
 import { Button } from "../Button";
 import { InputRange } from "../InputRange";
@@ -13,6 +13,7 @@ export const BetForm = ({
   onFirstSubmit,
 }: IBetFormProps) => {
   const dispatch = useAppDispatch();
+
   let budget = useAppSelector(getUserBudget);
 
   const { handleSubmit } = useForm();
@@ -20,11 +21,11 @@ export const BetForm = ({
   const [state, setState] = useState<number>(budget);
 
   useEffect(() => {
-    if (gameStatus === "finished" && winner !== "dealer") {
+    if (winner) {
       dispatch(setBudget((budget = budget + state * 2)));
     }
-  }, [winner, dispatch]);
-
+  }, [dispatch, gameStatus]);
+  console.log(winner);
   const countBudget = () => {
     dispatch(setBudget((budget = budget - state)));
   };
