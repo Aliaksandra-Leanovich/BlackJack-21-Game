@@ -20,7 +20,7 @@ export const Account = () => {
     localStorage.setItem("user", "");
   };
 
-  if (isAuthorized !== null) {
+  if (isAuthorized !== "") {
     return (
       <div>
         <Button type="submit" handleClick={handleBack}>

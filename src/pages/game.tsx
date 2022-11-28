@@ -15,7 +15,7 @@ export const GamePage = () => {
     navigate(-1);
   };
 
-  if (isAuthorized !== null) {
+  if (isAuthorized !== "") {
     return (
       <div>
         <div>

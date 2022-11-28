@@ -8,7 +8,7 @@ import { getUserInfo } from "../store/selectors/userSelector";
 export const HomePage = () => {
   const { isAuthorized } = useAppSelector(getUserInfo);
 
-  if (isAuthorized !== null) {
+  if (isAuthorized !== "") {
     return (
       <div>
         <LinkTemplate to={routes.ACCOUNT}>Account</LinkTemplate>
