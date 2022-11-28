@@ -4,10 +4,10 @@ import { v4 as uuidv4 } from "uuid";
 
 const initialState: IPlayers = {
   players: [
-    { name: "first", id: uuidv4(), points: "20" },
-    { name: "second", id: uuidv4(), points: "25" },
-    { name: "third", id: uuidv4(), points: "18" },
-    { name: "forth", id: uuidv4(), points: "22" },
+    { name: "first", id: uuidv4(), points: 20 },
+    { name: "second", id: uuidv4(), points: 25 },
+    { name: "third", id: uuidv4(), points: 18 },
+    { name: "forth", id: uuidv4(), points: 22 },
   ],
 };
 

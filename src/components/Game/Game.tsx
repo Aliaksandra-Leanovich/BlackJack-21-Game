@@ -53,34 +53,9 @@ export const Game = () => {
     dispatch(fetchDeckId());
   }, [pointsPlayer, dispatch, gameStatus]);
 
-  const createArrayOfAllPlayers = () => {
-    const player = { name: email, id: uuidv4(), points: pointsPlayer };
-    const dealer = { name: "dealer", id: uuidv4(), points: countDealer };
-    return [player, dealer, ...players];
-  };
-
-  const findWinner = () => {
-    let winner: IPlayer[] = [];
-
-    const players = createArrayOfAllPlayers();
-
-    const lessThen21 = players.filter((player) => player.points < 21);
-    const equal21 = players.filter((player) => player.points === 21);
-    const moreThen21 = players.filter((player) => player.points > 21);
-
-    if (equal21.length > 0) {
-      return (winner = equal21);
-    } else if (equal21.length === 0 && lessThen21.length > 0) {
-      lessThen21.map((player) => {
-        Math.max(+player.points);
-      });
-    }
-    return winner;
-  };
-
   const onStartSubmit = () => {
     setWinner([]);
-    setCountDealer(0);
+    // setCountDealer(0);
     setGameStatus(GameStatus.start);
     dispatch(unsetUserHand());
     setCardsForPlayer([]);
@@ -98,11 +73,41 @@ export const Game = () => {
   const onStopSubmit = async () => {
     setGameStatus(GameStatus.finished);
 
-    const dealerScore = await setDealersHand();
-    setCountDealer(dealerScore);
+    setCountDealer(await setDealersHand());
+
+    console.log(countDealer);
 
     setWinner(findWinner());
     console.log(findWinner());
+  };
+
+  const createArrayOfAllPlayers = () => {
+    const player = { name: email, id: uuidv4(), points: pointsPlayer };
+    const dealer = { name: "dealer", id: uuidv4(), points: countDealer };
+    return [player, dealer, ...players];
+  };
+
+  const findWinner = () => {
+    let winner: IPlayer[] = [];
+
+    const players = createArrayOfAllPlayers();
+    let maxReduced;
+    const lessThen21 = players.filter((player) => player.points < 21);
+    const equal21 = players.filter((player) => player.points === 21);
+    const moreThen21 = players.filter((player) => player.points > 21);
+
+    if (equal21.length > 0) {
+      return winner.concat(equal21);
+    } else if (equal21.length === 0 && lessThen21.length > 0) {
+      const maxPoints = Math.max.apply(
+        Math,
+        lessThen21.map((players) => players.points)
+      );
+      const users = lessThen21.find((user) => user.points === maxPoints);
+      return winner.concat(users!);
+    }
+    console.log(players);
+    // return winner;
   };
 
   return (
@@ -111,7 +116,7 @@ export const Game = () => {
         {gameStatus === "finished" ? (
           <div>
             The winner is...
-            {winner?.map((player) => (
+            {winner?.map((player: IPlayer) => (
               <p>{player.name}</p>
             ))}
           </div>
