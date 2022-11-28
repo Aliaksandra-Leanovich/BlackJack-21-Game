@@ -91,23 +91,21 @@ export const Game = () => {
     let winner: IPlayer[] = [];
 
     const players = createArrayOfAllPlayers();
-    let maxReduced;
-    const lessThen21 = players.filter((player) => player.points < 21);
+
+    const lessThan21 = players.filter((player) => player.points < 21);
     const equal21 = players.filter((player) => player.points === 21);
-    const moreThen21 = players.filter((player) => player.points > 21);
 
     if (equal21.length > 0) {
       return winner.concat(equal21);
-    } else if (equal21.length === 0 && lessThen21.length > 0) {
+    } else if (equal21.length === 0 && lessThan21.length > 0) {
       const maxPoints = Math.max.apply(
         Math,
-        lessThen21.map((players) => players.points)
+        lessThan21.map((players) => players.points)
       );
-      const users = lessThen21.find((user) => user.points === maxPoints);
+      const users = lessThan21.find((user) => user.points === maxPoints);
       return winner.concat(users!);
     }
-    console.log(players);
-    // return winner;
+    return winner;
   };
 
   return (
@@ -116,7 +114,7 @@ export const Game = () => {
         {gameStatus === "finished" ? (
           <div>
             The winner is...
-            {winner?.map((player: IPlayer) => (
+            {winner?.map((player) => (
               <p>{player.name}</p>
             ))}
           </div>
