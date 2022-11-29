@@ -26,7 +26,7 @@ export const BetForm = ({
       dispatch(setBudget((budget = budget + state * 2)));
     }
   }, [dispatch, gameStatus]);
-  console.log(winner);
+
   const countBudget = () => {
     dispatch(setBudget((budget = budget - state)));
   };
@@ -45,7 +45,7 @@ export const BetForm = ({
       {gameStatus === "start" ? (
         <div className="bet">
           <form onSubmit={handleSubmit(onSubmit)} className="bet__form">
-            <label className="bet__label">Enter You Bet</label>
+            <label className="bet__label">enter your bet</label>
             <InputRange
               min={100}
               max={budget}
@@ -60,12 +60,12 @@ export const BetForm = ({
               disabled={budget < state ? true : false}
               className="bet-button"
             >
-              Bet
+              bet
             </Button>
           </form>
         </div>
       ) : (
-        <p className="bet__state"> Your bet is {state}</p>
+        <p className="bet__state"> your bet is: {state}</p>
       )}
     </>
   );

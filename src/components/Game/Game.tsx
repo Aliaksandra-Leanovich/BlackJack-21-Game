@@ -92,7 +92,7 @@ export const Game = () => {
 
   const createArrayOfAllPlayers = () => {
     const player = { name: email, id: uuidv4(), points: pointsPlayer };
-    const dealer = { name: "dealer", id: uuidv4(), points: countDealer }; //dealer do no rewrite his points
+    const dealer = { name: "dealer", id: uuidv4(), points: countDealer };
     return [player, dealer, ...players];
   };
 
@@ -127,7 +127,7 @@ export const Game = () => {
         <Robot />
         <div className="game__comment">
           {gameStatus === "finished" ? (
-            <div className="game__comment__message">
+            <div className="game__message">
               the winner is...
               {winner?.map((player) => (
                 <p key={player.id}>{player.name}</p>
@@ -198,15 +198,15 @@ export const Game = () => {
           hit
         </Button>
 
-        <p className="game__message">Player's points: {pointsPlayer}</p>
+        <p className="game__message">your points: {pointsPlayer}</p>
       </div>
 
       <PlayerHand cards={cardsForPlayer} />
       <div>
         {gameStatus === "finished" && countDealer > 0 ? (
           <div>
-            <p>Dealer's points: {countDealer}</p>
-            <p>Player's points: {pointsPlayer}</p>
+            <p>dealer's points: {countDealer}</p>
+            <p>player's points: {pointsPlayer}</p>
           </div>
         ) : (
           " "

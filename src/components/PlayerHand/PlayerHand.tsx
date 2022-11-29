@@ -19,7 +19,6 @@ export const PlayerHand = ({ cards }: IProps) => {
     });
     dispatch(setUserPoints(points));
   }, [cards, points]);
-  console.log(hand);
 
   return (
     <div className="hand">
