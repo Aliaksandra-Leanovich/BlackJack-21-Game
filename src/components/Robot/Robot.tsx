@@ -3,7 +3,7 @@ import "./style.scss";
 
 export const Robot = () => {
   return (
-    <div className="cute-robot-v1">
+    <div className="cute-robot-v1 bounce">
       <div className="circle-bg">
         <div className="robot-ear left"></div>
         <div className="robot-head">

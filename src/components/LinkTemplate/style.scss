@@ -22,6 +22,10 @@ $bg-color-hover: #f9c74f;
 .bounce {
   padding: 22px 34px;
   -webkit-animation: bounce 0.75s infinite;
+
+  &:hover {
+    -webkit-animation: bounce 0s;
+  }
 }
 @-webkit-keyframes bounce {
   0% {

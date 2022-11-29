@@ -167,3 +167,24 @@ $tongue-color: #f9bbbb;
     }
   }
 }
+
+.bounce {
+  -webkit-animation: bounce 1.2s infinite;
+
+  &:hover {
+    -webkit-animation: bounce 0s;
+  }
+}
+@-webkit-keyframes bounce {
+  0% {
+    transform: scale(1, 1) translate(0px, 0px);
+  }
+
+  50% {
+    transform: scale(1, 1) translate(0px, -8px);
+  }
+
+  100% {
+    transform: scale(1, 1) translate(0px, 0px);
+  }
+}
