@@ -158,17 +158,13 @@ export const Game = () => {
           </Button>
         )}
       </div>
-      <div
-        className={
-          gameStatus === "finished" ? "block-start-hidden " : "block-start"
-        }
-      >
-        <BetForm
-          winner={playerWin}
-          onFirstSubmit={onFirstSubmit}
-          gameStatus={gameStatus}
-        />
-      </div>
+
+      <BetForm
+        winner={playerWin}
+        onFirstSubmit={onFirstSubmit}
+        gameStatus={gameStatus}
+      />
+
       <div
         className={
           gameStatus === "inprogress" ? "block-start" : "block-start-hidden "

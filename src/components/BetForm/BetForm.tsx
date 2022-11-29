@@ -41,7 +41,13 @@ export const BetForm = ({
   };
 
   return (
-    <>
+    <div
+      className={
+        gameStatus === "finished" || gameStatus === "notstarted"
+          ? "block-start-hidden "
+          : "block-start"
+      }
+    >
       {gameStatus === "start" ? (
         <div className="bet">
           <form onSubmit={handleSubmit(onSubmit)} className="bet__form">
@@ -54,7 +60,7 @@ export const BetForm = ({
               onChange={handleChange}
               step={100}
             />
-            <p className="bet__state">{state}</p>
+            <p className="bet__label">{state}</p>
             <Button
               type="submit"
               disabled={budget < state ? true : false}
@@ -65,8 +71,11 @@ export const BetForm = ({
           </form>
         </div>
       ) : (
-        <p className="bet__state"> your bet is: {state}</p>
+        <div className="bet__state">
+          <div className="bet__state__chip"></div>
+          <p className="bet__state__count"> {state}</p>
+        </div>
       )}
-    </>
+    </div>
   );
 };

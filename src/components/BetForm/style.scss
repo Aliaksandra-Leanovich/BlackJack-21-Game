@@ -25,12 +25,52 @@ $font-color: #000000;
   }
 
   &__state {
-    font-size: 18px;
-    line-height: 20px;
-    font-weight: 600;
-
-    color: $font-color;
+    background-color: rgba(0, 0, 0, 0.3);
 
     margin: 10px 0;
+    padding: 20px;
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+
+    &__count {
+      font-size: 18px;
+      line-height: 20px;
+      font-weight: 600;
+
+      color: $font-color;
+      margin-left: 10px;
+    }
+
+    &__chip {
+      position: relative;
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 3px solid $border-color;
+      background-color: #fff;
+
+      &:after {
+        z-index: 1;
+        position: absolute;
+        content: " ";
+        border: 4px dashed #ff006e;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+
+        top: 0px;
+        left: 0px;
+      }
+    }
   }
+}
+
+.block-start {
+  display: block;
+}
+.block-start-hidden {
+  display: none;
 }
