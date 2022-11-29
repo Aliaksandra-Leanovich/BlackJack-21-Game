@@ -1,3 +1,10 @@
+$font-color-light: #ffffff;
+$bg-color-darkblue: #14213d;
+$bg-color-lighgray: #2b2d42;
+$bg-color-yellow: #ffd166;
+$bg-color-orange: #ca6702;
+$bg-color-dark: #000000;
+
 .button {
   padding: 18px 24px;
 
@@ -11,52 +18,53 @@
 
   &:hover {
     transform: translateY(-5px);
-    background-color: #000000;
-    color: #fff;
+    background-color: $bg-color-dark;
+    color: $font-color-light;
   }
 
   &:active {
-    color: white;
-    background-color: #ca6702;
+    color: $font-color-light;
+    background-color: $bg-color-orange;
   }
 }
 
 .back {
-  background-color: #14213d;
-  color: #fff;
+  background-color: $bg-color-darkblue;
+  color: $font-color-light;
 }
 
 .logout {
-  background-color: #2b2d42;
-  color: #fff;
+  background-color: $bg-color-lighgray;
+  color: $font-color-light;
 }
 .sign_up {
-  background-color: #ffd166;
+  background-color: $bg-color-yellow;
 }
 .new-game {
-  background-color: #f9c74f;
-  color: white;
+  background-color: $bg-color-yellow;
+  color: $font-color-light;
 }
 .bet-button {
   padding: 10px 24px;
-  border: 3px solid black;
+  border: 2px solid $bg-color-dark;
 
   &:hover {
     transform: translateY(0px);
-    background-color: #f6aa1c;
+    border: 2px solid $bg-color-yellow;
+    background-color: $bg-color-yellow;
   }
 }
 .stay {
   padding: 16px 30px;
   margin: 10px;
 
-  background-color: #14213d;
+  background-color: $bg-color-darkblue;
   color: #e2e2df;
   font-size: 22px;
   line-height: 30px;
 
   &:hover {
     transform: translateY(0px);
-    background-color: #f6aa1c;
+    background-color: $bg-color-yellow;
   }
 }

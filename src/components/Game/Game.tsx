@@ -58,6 +58,7 @@ export const Game = () => {
 
   const onStartSubmit = () => {
     setWinner([]);
+    setCountDealer(0);
     setPlayerWin(false);
     setGameStatus(GameStatus.start);
     dispatch(unsetUserHand());
@@ -92,7 +93,7 @@ export const Game = () => {
 
   const createArrayOfAllPlayers = () => {
     const player = { name: email, id: uuidv4(), points: pointsPlayer };
-    const dealer = { name: "dealer", id: uuidv4(), points: countDealer };
+    const dealer = { name: "dealer", id: uuidv4(), points: countDealer }; ///!!!!!
     return [player, dealer, ...players];
   };
 
@@ -100,7 +101,7 @@ export const Game = () => {
     let winner: IPlayer[] = [];
 
     const players = createArrayOfAllPlayers();
-
+    console.log(players);
     const lessThan21 = players.filter((player) => player!.points < 21);
     const equal21 = players.filter((player) => player!.points === 21);
 
@@ -205,8 +206,8 @@ export const Game = () => {
       <div>
         {gameStatus === "finished" && countDealer > 0 ? (
           <div>
-            <p>dealer's points: {countDealer}</p>
-            <p>player's points: {pointsPlayer}</p>
+            <p className="game__result">dealer's points: {countDealer}</p>
+            <p className="game__result">player's points: {pointsPlayer}</p>
           </div>
         ) : (
           " "

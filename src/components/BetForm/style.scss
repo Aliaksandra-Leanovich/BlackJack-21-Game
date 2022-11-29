@@ -1,7 +1,11 @@
+$border-color: #000000;
+$bg-color: rgb(235, 235, 235);
+$font-color: #000000;
+
 .bet {
   padding: 20px;
-  border: 4px solid black;
-  background-color: rgb(235, 235, 235);
+  border: 6px solid $border-color;
+  background-color: $bg-color;
   border-radius: 20px;
   &__form {
     display: flex;
@@ -15,9 +19,9 @@
     line-height: 22px;
     font-weight: 600;
 
-    color: black;
+    color: $font-color;
 
-    margin-bottom: 15px;
+    margin-bottom: 16px;
   }
 
   &__state {
@@ -25,7 +29,7 @@
     line-height: 20px;
     font-weight: 600;
 
-    color: black;
+    color: $font-color;
 
     margin: 10px 0;
   }

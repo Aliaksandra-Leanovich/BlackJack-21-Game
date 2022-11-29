@@ -1,7 +1,9 @@
+$white: #ffffff;
+$light-pink: #fbb1bd;
+
 .game {
   width: 100%;
   padding: 100px 0;
-  //   height: 60vh;
 
   display: flex;
   justify-content: center;
@@ -19,7 +21,7 @@
     height: 120px;
     padding: 20px;
 
-    background: #fbb1bd;
+    background: $light-pink;
     position: relative;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -41,7 +43,7 @@
       width: 0;
       height: 0;
       border-top: 10px solid transparent;
-      border-right: 18px solid #fbb1bd;
+      border-right: 18px solid $light-pink;
       border-bottom: 10px solid transparent;
     }
 
@@ -55,6 +57,14 @@
     line-height: 28px;
     font-weight: 600;
 
-    color: #ffffff;
+    color: $white;
+  }
+
+  &__result {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 400;
+
+    color: $white;
   }
 }
