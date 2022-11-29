@@ -146,24 +146,20 @@ export const Game = () => {
         }
       >
         {budget === 0 ? (
-          <>
-            <p className="game__message">sorry, you dont have money left</p>
-          </>
+          <p className="game__message">sorry, you dont have money left</p>
         ) : (
-          <>
-            <Button
-              type="submit"
-              handleClick={onStartSubmit}
-              className="new-game"
-            >
-              START NEW GAME
-            </Button>
-          </>
+          <Button
+            type="submit"
+            handleClick={onStartSubmit}
+            className="new-game"
+          >
+            START NEW GAME
+          </Button>
         )}
       </div>
       <div
         className={
-          gameStatus === "start" ? "block-start" : "block-start-hidden "
+          gameStatus === "finished" ? "block-start-hidden " : "block-start"
         }
       >
         <BetForm
@@ -185,8 +181,9 @@ export const Game = () => {
               ? true
               : false
           }
+          className="stay"
         >
-          New Card
+          stay
         </Button>
         <Button
           type="submit"
@@ -196,11 +193,12 @@ export const Game = () => {
               ? true
               : false
           }
+          className="stay"
         >
-          Stop
+          hit
         </Button>
 
-        <p>Player's points: {pointsPlayer}</p>
+        <p className="game__message">Player's points: {pointsPlayer}</p>
       </div>
 
       <PlayerHand cards={cardsForPlayer} />

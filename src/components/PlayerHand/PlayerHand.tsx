@@ -2,13 +2,10 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getUserHand } from "../../store/selectors";
 import { setUserHand, setUserPoints } from "../../store/slices/userSlices";
-import { ICard } from "../../store/types";
+import { Card } from "../Card/Card";
 import { countPoints } from "../Game/countPoints";
 import "./style.scss";
-
-interface IProps {
-  cards: ICard[];
-}
+import { IProps } from "./types";
 
 export const PlayerHand = ({ cards }: IProps) => {
   const hand = useAppSelector(getUserHand);
@@ -25,12 +22,10 @@ export const PlayerHand = ({ cards }: IProps) => {
   console.log(hand);
 
   return (
-    <div>
+    <div className="hand">
       <div style={{ display: "flex" }}>
         {hand.map((card) => (
-          <li key={card.code}>
-            <img src={card.image} alt={card.code} className="card" />
-          </li>
+          <Card key={card.code} card={card} />
         ))}
       </div>
     </div>
