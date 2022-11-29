@@ -6,6 +6,7 @@ import { setBudget } from "../../store/slices/userSlices";
 import { Button } from "../Button";
 import { InputRange } from "../InputRange";
 import { IBetFormProps } from "./types";
+import "./style.scss";
 
 export const BetForm = ({
   winner,
@@ -40,10 +41,10 @@ export const BetForm = ({
   };
 
   return (
-    <>
+    <div className="bet">
       {gameStatus === "start" ? (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label>Enter You Bet</label>
+        <form onSubmit={handleSubmit(onSubmit)} className="bet__form">
+          <label className="bet__label">Enter You Bet</label>
           <InputRange
             min={100}
             max={budget}
@@ -60,6 +61,6 @@ export const BetForm = ({
       ) : (
         <p>Your bet is {state}</p>
       )}
-    </>
+    </div>
   );
 };

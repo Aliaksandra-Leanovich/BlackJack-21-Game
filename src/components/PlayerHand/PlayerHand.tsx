@@ -4,6 +4,7 @@ import { getUserHand } from "../../store/selectors";
 import { setUserHand, setUserPoints } from "../../store/slices/userSlices";
 import { ICard } from "../../store/types";
 import { countPoints } from "../Game/countPoints";
+import "./style.scss";
 
 interface IProps {
   cards: ICard[];
@@ -21,6 +22,7 @@ export const PlayerHand = ({ cards }: IProps) => {
     });
     dispatch(setUserPoints(points));
   }, [cards, points]);
+  console.log(hand);
 
   return (
     <div>

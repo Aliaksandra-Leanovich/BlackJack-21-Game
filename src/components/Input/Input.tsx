@@ -1,4 +1,5 @@
 import { IInputProps } from "./types";
+import "./style.scss";
 
 export const Input = ({
   type,
@@ -12,7 +13,7 @@ export const Input = ({
   return (
     <div>
       <input
-        className={className}
+        className="input "
         type={type}
         placeholder={placeholder}
         {...register(label)}

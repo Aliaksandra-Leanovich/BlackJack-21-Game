@@ -1,0 +1,38 @@
+.button {
+  padding: 18px 24px;
+
+  border-radius: 24px;
+
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+
+  transition: transform 0.5s ease-out, background-color 0.5s ease-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    background-color: #000000;
+  }
+
+  &:active {
+    color: white;
+    background-color: #ca6702;
+  }
+}
+
+.back {
+  background-color: #14213d;
+  color: #fff;
+}
+
+.logout {
+  background-color: #2b2d42;
+  color: #fff;
+}
+.sign_up {
+  background-color: #ffd166;
+}
+.new-game {
+  background-color: #f9c74f;
+  color: white;
+}

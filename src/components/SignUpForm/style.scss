@@ -14,31 +14,4 @@
     max-width: 300px;
     width: 100%;
   }
-
-  &__input {
-    font-size: 16px;
-    line-height: 20px;
-
-    padding: 18px 16px;
-    width: 100%;
-
-    border-radius: 24px;
-  }
-
-  &__button {
-    background-color: #ffd166;
-    border-radius: 24px;
-
-    font-size: 20px;
-    font-weight: 500;
-
-    &:hover {
-      color: white;
-      background-color: #ee9b00;
-    }
-    &:active {
-      color: white;
-      background-color: #ca6702;
-    }
-  }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { IButton } from "./types";
+import "./style.scss";
 
 export const Button = ({
   children,
@@ -10,7 +11,7 @@ export const Button = ({
 }: React.PropsWithChildren<IButton>) => {
   return (
     <button
-      className={className}
+      className={`button ${className}`}
       type={type}
       onClick={handleClick}
       disabled={disabled}

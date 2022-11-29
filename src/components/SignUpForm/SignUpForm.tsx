@@ -30,7 +30,6 @@ const SignUpForm = () => {
     <div className="sign-up">
       <form onSubmit={handleSubmit(onSubmit)} className="sign-up__form">
         <Input
-          className="sign-up__input"
           type="email"
           label="email"
           errors={errors.email}
@@ -38,15 +37,14 @@ const SignUpForm = () => {
           placeholder="Enter your email"
         />
         <Input
-          className="sign-up__input"
           type="password"
           label="password"
           errors={errors.password}
           register={register}
           placeholder="Enter your password"
         />
-        <Button className="sign-up__button" type="submit">
-          Submit
+        <Button className="sign_up" type="submit">
+          Sign up
         </Button>
       </form>
     </div>

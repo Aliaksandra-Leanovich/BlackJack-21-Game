@@ -1,0 +1,39 @@
+.link {
+  padding: 18px 34px;
+
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+
+  border-radius: 24px;
+  background-color: #edf2f4;
+
+  transition: transform 0.5s ease-out, background-color 0.5s ease-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    background-color: #f9c74f;
+  }
+}
+
+.bounce {
+  padding: 22px 34px;
+  -webkit-animation: bounce 0.75s infinite;
+}
+@-webkit-keyframes bounce {
+  0% {
+    transform: scale(1, 1) translate(0px, 0px);
+  }
+
+  30% {
+    transform: scale(1, 0.9) translate(0px, 2px);
+  }
+
+  75% {
+    transform: scale(1, 1) translate(0px, -4px);
+  }
+
+  100% {
+    transform: scale(1, 1) translate(0px, 0px);
+  }
+}

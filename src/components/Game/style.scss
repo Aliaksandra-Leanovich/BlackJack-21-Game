@@ -1,0 +1,60 @@
+.game {
+  width: 100%;
+  padding: 100px 0;
+  //   height: 60vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &__robot {
+    display: flex;
+    align-items: center;
+  }
+
+  &__comment {
+    margin-left: 40px;
+    width: 250px;
+    height: 120px;
+    padding: 20px;
+
+    background: #fbb1bd;
+    position: relative;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    transition: transform 0.5s ease-out;
+
+    &::after {
+      content: "";
+      content: "";
+      position: absolute;
+      right: 98%;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-right: 18px solid #fbb1bd;
+      border-bottom: 10px solid transparent;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+
+  &__message {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 600;
+
+    color: #ffffff;
+  }
+}

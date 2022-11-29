@@ -1,4 +1,4 @@
-import React from "react";
+import "./style.scss";
 import { IInputProps } from "./types";
 
 export const InputRange = ({
@@ -8,6 +8,7 @@ export const InputRange = ({
   value,
   min,
   max,
+
   step,
 }: IInputProps) => {
   return (
@@ -20,6 +21,7 @@ export const InputRange = ({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        className="input-range"
       />
     </>
   );

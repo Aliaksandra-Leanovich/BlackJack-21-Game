@@ -18,6 +18,8 @@ import { PlayerHand } from "../PlayerHand";
 import { getCardScore } from "./countPoints";
 import { v4 as uuidv4 } from "uuid";
 import { GameStatus } from "./types";
+import "./style.scss";
+import { Robot } from "../Robot/Robot";
 
 export const Game = () => {
   const dispatch = useAppDispatch();
@@ -120,18 +122,21 @@ export const Game = () => {
   };
 
   return (
-    <div>
-      <div>
-        {gameStatus === "finished" ? (
-          <div>
-            The winner is...
-            {winner?.map((player) => (
-              <p key={player.id}>{player.name}</p>
-            ))}
-          </div>
-        ) : (
-          <p>Good luck!</p>
-        )}
+    <div className="game">
+      <div className="game__robot">
+        <Robot />
+        <div className="game__comment">
+          {gameStatus === "finished" ? (
+            <div className="game__comment__message">
+              the winner is...
+              {winner?.map((player) => (
+                <p key={player.id}>{player.name}</p>
+              ))}
+            </div>
+          ) : (
+            <p className="game__message">good luck!</p>
+          )}
+        </div>
       </div>
       <div
         className={
@@ -140,13 +145,17 @@ export const Game = () => {
             : "block-start-hidden"
         }
       >
-        {budget < 0 ? (
+        {budget === 0 ? (
           <>
-            <p>sorry, you dont have money left</p>
+            <p className="game__message">sorry, you dont have money left</p>
           </>
         ) : (
           <>
-            <Button type="submit" handleClick={onStartSubmit}>
+            <Button
+              type="submit"
+              handleClick={onStartSubmit}
+              className="new-game"
+            >
               START NEW GAME
             </Button>
           </>
