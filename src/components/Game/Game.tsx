@@ -127,7 +127,7 @@ export const Game = () => {
       <div className={styles.robot}>
         <Robot />
         <div className={styles.comment}>
-          {gameStatus === "finished" ? (
+          {gameStatus === GameStatus.finished ? (
             <div className={styles.message}>
               the winner is...
               {winner?.map((player) => (
@@ -141,7 +141,8 @@ export const Game = () => {
       </div>
       <div
         className={
-          gameStatus === "notstarted" || gameStatus === "finished"
+          gameStatus === GameStatus.notstarted ||
+          gameStatus === GameStatus.finished
             ? styles.block__visible
             : styles.block__hidden
         }
@@ -163,19 +164,15 @@ export const Game = () => {
 
       <div
         className={
-          gameStatus === "inprogress"
+          gameStatus === GameStatus.inprogress
             ? styles.block__visible
             : styles.block__hidden
         }
       >
-        <Button type="submit" handleClick={onSubmit} className={styles.stay}>
+        <Button type="submit" handleClick={onSubmit}>
           stay
         </Button>
-        <Button
-          type="submit"
-          handleClick={onStopSubmit}
-          className={styles.stay}
-        >
+        <Button type="submit" handleClick={onStopSubmit}>
           hit
         </Button>
 
@@ -184,7 +181,7 @@ export const Game = () => {
 
       <PlayerHand cards={cardsForPlayer} />
       <div>
-        {gameStatus === "finished" && countDealer > 0 ? (
+        {gameStatus === GameStatus.finished && countDealer > 0 ? (
           <div>
             <p className={styles.result}>dealer's points: {countDealer}</p>
             <p className={styles.result}>player's points: {pointsPlayer}</p>

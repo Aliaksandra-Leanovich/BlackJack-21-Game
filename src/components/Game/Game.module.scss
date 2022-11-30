@@ -24,19 +24,6 @@ $bg-color-yellow: #ffd166;
   color: $white;
 }
 
-.stay {
-  padding: 16px 30px;
-  margin: 10px;
-
-  color: #e2e2df;
-  font-size: 22px;
-  line-height: 30px;
-
-  &:hover {
-    transform: translateY(0px);
-    background-color: $bg-color-dark;
-  }
-}
 .robot {
   display: flex;
   align-items: center;
