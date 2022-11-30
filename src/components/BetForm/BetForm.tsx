@@ -26,7 +26,7 @@ export const BetForm = ({
     if (winner) {
       dispatch(setBudget((budget = budget + state * 2)));
     }
-  }, [dispatch, gameStatus]);
+  }, [dispatch, winner]);
 
   const countBudget = () => {
     dispatch(setBudget((budget = budget - state)));

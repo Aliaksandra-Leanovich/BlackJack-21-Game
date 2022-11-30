@@ -33,7 +33,7 @@ export const Game = () => {
   const [countDealer, setCountDealer] = useState(0);
   const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
   const [winner, setWinner] = useState<IPlayer[]>();
-  const [playerWin, setPlayerWin] = useState<boolean>();
+  const [playerWin, setPlayerWin] = useState(false);
   const [gameStatus, setGameStatus] = useState<GameStatus>(
     GameStatus.notstarted
   );
@@ -73,13 +73,6 @@ export const Game = () => {
     setCardsForPlayer(await cardsApi.getNewCard(deckId, 1));
   };
 
-  const setResultForPlayer = () => {
-    winner?.forEach((player) => {
-      player.name == email ? setPlayerWin(true) : setPlayerWin(false);
-    });
-    // do not changes into true
-  };
-
   const onStopSubmit = async () => {
     setGameStatus(GameStatus.finished);
 
@@ -87,7 +80,7 @@ export const Game = () => {
 
     setWinner(findWinner());
 
-    setResultForPlayer();
+    setResultForPlayer(findWinner());
   };
 
   const createArrayOfAllPlayers = () => {
@@ -108,6 +101,7 @@ export const Game = () => {
     if (equal21.length) {
       return winner.concat(equal21);
     }
+
     if (!equal21.length && lessThan21.length) {
       const users = lessThan21.filter(
         (user) =>
@@ -120,6 +114,13 @@ export const Game = () => {
       return winner.concat(users);
     }
     return winner;
+  };
+
+  const setResultForPlayer = (winner: IPlayer[]) => {
+    let user = winner.find((player: IPlayer) => player.name == email);
+    if (user?.name !== undefined) {
+      setPlayerWin(true);
+    }
   };
 
   return (
