@@ -1,5 +1,4 @@
-$bg-color: #edf2f4;
-$bg-color-hover: #f9c74f;
+@import "../../ui/Colors.module.scss";
 
 .link {
   font-weight: 600;
@@ -12,7 +11,7 @@ $bg-color-hover: #f9c74f;
 
   &:hover {
     transform: translateY(-4px);
-    background-color: $bg-color-hover;
+    background-color: $errorColor;
   }
 }
 

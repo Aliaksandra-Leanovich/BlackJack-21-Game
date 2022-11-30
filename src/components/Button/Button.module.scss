@@ -1,9 +1,4 @@
-$font-color-light: #ffffff;
-$bg-color-darkblue: #14213d;
-$bg-color-lighgray: #2b2d42;
-$bg-color-yellow: #ffd166;
-$bg-color-orange: #ca6702;
-$bg-color-dark: #000000;
+@import "../../ui/Colors.module.scss";
 
 .button {
   padding: 18px 24px;
@@ -18,25 +13,7 @@ $bg-color-dark: #000000;
 
   &:hover {
     transform: translateY(-4px);
-    background-color: $bg-color-dark;
-    color: $font-color-light;
+    background-color: $primaryColor;
+    color: $infoColor;
   }
-
-  &:active {
-    color: $font-color-light;
-    background-color: $bg-color-orange;
-  }
-}
-
-.darkblue {
-  background-color: $bg-color-darkblue;
-  color: $font-color-light;
-}
-
-.lightgary {
-  background-color: $bg-color-lighgray;
-  color: $font-color-light;
-}
-.yellow {
-  background-color: $bg-color-yellow;
 }

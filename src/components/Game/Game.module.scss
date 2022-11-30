@@ -1,7 +1,4 @@
-$white: #ffffff;
-$bg-color-dark: #000000;
-$bg-color-lighgray: #2b2d42;
-$bg-color-yellow: #ffd166;
+@import "../../ui/Colors.module.scss";
 
 .game {
   width: 100%;
@@ -20,8 +17,8 @@ $bg-color-yellow: #ffd166;
 }
 
 .new_game {
-  background-color: $bg-color-yellow;
-  color: $white;
+  background-color: $errorColor;
+  color: $infoLightColor;
 }
 
 .robot {
@@ -35,7 +32,7 @@ $bg-color-yellow: #ffd166;
   height: 120px;
   padding: 20px;
 
-  background: $bg-color-yellow;
+  background: $errorColor;
 
   position: relative;
 
@@ -58,7 +55,7 @@ $bg-color-yellow: #ffd166;
     width: 0;
     height: 0;
     border-top: 10px solid transparent;
-    border-right: 18px solid $bg-color-yellow;
+    border-right: 18px solid $errorColor;
     border-bottom: 10px solid transparent;
   }
 
@@ -72,12 +69,12 @@ $bg-color-yellow: #ffd166;
   line-height: 28px;
   font-weight: 600;
 
-  color: $bg-color-dark;
+  color: $primaryColor;
 }
 
 .result {
   font-size: 24px;
   line-height: 28px;
 
-  color: $white;
+  color: $infoLightColor;
 }
