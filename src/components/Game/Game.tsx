@@ -118,7 +118,7 @@ export const Game = () => {
 
   const setResultForPlayer = (winner: IPlayer[]) => {
     let user = winner.find((player: IPlayer) => player.name == email);
-    if (user?.name !== undefined) {
+    if (user?.name) {
       setPlayerWin(true);
     }
   };
