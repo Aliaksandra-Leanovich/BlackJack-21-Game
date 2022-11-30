@@ -44,8 +44,7 @@ export const BetForm = ({
   return (
     <div
       className={
-        gameStatus === GameStatus.finished ||
-        gameStatus === GameStatus.notstarted
+        gameStatus == GameStatus.finished || gameStatus == GameStatus.notstarted
           ? styles.block__hidden
           : styles.block__visible
       }

@@ -102,16 +102,16 @@ export const Game = () => {
     const players = createArrayOfAllPlayers();
     console.log(players);
 
-    const lessThan21 = players.filter((player) => player!.points < 21);
-    const equal21 = players.filter((player) => player!.points === 21);
+    const lessThan21 = players.filter((player) => player.points < 21);
+    const equal21 = players.filter((player) => player.points == 21);
 
     if (equal21.length > 0) {
       return winner.concat(equal21);
     }
-    if (equal21.length === 0 && lessThan21.length > 0) {
+    if (!equal21.length && lessThan21.length) {
       const users = lessThan21.filter(
         (user) =>
-          user.points ===
+          user.points ==
           Math.max.apply(
             Math,
             lessThan21.map((players) => players.points)
@@ -127,7 +127,7 @@ export const Game = () => {
       <div className={styles.robot}>
         <Robot />
         <div className={styles.comment}>
-          {gameStatus === GameStatus.finished ? (
+          {gameStatus == GameStatus.finished ? (
             <div className={styles.message}>
               the winner is...
               {winner?.map((player) => (
@@ -141,13 +141,13 @@ export const Game = () => {
       </div>
       <div
         className={
-          gameStatus === GameStatus.notstarted ||
-          gameStatus === GameStatus.finished
+          gameStatus == GameStatus.notstarted ||
+          gameStatus == GameStatus.finished
             ? styles.block__visible
             : styles.block__hidden
         }
       >
-        {budget === 0 ? (
+        {!budget ? (
           <p className={styles.message}>sorry, you dont have money left</p>
         ) : (
           <Button type="submit" handleClick={onStartSubmit}>
@@ -164,7 +164,7 @@ export const Game = () => {
 
       <div
         className={
-          gameStatus === GameStatus.inprogress
+          gameStatus == GameStatus.inprogress
             ? styles.block__visible
             : styles.block__hidden
         }
@@ -181,7 +181,7 @@ export const Game = () => {
 
       <PlayerHand cards={cardsForPlayer} />
       <div>
-        {gameStatus === GameStatus.finished ? (
+        {gameStatus == GameStatus.finished ? (
           <div>
             <p className={styles.result}>dealer's points: {countDealer}</p>
             <p className={styles.result}>player's points: {pointsPlayer}</p>
