@@ -11,65 +11,6 @@ $bg-color-yellow: #ffd166;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  &__robot {
-    display: flex;
-    align-items: center;
-  }
-
-  &__comment {
-    margin-left: 40px;
-    width: 250px;
-    height: 120px;
-    padding: 20px;
-
-    background: $bg-color-yellow;
-
-    position: relative;
-
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 18px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-
-    transition: transform 0.5s ease-out;
-
-    &::after {
-      content: "";
-      position: absolute;
-      right: 98%;
-      top: 50%;
-      width: 0;
-      height: 0;
-      border-top: 10px solid transparent;
-      border-right: 18px solid $bg-color-yellow;
-      border-bottom: 10px solid transparent;
-    }
-
-    &:hover {
-      transform: translateY(-5px);
-    }
-  }
-
-  &__message {
-    font-size: 24px;
-    line-height: 28px;
-    font-weight: 600;
-
-    color: $bg-color-dark;
-  }
-
-  &__result {
-    font-size: 24px;
-    line-height: 28px;
-    font-weight: 400;
-
-    color: $white;
-  }
 }
 .block__visible {
   display: block;
@@ -95,4 +36,62 @@ $bg-color-yellow: #ffd166;
     transform: translateY(0px);
     background-color: $bg-color-dark;
   }
+}
+.robot {
+  display: flex;
+  align-items: center;
+}
+
+.comment {
+  margin-left: 40px;
+  width: 250px;
+  height: 120px;
+  padding: 20px;
+
+  background: $bg-color-yellow;
+
+  position: relative;
+
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  transition: transform 0.5s ease-out;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 98%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 18px solid $bg-color-yellow;
+    border-bottom: 10px solid transparent;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.message {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 600;
+
+  color: $bg-color-dark;
+}
+
+.result {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 400;
+
+  color: $white;
 }

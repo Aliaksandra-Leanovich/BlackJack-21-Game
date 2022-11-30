@@ -50,30 +50,29 @@ export const BetForm = ({
     >
       {gameStatus === "start" ? (
         <div className={styles.bet}>
-          <form onSubmit={handleSubmit(onSubmit)} className={styles.bet__form}>
-            <label className={styles.bet__label}>enter your bet</label>
+          <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+            <label className={styles.label}>enter your bet</label>
             <InputRange
               min={100}
               max={budget}
-              type="range"
               value={state}
               onChange={handleChange}
               step={100}
             />
-            <p className={styles.bet__label}>{state}</p>
+            <p className={styles.label}>{state}</p>
             <Button
               type="submit"
               disabled={budget < state ? true : false}
-              className={styles.bet__button}
+              className={styles.button}
             >
               bet
             </Button>
           </form>
         </div>
       ) : (
-        <div className={styles.bet__state}>
-          <div className={styles.bet__state__chip}></div>
-          <p className={styles.bet__state__count}> {state}</p>
+        <div className={styles.state}>
+          <div className={styles.chip}></div>
+          <p className={styles.count}> {state}</p>
         </div>
       )}
     </div>

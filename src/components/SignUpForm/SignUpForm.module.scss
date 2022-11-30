@@ -5,13 +5,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
 
-  &__form {
-    display: grid;
-    row-gap: 14px;
-    grid-template-rows: 1fr 1fr 1fr;
+.form {
+  display: grid;
+  row-gap: 14px;
+  grid-template-rows: 1fr 1fr 1fr;
 
-    max-width: 300px;
-    width: 100%;
-  }
+  max-width: 300px;
+  width: 100%;
 }

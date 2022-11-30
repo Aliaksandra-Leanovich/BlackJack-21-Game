@@ -5,7 +5,7 @@ import { Robot } from "../../components/Robot/Robot";
 import { routes } from "../../routes/routes";
 import { useAppSelector } from "../../store/hooks/hooks";
 import { getUserInfo } from "../../store/selectors/userSelector";
-import styles from "./home.module.scss";
+import styles from "./HomePage.module.scss";
 
 export const HomePage = () => {
   const { isAuthorized } = useAppSelector(getUserInfo);

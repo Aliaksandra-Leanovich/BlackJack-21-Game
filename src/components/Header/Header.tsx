@@ -21,13 +21,13 @@ export const Header = () => {
   };
 
   return (
-    <div className={styles.buttons}>
-      <Button type="submit" handleClick={handleBack} className="back">
+    <div className={styles.container}>
+      <Button type="submit" handleClick={handleBack}>
         Back
       </Button>
       <LinkTemplate to={routes.ACCOUNT}>My Account</LinkTemplate>
       <BudgetPlayer />
-      <Button type="submit" handleClick={handleLogout} className="logout">
+      <Button type="submit" handleClick={handleLogout}>
         Log Out
       </Button>
     </div>

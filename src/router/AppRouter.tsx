@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import { MainTemplate } from "../components/MainTemplate/MainTemplate";
-import { Account } from "../pages/account";
-import { GamePage } from "../pages/game";
-import { HomePage } from "../pages/home/home";
-import { SignUpPage } from "../pages/signup";
+import { AccountPage } from "../pages/AccountPage";
+import { GamePage } from "../pages/GamePage";
+import { HomePage } from "../pages/HomePage/HomePage";
+import { SignUpPage } from "../pages/SignUpPage";
 import { routes } from "../routes/routes";
 
 export const AppRouter = () => {
@@ -13,7 +13,7 @@ export const AppRouter = () => {
         <Route index element={<HomePage />} />
         <Route path={routes.SIGNUP} element={<SignUpPage />} />
         <Route path={routes.GAME} element={<GamePage />} />
-        <Route path={routes.ACCOUNT} element={<Account />} />
+        <Route path={routes.ACCOUNT} element={<AccountPage />} />
       </Route>
     </Routes>
   );

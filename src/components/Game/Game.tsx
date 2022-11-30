@@ -124,18 +124,18 @@ export const Game = () => {
 
   return (
     <div className={styles.game}>
-      <div className={styles.game__robot}>
+      <div className={styles.robot}>
         <Robot />
-        <div className={styles.game__comment}>
+        <div className={styles.comment}>
           {gameStatus === "finished" ? (
-            <div className={styles.game__message}>
+            <div className={styles.message}>
               the winner is...
               {winner?.map((player) => (
                 <p key={player.id}>{player.name}</p>
               ))}
             </div>
           ) : (
-            <p className={styles.game__message}>good luck!</p>
+            <p className={styles.message}>good luck!</p>
           )}
         </div>
       </div>
@@ -147,9 +147,7 @@ export const Game = () => {
         }
       >
         {budget === 0 ? (
-          <p className={styles.game__message}>
-            sorry, you dont have money left
-          </p>
+          <p className={styles.message}>sorry, you dont have money left</p>
         ) : (
           <Button type="submit" handleClick={onStartSubmit}>
             START NEW GAME
@@ -170,44 +168,26 @@ export const Game = () => {
             : styles.block__hidden
         }
       >
-        <Button
-          type="submit"
-          handleClick={onSubmit}
-          disabled={
-            gameStatus === "notstarted" || gameStatus === "finished"
-              ? true
-              : false
-          }
-          className={styles.stay}
-        >
+        <Button type="submit" handleClick={onSubmit} className={styles.stay}>
           stay
         </Button>
         <Button
           type="submit"
           handleClick={onStopSubmit}
-          disabled={
-            gameStatus === "notstarted" || gameStatus === "finished"
-              ? true
-              : false
-          }
           className={styles.stay}
         >
           hit
         </Button>
 
-        <p className={styles.game__message}>your points: {pointsPlayer}</p>
+        <p className={styles.message}>your points: {pointsPlayer}</p>
       </div>
 
       <PlayerHand cards={cardsForPlayer} />
       <div>
         {gameStatus === "finished" && countDealer > 0 ? (
           <div>
-            <p className={styles.game__result}>
-              dealer's points: {countDealer}
-            </p>
-            <p className={styles.game__result}>
-              player's points: {pointsPlayer}
-            </p>
+            <p className={styles.result}>dealer's points: {countDealer}</p>
+            <p className={styles.result}>player's points: {pointsPlayer}</p>
           </div>
         ) : (
           " "

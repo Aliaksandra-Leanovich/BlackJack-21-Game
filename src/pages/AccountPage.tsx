@@ -5,7 +5,7 @@ import { routes } from "../routes/routes";
 import { useAppSelector } from "../store/hooks";
 import { getUserInfo } from "../store/selectors/userSelector";
 
-export const Account = () => {
+export const AccountPage = () => {
   const { isAuthorized } = useAppSelector(getUserInfo);
 
   if (isAuthorized !== "") {
