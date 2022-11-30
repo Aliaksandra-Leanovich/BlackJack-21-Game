@@ -1,12 +1,12 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { getUserBudget, getUserInfo } from "../../store/selectors";
+import { getUserBudget } from "../../store/selectors";
 import { setBudget } from "../../store/slices/userSlices";
 import { Button } from "../Button";
 import { InputRange } from "../InputRange";
-import { IBetFormProps } from "./types";
 import "./style.scss";
+import { IBetFormProps } from "./types";
 
 export const BetForm = ({
   winner,

@@ -4,7 +4,7 @@ import { BudgetPlayer } from "../BudgetPlayer/BudgetPlayer";
 import "./style.scss";
 
 export const PlayerInformation = () => {
-  const { email, budget } = useAppSelector(getUserInfo);
+  const { email } = useAppSelector(getUserInfo);
   return (
     <div className="account">
       <p className="account__email">{email}</p>

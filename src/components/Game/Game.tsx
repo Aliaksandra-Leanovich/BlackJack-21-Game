@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../../App.css";
+import { v4 as uuidv4 } from "uuid";
 import { cardsApi } from "../../services/CardsService";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
@@ -15,11 +15,10 @@ import { ICard, IPlayer } from "../../store/types";
 import { BetForm } from "../BetForm";
 import { Button } from "../Button";
 import { PlayerHand } from "../PlayerHand";
-import { getCardScore } from "./countPoints";
-import { v4 as uuidv4 } from "uuid";
-import { GameStatus } from "./types";
-import "./style.scss";
 import { Robot } from "../Robot/Robot";
+import { getCardScore } from "./countPoints";
+import "./style.scss";
+import { GameStatus } from "./types";
 
 export const Game = () => {
   const dispatch = useAppDispatch();
@@ -58,7 +57,7 @@ export const Game = () => {
 
   const onStartSubmit = () => {
     setWinner([]);
-    setCountDealer(0);
+    // setCountDealer(0);
     setPlayerWin(false);
     setGameStatus(GameStatus.start);
     dispatch(unsetUserHand());

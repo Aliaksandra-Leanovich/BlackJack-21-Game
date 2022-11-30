@@ -1,6 +1,6 @@
 import React from "react";
-import { IButton } from "./types";
 import "./style.scss";
+import { IButton } from "./types";
 
 export const Button = ({
   children,

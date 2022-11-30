@@ -1,5 +1,5 @@
-import { IInputProps } from "./types";
 import "./style.scss";
+import { IInputProps } from "./types";
 
 export const Input = ({
   type,

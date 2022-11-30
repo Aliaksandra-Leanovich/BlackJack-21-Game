@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes/routes";
-import { useAppDispatch } from "../../store/hooks/hooks";
+import { useAppDispatch } from "../../store/hooks";
 import { setUserEmail, setUserPassword } from "../../store/slices/userSlices";
 import { Button } from "../Button";
 import { Input } from "../Input";

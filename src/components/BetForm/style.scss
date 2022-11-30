@@ -1,12 +1,15 @@
 $border-color: #000000;
 $bg-color: rgb(235, 235, 235);
 $font-color: #000000;
+$bg-pink: #ff006e;
 
 .bet {
   padding: 20px;
+
+  border-radius: 20px;
   border: 6px solid $border-color;
   background-color: $bg-color;
-  border-radius: 20px;
+
   &__form {
     display: flex;
     justify-content: center;
@@ -44,25 +47,30 @@ $font-color: #000000;
     }
 
     &__chip {
-      position: relative;
       display: inline-block;
+
+      position: relative;
+
       width: 24px;
       height: 24px;
+
       border-radius: 50%;
       border: 3px solid $border-color;
-      background-color: #fff;
+      background-color: $bg-color;
 
       &:after {
+        content: " ";
+
         z-index: 1;
         position: absolute;
-        content: " ";
-        border: 4px dashed #ff006e;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-
         top: 0px;
         left: 0px;
+
+        border: 4px dashed $bg-pink;
+        border-radius: 50%;
+
+        width: 10px;
+        height: 10px;
       }
     }
   }

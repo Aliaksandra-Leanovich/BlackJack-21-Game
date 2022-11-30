@@ -1,6 +1,4 @@
-import { Navigate, useNavigate } from "react-router-dom";
-import { BudgetPlayer } from "../components/BudgetPlayer/BudgetPlayer";
-import { Button } from "../components/Button";
+import { Navigate } from "react-router-dom";
 import { Game } from "../components/Game/Game";
 import { Header } from "../components/Header/Header";
 import { routes } from "../routes/routes";

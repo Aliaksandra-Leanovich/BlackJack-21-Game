@@ -1,5 +1,5 @@
-import { IProps } from "./types";
 import "./style.scss";
+import { IProps } from "./types";
 
 export const Card = ({ card }: IProps) => {
   return (
