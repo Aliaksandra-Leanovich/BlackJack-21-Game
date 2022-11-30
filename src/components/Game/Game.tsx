@@ -75,7 +75,7 @@ export const Game = () => {
 
   const setResultForPlayer = () => {
     winner?.forEach((player) => {
-      player.name === email ? setPlayerWin(true) : setPlayerWin(false);
+      player.name == email ? setPlayerWin(true) : setPlayerWin(false);
     });
     // do not changes into true
   };
