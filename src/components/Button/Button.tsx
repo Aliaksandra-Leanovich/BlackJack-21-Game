@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.scss";
+import styles from "./Button.module.scss";
 import { IButton } from "./types";
 
 export const Button = ({
@@ -11,7 +11,7 @@ export const Button = ({
 }: React.PropsWithChildren<IButton>) => {
   return (
     <button
-      className={`button ${className}`}
+      className={`${className} ${styles.button}`}
       type={type}
       onClick={handleClick}
       disabled={disabled}

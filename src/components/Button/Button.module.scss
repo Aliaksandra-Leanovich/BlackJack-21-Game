@@ -40,32 +40,3 @@ $bg-color-dark: #000000;
 .sign_up {
   background-color: $bg-color-yellow;
 }
-.new-game {
-  background-color: $bg-color-yellow;
-  color: $font-color-light;
-}
-
-.stay {
-  padding: 16px 30px;
-  margin: 10px;
-
-  background-color: $bg-color-darkblue;
-  color: #e2e2df;
-  font-size: 22px;
-  line-height: 30px;
-
-  &:hover {
-    transform: translateY(0px);
-    background-color: $bg-color-yellow;
-  }
-}
-.bet-button {
-  padding: 10px 24px;
-  border: 2px solid $bg-color-dark;
-
-  &:hover {
-    transform: translateY(0px);
-    border: 2px solid $bg-color-yellow;
-    background-color: $bg-color-yellow;
-  }
-}

@@ -1,5 +1,7 @@
-$light-pink: #fbb1bd;
 $white: #ffffff;
+$bg-color-dark: #000000;
+$bg-color-lighgray: #2b2d42;
+$bg-color-yellow: #ffd166;
 
 .game {
   width: 100%;
@@ -21,7 +23,7 @@ $white: #ffffff;
     height: 120px;
     padding: 20px;
 
-    background: $light-pink;
+    background: $bg-color-yellow;
 
     position: relative;
 
@@ -44,7 +46,7 @@ $white: #ffffff;
       width: 0;
       height: 0;
       border-top: 10px solid transparent;
-      border-right: 18px solid $light-pink;
+      border-right: 18px solid $bg-color-yellow;
       border-bottom: 10px solid transparent;
     }
 
@@ -58,7 +60,7 @@ $white: #ffffff;
     line-height: 28px;
     font-weight: 600;
 
-    color: $white;
+    color: $bg-color-dark;
   }
 
   &__result {
@@ -69,9 +71,28 @@ $white: #ffffff;
     color: $white;
   }
 }
-.block-start {
+.block__visible {
   display: block;
 }
-.block-start-hidden {
+.block__hidden {
   display: none;
+}
+
+.new_game {
+  background-color: $bg-color-yellow;
+  color: $white;
+}
+
+.stay {
+  padding: 16px 30px;
+  margin: 10px;
+
+  color: #e2e2df;
+  font-size: 22px;
+  line-height: 30px;
+
+  &:hover {
+    transform: translateY(0px);
+    background-color: $bg-color-dark;
+  }
 }

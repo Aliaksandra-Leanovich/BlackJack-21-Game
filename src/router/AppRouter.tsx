@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { MainTemplate } from "../components/MainTemplate/MainTemplate";
 import { Account } from "../pages/account";
 import { GamePage } from "../pages/game";
-import { HomePage } from "../pages/home";
+import { HomePage } from "../pages/home/home";
 import { SignUpPage } from "../pages/signup";
 import { routes } from "../routes/routes";
 

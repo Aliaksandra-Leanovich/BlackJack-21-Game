@@ -17,7 +17,7 @@ import { Button } from "../Button";
 import { PlayerHand } from "../PlayerHand";
 import { Robot } from "../Robot/Robot";
 import { getCardScore } from "./countPoints";
-import "./style.scss";
+import styles from "./Game.module.scss";
 import { GameStatus } from "./types";
 
 export const Game = () => {
@@ -122,37 +122,35 @@ export const Game = () => {
   };
 
   return (
-    <div className="game">
-      <div className="game__robot">
+    <div className={styles.game}>
+      <div className={styles.game__robot}>
         <Robot />
-        <div className="game__comment">
+        <div className={styles.game__comment}>
           {gameStatus === "finished" ? (
-            <div className="game__message">
+            <div className={styles.game__message}>
               the winner is...
               {winner?.map((player) => (
                 <p key={player.id}>{player.name}</p>
               ))}
             </div>
           ) : (
-            <p className="game__message">good luck!</p>
+            <p className={styles.game__message}>good luck!</p>
           )}
         </div>
       </div>
       <div
         className={
           gameStatus === "notstarted" || gameStatus === "finished"
-            ? "block-start"
-            : "block-start-hidden"
+            ? styles.block__visible
+            : styles.block__hidden
         }
       >
         {budget === 0 ? (
-          <p className="game__message">sorry, you dont have money left</p>
+          <p className={styles.game__message}>
+            sorry, you dont have money left
+          </p>
         ) : (
-          <Button
-            type="submit"
-            handleClick={onStartSubmit}
-            className="new-game"
-          >
+          <Button type="submit" handleClick={onStartSubmit}>
             START NEW GAME
           </Button>
         )}
@@ -166,7 +164,9 @@ export const Game = () => {
 
       <div
         className={
-          gameStatus === "inprogress" ? "block-start" : "block-start-hidden "
+          gameStatus === "inprogress"
+            ? styles.block__visible
+            : styles.block__hidden
         }
       >
         <Button
@@ -177,7 +177,7 @@ export const Game = () => {
               ? true
               : false
           }
-          className="stay"
+          className={styles.stay}
         >
           stay
         </Button>
@@ -189,20 +189,24 @@ export const Game = () => {
               ? true
               : false
           }
-          className="stay"
+          className={styles.stay}
         >
           hit
         </Button>
 
-        <p className="game__message">your points: {pointsPlayer}</p>
+        <p className={styles.game__message}>your points: {pointsPlayer}</p>
       </div>
 
       <PlayerHand cards={cardsForPlayer} />
       <div>
         {gameStatus === "finished" && countDealer > 0 ? (
           <div>
-            <p className="game__result">dealer's points: {countDealer}</p>
-            <p className="game__result">player's points: {pointsPlayer}</p>
+            <p className={styles.game__result}>
+              dealer's points: {countDealer}
+            </p>
+            <p className={styles.game__result}>
+              player's points: {pointsPlayer}
+            </p>
           </div>
         ) : (
           " "

@@ -1,7 +1,7 @@
 import React from "react";
 import { ILinkProps } from "./types";
 import { Link } from "react-router-dom";
-import "./style.scss";
+import styles from "./Link.module.scss";
 
 export const LinkTemplate = ({
   children,
@@ -9,7 +9,7 @@ export const LinkTemplate = ({
   to,
 }: React.PropsWithChildren<ILinkProps>) => {
   return (
-    <Link to={to} className={`link ${className}`}>
+    <Link to={to} className={`${styles.link} ${className}`}>
       {children}
     </Link>
   );

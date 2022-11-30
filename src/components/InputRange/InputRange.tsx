@@ -1,4 +1,4 @@
-import "./style.scss";
+import styles from "./InputRange.module.scss";
 import { IInputProps } from "./types";
 
 export const InputRange = ({
@@ -8,7 +8,6 @@ export const InputRange = ({
   value,
   min,
   max,
-
   step,
 }: IInputProps) => {
   return (
@@ -21,7 +20,7 @@ export const InputRange = ({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
-        className="input-range"
+        className={styles.input_range}
       />
     </>
   );

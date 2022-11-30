@@ -4,8 +4,8 @@ import { useAppDispatch } from "../../store/hooks";
 import { unsetUser } from "../../store/slices/userSlices";
 import { BudgetPlayer } from "../BudgetPlayer/BudgetPlayer";
 import { Button } from "../Button";
-import { LinkTemplate } from "../LinkTemplate";
-import "./style.scss";
+import { LinkTemplate } from "../Link";
+import styles from "./Header.module.scss";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export const Header = () => {
   };
 
   return (
-    <div className="buttons">
+    <div className={styles.buttons}>
       <Button type="submit" handleClick={handleBack} className="back">
         Back
       </Button>

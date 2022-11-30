@@ -4,7 +4,7 @@ import { getUserHand } from "../../store/selectors";
 import { setUserHand, setUserPoints } from "../../store/slices/userSlices";
 import { Card } from "../Card/Card";
 import { countPoints } from "../Game/countPoints";
-import "./style.scss";
+import styles from "./PlayerHand.module.scss";
 import { IProps } from "./types";
 
 export const PlayerHand = ({ cards }: IProps) => {
@@ -21,8 +21,8 @@ export const PlayerHand = ({ cards }: IProps) => {
   }, [cards, points]);
 
   return (
-    <div className="hand">
-      <div style={{ display: "flex" }}>
+    <div className={styles.hand}>
+      <div className={styles.hand__container}>
         {hand.map((card) => (
           <Card key={card.code} card={card} />
         ))}

@@ -4,13 +4,13 @@ $face-color: #6c757d;
 $inner-bg: #cedbdd;
 $tongue-color: #f9bbbb;
 
-.cute-robot-v1 {
+.robot {
   height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  .circle-bg {
+  .circle {
     width: 170px;
     height: 170px;
 
@@ -32,7 +32,7 @@ $tongue-color: #f9bbbb;
     }
 
     &:hover {
-      .robot-face {
+      .robot__face {
         top: 20px !important;
       }
 
@@ -59,7 +59,7 @@ $tongue-color: #f9bbbb;
       }
     }
 
-    .robot-head {
+    .robot__head {
       height: 140px;
       width: 140px;
       position: absolute;
@@ -93,7 +93,7 @@ $tongue-color: #f9bbbb;
         border-radius: 100%;
       }
 
-      .robot-face {
+      .robot__face {
         height: 78px;
         width: 96px;
         background: $inner-bg;
@@ -137,7 +137,7 @@ $tongue-color: #f9bbbb;
       }
     }
 
-    .robot-ear {
+    .robot__ear {
       position: absolute;
       height: 80px;
       width: 60px;
@@ -155,7 +155,7 @@ $tongue-color: #f9bbbb;
       }
     }
 
-    .robot-body {
+    .robot__body {
       height: 30px;
       width: 70px;
       border: 8px solid $outline-color;

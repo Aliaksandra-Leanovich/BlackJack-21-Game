@@ -5,7 +5,7 @@ import { getUserBudget } from "../../store/selectors";
 import { setBudget } from "../../store/slices/userSlices";
 import { Button } from "../Button";
 import { InputRange } from "../InputRange";
-import "./style.scss";
+import styles from "./BetForm.module.scss";
 import { IBetFormProps } from "./types";
 
 export const BetForm = ({
@@ -44,14 +44,14 @@ export const BetForm = ({
     <div
       className={
         gameStatus === "finished" || gameStatus === "notstarted"
-          ? "block-start-hidden "
-          : "block-start"
+          ? styles.block__hidden
+          : styles.block__visible
       }
     >
       {gameStatus === "start" ? (
-        <div className="bet">
-          <form onSubmit={handleSubmit(onSubmit)} className="bet__form">
-            <label className="bet__label">enter your bet</label>
+        <div className={styles.bet}>
+          <form onSubmit={handleSubmit(onSubmit)} className={styles.bet__form}>
+            <label className={styles.bet__label}>enter your bet</label>
             <InputRange
               min={100}
               max={budget}
@@ -60,20 +60,20 @@ export const BetForm = ({
               onChange={handleChange}
               step={100}
             />
-            <p className="bet__label">{state}</p>
+            <p className={styles.bet__label}>{state}</p>
             <Button
               type="submit"
               disabled={budget < state ? true : false}
-              className="bet-button"
+              className={styles.bet__button}
             >
               bet
             </Button>
           </form>
         </div>
       ) : (
-        <div className="bet__state">
-          <div className="bet__state__chip"></div>
-          <p className="bet__state__count"> {state}</p>
+        <div className={styles.bet__state}>
+          <div className={styles.bet__state__chip}></div>
+          <p className={styles.bet__state__count}> {state}</p>
         </div>
       )}
     </div>

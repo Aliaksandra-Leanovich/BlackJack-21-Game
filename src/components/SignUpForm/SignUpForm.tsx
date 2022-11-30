@@ -6,7 +6,7 @@ import { setUserEmail, setUserPassword } from "../../store/slices/userSlices";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import { IRegister } from "../Input/types";
-import "./style.scss";
+import styles from "./SignUpForm.module.scss";
 
 const SignUpForm = () => {
   const dispatch = useAppDispatch();
@@ -27,8 +27,8 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="sign-up">
-      <form onSubmit={handleSubmit(onSubmit)} className="sign-up__form">
+    <div className={styles.sign_up}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.sign_up__form}>
         <Input
           type="email"
           label="email"
@@ -43,9 +43,7 @@ const SignUpForm = () => {
           register={register}
           placeholder="Enter your password"
         />
-        <Button className="sign_up" type="submit">
-          Sign up
-        </Button>
+        <Button type="submit">Sign up</Button>
       </form>
     </div>
   );

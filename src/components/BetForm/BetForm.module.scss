@@ -2,6 +2,8 @@ $border-color: #000000;
 $bg-color: #ebebeb;
 $font-color: #000000;
 $bg-pink: #ff006e;
+$bg-color-yellow: #ffd166;
+$bg-color-dark: #000000;
 
 .bet {
   padding: 20px;
@@ -26,7 +28,16 @@ $bg-pink: #ff006e;
 
     margin-bottom: 16px;
   }
+  &__button {
+    padding: 10px 24px;
+    border: 2px solid $bg-color-dark;
 
+    &:hover {
+      transform: translateY(0px);
+      border: 2px solid $bg-color-yellow;
+      background-color: $bg-color-yellow;
+    }
+  }
   &__state {
     background-color: rgba(0, 0, 0, 0.3);
 
@@ -76,9 +87,9 @@ $bg-pink: #ff006e;
   }
 }
 
-.block-start {
+.block__visible {
   display: block;
 }
-.block-start-hidden {
+.block__hidden {
   display: none;
 }
