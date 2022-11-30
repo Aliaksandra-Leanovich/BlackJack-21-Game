@@ -171,10 +171,6 @@ $tongue-color: #f9bbbb;
 
 .bounce {
   -webkit-animation: bounce 1.2s infinite;
-
-  &:hover {
-    -webkit-animation: bounce 0s;
-  }
 }
 @-webkit-keyframes bounce {
   0% {

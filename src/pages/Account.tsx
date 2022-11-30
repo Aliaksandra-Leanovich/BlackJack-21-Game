@@ -1,18 +1,18 @@
 import { Navigate } from "react-router-dom";
-import { Game } from "../components/Game/Game";
+import { PlayerInformation } from "../components/PlayerInformation/PlayerInformation";
 import { Header } from "../components/Header/Header";
 import { routes } from "../routes/routes";
-import { useAppSelector } from "../store/hooks/hooks";
+import { useAppSelector } from "../store/hooks";
 import { getUserInfo } from "../store/selectors/userSelector";
 
-export const GamePage = () => {
+export const Account = () => {
   const { isAuthorized } = useAppSelector(getUserInfo);
 
   if (isAuthorized !== "") {
     return (
       <>
         <Header />
-        <Game />
+        <PlayerInformation />
       </>
     );
   }

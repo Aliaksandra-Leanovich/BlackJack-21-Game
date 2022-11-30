@@ -1,19 +1,19 @@
 import { Route, Routes } from "react-router-dom";
 import { MainTemplate } from "../components/MainTemplate/MainTemplate";
-import { AccountPage } from "../pages/AccountPage";
-import { GamePage } from "../pages/GamePage";
-import { HomePage } from "../pages/HomePage/HomePage";
-import { SignUpPage } from "../pages/SignUpPage";
+import { Account } from "../pages/Account";
+import { BlackJack } from "../pages/BlackJack";
+import { Home } from "../pages/Home/Home";
+import { SignUp } from "../pages/SignUp";
 import { routes } from "../routes/routes";
 
 export const AppRouter = () => {
   return (
     <Routes>
       <Route path={routes.HOME} element={<MainTemplate />}>
-        <Route index element={<HomePage />} />
-        <Route path={routes.SIGNUP} element={<SignUpPage />} />
-        <Route path={routes.GAME} element={<GamePage />} />
-        <Route path={routes.ACCOUNT} element={<AccountPage />} />
+        <Route index element={<Home />} />
+        <Route path={routes.SIGNUP} element={<SignUp />} />
+        <Route path={routes.BLACKJACK} element={<BlackJack />} />
+        <Route path={routes.ACCOUNT} element={<Account />} />
       </Route>
     </Routes>
   );
