@@ -28,14 +28,6 @@
     }
 
     &:hover {
-      .robot__face {
-        top: 20px !important;
-      }
-
-      .eyes {
-        top: 20px !important;
-      }
-
       .mouth {
         background: $secondaryColor;
         border: none;
@@ -106,7 +98,7 @@
           background: $secondaryColor;
           border-radius: 100%;
           position: absolute;
-          top: 28px;
+          top: 24px;
 
           &.left {
             left: 18px;
