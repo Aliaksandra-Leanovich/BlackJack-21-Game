@@ -60,11 +60,7 @@ export const BetForm = ({
               step={100}
             />
             <p className={styles.label}>{state}</p>
-            <Button
-              type="submit"
-              disabled={budget < state ? true : false}
-              className={styles.button}
-            >
+            <Button type="submit" className={styles.button}>
               bet
             </Button>
           </form>

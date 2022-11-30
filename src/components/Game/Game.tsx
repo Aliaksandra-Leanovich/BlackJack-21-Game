@@ -181,7 +181,7 @@ export const Game = () => {
 
       <PlayerHand cards={cardsForPlayer} />
       <div>
-        {gameStatus === GameStatus.finished && countDealer > 0 ? (
+        {gameStatus === GameStatus.finished ? (
           <div>
             <p className={styles.result}>dealer's points: {countDealer}</p>
             <p className={styles.result}>player's points: {pointsPlayer}</p>
