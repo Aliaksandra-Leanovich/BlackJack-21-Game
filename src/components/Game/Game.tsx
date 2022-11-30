@@ -101,6 +101,7 @@ export const Game = () => {
 
     const players = createArrayOfAllPlayers();
     console.log(players);
+
     const lessThan21 = players.filter((player) => player!.points < 21);
     const equal21 = players.filter((player) => player!.points === 21);
 
