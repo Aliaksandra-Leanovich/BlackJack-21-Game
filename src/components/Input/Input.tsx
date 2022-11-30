@@ -11,7 +11,7 @@ export const Input = ({
   register,
 }: IInputProps) => {
   return (
-    <div>
+    <div className={styles.container}>
       <input
         className={`${className} ${styles.input}`}
         type={type}
@@ -19,6 +19,7 @@ export const Input = ({
         {...register(label)}
         onChange={onChange}
       />
+      {errors && <p className={styles.error}>{errors.message}</p>}
     </div>
   );
 };
