@@ -59,7 +59,7 @@ $tongue-color: #f9bbbb;
       }
     }
 
-    .robot__head {
+    .head {
       height: 140px;
       width: 140px;
       position: absolute;
@@ -93,7 +93,7 @@ $tongue-color: #f9bbbb;
         border-radius: 100%;
       }
 
-      .robot__face {
+      .face {
         height: 78px;
         width: 96px;
         background: $inner-bg;
@@ -137,7 +137,7 @@ $tongue-color: #f9bbbb;
       }
     }
 
-    .robot__ear {
+    .ear {
       position: absolute;
       height: 80px;
       width: 60px;
@@ -155,7 +155,7 @@ $tongue-color: #f9bbbb;
       }
     }
 
-    .robot__body {
+    .body {
       height: 30px;
       width: 70px;
       border: 8px solid $outline-color;
