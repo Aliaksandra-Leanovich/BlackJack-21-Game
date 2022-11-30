@@ -44,16 +44,7 @@ $bg-color-dark: #000000;
   background-color: $bg-color-yellow;
   color: $font-color-light;
 }
-.bet-button {
-  padding: 10px 24px;
-  border: 2px solid $bg-color-dark;
 
-  &:hover {
-    transform: translateY(0px);
-    border: 2px solid $bg-color-yellow;
-    background-color: $bg-color-yellow;
-  }
-}
 .stay {
   padding: 16px 30px;
   margin: 10px;
@@ -65,6 +56,16 @@ $bg-color-dark: #000000;
 
   &:hover {
     transform: translateY(0px);
+    background-color: $bg-color-yellow;
+  }
+}
+.bet-button {
+  padding: 10px 24px;
+  border: 2px solid $bg-color-dark;
+
+  &:hover {
+    transform: translateY(0px);
+    border: 2px solid $bg-color-yellow;
     background-color: $bg-color-yellow;
   }
 }

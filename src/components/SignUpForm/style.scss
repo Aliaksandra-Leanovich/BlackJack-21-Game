@@ -8,8 +8,8 @@
 
   &__form {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
     row-gap: 14px;
+    grid-template-rows: 1fr 1fr 1fr;
 
     max-width: 300px;
     width: 100%;
