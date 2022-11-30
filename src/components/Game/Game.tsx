@@ -105,7 +105,7 @@ export const Game = () => {
     const lessThan21 = players.filter((player) => player.points < 21);
     const equal21 = players.filter((player) => player.points == 21);
 
-    if (equal21.length > 0) {
+    if (equal21.length) {
       return winner.concat(equal21);
     }
     if (!equal21.length && lessThan21.length) {
