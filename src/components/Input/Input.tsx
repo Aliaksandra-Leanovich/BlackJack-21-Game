@@ -11,7 +11,7 @@ export const Input = ({
   register,
 }: IInputProps) => {
   return (
-    <div className={styles.container}>
+    <div>
       <input
         className={`${className} ${styles.input}`}
         type={type}
