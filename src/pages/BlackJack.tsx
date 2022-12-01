@@ -5,7 +5,7 @@ import { routes } from "../routes/routes";
 import { useAppSelector } from "../store/hooks/hooks";
 import { getUserInfo } from "../store/selectors/userSelector";
 
-export const GamePage = () => {
+export const BlackJack = () => {
   const { isAuthorized } = useAppSelector(getUserInfo);
 
   if (isAuthorized !== "") {

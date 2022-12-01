@@ -1,42 +1,17 @@
-$font-color-light: #ffffff;
-$bg-color-darkblue: #14213d;
-$bg-color-lighgray: #2b2d42;
-$bg-color-yellow: #ffd166;
-$bg-color-orange: #ca6702;
-$bg-color-dark: #000000;
+@import "../../ui/Colors.module.scss";
 
 .button {
   padding: 18px 24px;
 
   border-radius: 24px;
 
-  font-size: 16px;
-  line-height: 20px;
   font-weight: 600;
 
   transition: transform 0.5s ease-out, background-color 0.5s ease-out;
 
   &:hover {
     transform: translateY(-4px);
-    background-color: $bg-color-dark;
-    color: $font-color-light;
+    background-color: $primaryColor;
+    color: $infoColor;
   }
-
-  &:active {
-    color: $font-color-light;
-    background-color: $bg-color-orange;
-  }
-}
-
-.back {
-  background-color: $bg-color-darkblue;
-  color: $font-color-light;
-}
-
-.logout {
-  background-color: $bg-color-lighgray;
-  color: $font-color-light;
-}
-.sign_up {
-  background-color: $bg-color-yellow;
 }

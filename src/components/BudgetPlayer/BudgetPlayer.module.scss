@@ -1,9 +1,9 @@
-$font-color: #ffffff;
+@import "../../ui/Colors.module.scss";
 
 .budget {
   font-size: 24px;
   font-weight: 600;
   line-height: 28px;
 
-  color: $font-color;
+  color: $infoLightColor;
 }

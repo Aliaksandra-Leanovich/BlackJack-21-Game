@@ -1,6 +1,6 @@
 export enum routes {
   HOME = "/",
-  GAME = "/game",
+  BLACKJACK = "/black-jack",
   ACCOUNT = "/account",
   SIGNUP = "/sign-up",
   NOT_FOUND = "*",

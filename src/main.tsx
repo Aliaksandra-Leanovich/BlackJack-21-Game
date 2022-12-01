@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import App from "./App";
-import "./index.module.scss";
+import "normalize.css";
+import "./Main.module.scss";
 import store from "./store/store";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

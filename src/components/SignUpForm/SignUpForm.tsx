@@ -40,7 +40,7 @@ const SignUpForm = () => {
 
   return (
     <div className={styles.sign_up}>
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.sign_up__form}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Input
           type="email"
           label="email"

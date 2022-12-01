@@ -5,9 +5,9 @@ import { Robot } from "../../components/Robot/Robot";
 import { routes } from "../../routes/routes";
 import { useAppSelector } from "../../store/hooks/hooks";
 import { getUserInfo } from "../../store/selectors/userSelector";
-import styles from "./home.module.scss";
+import styles from "./Home.module.scss";
 
-export const HomePage = () => {
+export const Home = () => {
   const { isAuthorized } = useAppSelector(getUserInfo);
 
   if (isAuthorized !== "") {
@@ -16,7 +16,7 @@ export const HomePage = () => {
         <Header />
         <div className={styles.home}>
           <Robot />
-          <LinkTemplate to={routes.GAME}>Play Game</LinkTemplate>
+          <LinkTemplate to={routes.BLACKJACK}>Play Game</LinkTemplate>
         </div>
       </>
     );

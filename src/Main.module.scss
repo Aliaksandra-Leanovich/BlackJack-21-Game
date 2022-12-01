@@ -1,4 +1,13 @@
-$bg-color: #ff006e;
+@import "./ui/Colors.module.scss";
+
+@font-face {
+  font-family: "Custom Font";
+  font-weight: 400;
+  font-style: normal;
+  src: local("Custom Font"),
+    url("/public/fonts/Inter/Inter-Regular.woff2") format("woff2");
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -14,7 +23,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", sans-serif;
 
   background: $bg-color;
   background-repeat: no-repeat;

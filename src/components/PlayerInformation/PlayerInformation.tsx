@@ -7,7 +7,7 @@ export const PlayerInformation = () => {
   const { email } = useAppSelector(getUserInfo);
   return (
     <div className={styles.account}>
-      <p className={styles.account__email}>{email}</p>
+      <p className={styles.email}>{email}</p>
       <BudgetPlayer />
     </div>
   );

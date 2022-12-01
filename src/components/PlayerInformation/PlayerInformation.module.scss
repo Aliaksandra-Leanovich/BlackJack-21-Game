@@ -1,4 +1,4 @@
-$font-color: #ffffff;
+@import "../../ui/Colors.module.scss";
 
 .account {
   width: 100%;
@@ -8,14 +8,14 @@ $font-color: #ffffff;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
 
-  &__email {
-    font-size: 24px;
-    line-height: 28px;
-    font-weight: 600;
+.email {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 600;
 
-    color: $font-color;
+  color: $infoColor;
 
-    margin-bottom: 10px;
-  }
+  margin-bottom: 10px;
 }

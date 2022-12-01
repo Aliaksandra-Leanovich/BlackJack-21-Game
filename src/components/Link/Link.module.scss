@@ -1,9 +1,6 @@
-$bg-color: #edf2f4;
-$bg-color-hover: #f9c74f;
+@import "../../ui/Colors.module.scss";
 
 .link {
-  font-size: 16px;
-  line-height: 20px;
   font-weight: 600;
 
   padding: 18px 34px;
@@ -14,32 +11,6 @@ $bg-color-hover: #f9c74f;
 
   &:hover {
     transform: translateY(-4px);
-    background-color: $bg-color-hover;
-  }
-}
-
-.bounce {
-  padding: 22px 34px;
-  -webkit-animation: bounce 0.75s infinite;
-
-  &:hover {
-    -webkit-animation: bounce 0s;
-  }
-}
-@-webkit-keyframes bounce {
-  0% {
-    transform: scale(1, 1) translate(0px, 0px);
-  }
-
-  30% {
-    transform: scale(1, 0.9) translate(0px, 2px);
-  }
-
-  75% {
-    transform: scale(1, 1) translate(0px, -4px);
-  }
-
-  100% {
-    transform: scale(1, 1) translate(0px, 0px);
+    background-color: $errorColor;
   }
 }

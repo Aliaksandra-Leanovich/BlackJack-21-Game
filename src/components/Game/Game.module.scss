@@ -1,7 +1,4 @@
-$white: #ffffff;
-$bg-color-dark: #000000;
-$bg-color-lighgray: #2b2d42;
-$bg-color-yellow: #ffd166;
+@import "../../ui/Colors.module.scss";
 
 .game {
   width: 100%;
@@ -11,88 +8,70 @@ $bg-color-yellow: #ffd166;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  &__robot {
-    display: flex;
-    align-items: center;
-  }
-
-  &__comment {
-    margin-left: 40px;
-    width: 250px;
-    height: 120px;
-    padding: 20px;
-
-    background: $bg-color-yellow;
-
-    position: relative;
-
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 18px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-
-    transition: transform 0.5s ease-out;
-
-    &::after {
-      content: "";
-      position: absolute;
-      right: 98%;
-      top: 50%;
-      width: 0;
-      height: 0;
-      border-top: 10px solid transparent;
-      border-right: 18px solid $bg-color-yellow;
-      border-bottom: 10px solid transparent;
-    }
-
-    &:hover {
-      transform: translateY(-5px);
-    }
-  }
-
-  &__message {
-    font-size: 24px;
-    line-height: 28px;
-    font-weight: 600;
-
-    color: $bg-color-dark;
-  }
-
-  &__result {
-    font-size: 24px;
-    line-height: 28px;
-    font-weight: 400;
-
-    color: $white;
-  }
 }
+
 .block__visible {
   display: block;
 }
+
 .block__hidden {
   display: none;
 }
 
-.new_game {
-  background-color: $bg-color-yellow;
-  color: $white;
+.robot {
+  display: flex;
+  align-items: center;
 }
 
-.stay {
-  padding: 16px 30px;
-  margin: 10px;
+.comment {
+  margin-left: 40px;
+  width: 250px;
+  height: 120px;
+  padding: 20px;
 
-  color: #e2e2df;
-  font-size: 22px;
-  line-height: 30px;
+  background: $errorColor;
+
+  position: relative;
+
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  transition: transform 0.5s ease-out;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 98%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 18px solid $errorColor;
+    border-bottom: 10px solid transparent;
+  }
 
   &:hover {
-    transform: translateY(0px);
-    background-color: $bg-color-dark;
+    transform: translateY(-5px);
   }
+}
+
+.message {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 600;
+
+  color: $primaryColor;
+}
+
+.result {
+  font-size: 24px;
+  line-height: 28px;
+
+  color: $infoLightColor;
 }

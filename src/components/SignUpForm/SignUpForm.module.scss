@@ -5,12 +5,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
 
   &__form {
     display: grid;
     row-gap: 28px;
 
-    max-width: 300px;
-    width: 100%;
-  }
+
+  max-width: 300px;
+  width: 100%;
 }
