@@ -49,7 +49,7 @@ export const BetForm = ({
           : styles.block__visible
       }
     >
-      {gameStatus === "start" ? (
+      {gameStatus == GameStatus.start ? (
         <div className={styles.bet}>
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             <label className={styles.label}>enter your bet</label>
