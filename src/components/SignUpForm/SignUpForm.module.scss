@@ -7,10 +7,11 @@
   align-items: center;
 }
 
-.form {
-  display: grid;
-  row-gap: 14px;
-  grid-template-rows: 1fr 1fr 1fr;
+
+  &__form {
+    display: grid;
+    row-gap: 28px;
+
 
   max-width: 300px;
   width: 100%;

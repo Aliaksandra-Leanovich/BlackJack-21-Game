@@ -20,6 +20,7 @@ export const Input = ({
         {...register(label)}
         onChange={onChange}
       />
+      {errors && <p className={styles.error}>{errors.message}</p>}
     </div>
   );
 };
