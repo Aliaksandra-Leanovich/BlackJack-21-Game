@@ -7,7 +7,7 @@ export const Button = ({
   children,
   type,
   className,
-  disabled,
+
   handleClick,
 }: React.PropsWithChildren<IButton>) => {
   return (
@@ -15,7 +15,6 @@ export const Button = ({
       className={clsx(styles.button, className)}
       type={type}
       onClick={handleClick}
-      disabled={disabled}
     >
       {children}
     </button>
