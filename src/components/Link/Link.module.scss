@@ -14,29 +14,3 @@
     background-color: $errorColor;
   }
 }
-
-.bounce {
-  padding: 22px 34px;
-  -webkit-animation: bounce 0.75s infinite;
-
-  &:hover {
-    -webkit-animation: bounce 0s;
-  }
-}
-@-webkit-keyframes bounce {
-  0% {
-    transform: scale(1, 1) translate(0px, 0px);
-  }
-
-  30% {
-    transform: scale(1, 0.9) translate(0px, 2px);
-  }
-
-  75% {
-    transform: scale(1, 1) translate(0px, -4px);
-  }
-
-  100% {
-    transform: scale(1, 1) translate(0px, 0px);
-  }
-}

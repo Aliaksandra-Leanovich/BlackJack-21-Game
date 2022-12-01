@@ -1,16 +1,11 @@
-$border-color: #000000;
-$bg-color: #ebebeb;
-$font-color: #000000;
-$bg-pink: #ff006e;
-$bg-color-yellow: #ffd166;
-$bg-color-dark: #000000;
+@import "../../ui/Colors.module.scss";
 
 .bet {
   padding: 20px;
 
   border-radius: 20px;
-  border: 6px solid $border-color;
-  background-color: $bg-color;
+  border: 6px solid $primaryColor;
+  background-color: $infoLightColor;
 }
 
 .block__visible {
@@ -30,8 +25,8 @@ $bg-color-dark: #000000;
   height: 24px;
 
   border-radius: 50%;
-  border: 3px solid $border-color;
-  background-color: $bg-color;
+  border: 3px solid $primaryColor;
+  background-color: $infoColor;
 
   &:after {
     content: " ";
@@ -41,7 +36,7 @@ $bg-color-dark: #000000;
     top: 0px;
     left: 0px;
 
-    border: 4px dashed $bg-pink;
+    border: 4px dashed $bg-color;
     border-radius: 50%;
 
     width: 10px;
@@ -54,12 +49,12 @@ $bg-color-dark: #000000;
   line-height: 20px;
   font-weight: 600;
 
-  color: $font-color;
+  color: $primaryColor;
   margin-left: 10px;
 }
 
 .state {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.379);
 
   margin: 10px 0;
   padding: 20px;
@@ -71,12 +66,12 @@ $bg-color-dark: #000000;
 
 .button {
   padding: 10px 24px;
-  border: 2px solid $bg-color-dark;
+  border: 2px solid $primaryColor;
 
   &:hover {
     transform: translateY(0px);
-    border: 2px solid $bg-color-yellow;
-    background-color: $bg-color-yellow;
+    border: 2px solid $errorColor;
+    background-color: $errorColor;
   }
 }
 
@@ -92,7 +87,7 @@ $bg-color-dark: #000000;
   line-height: 22px;
   font-weight: 600;
 
-  color: $font-color;
+  color: $primaryColor;
 
   margin-bottom: 16px;
 }
