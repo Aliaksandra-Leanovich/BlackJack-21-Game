@@ -4,9 +4,5 @@ import styles from "./BudgetPlayer.module.scss";
 
 export const BudgetPlayer = () => {
   const { budget } = useAppSelector(getUserInfo);
-  return (
-    <div>
-      <p className={styles.budget}>{budget}</p>
-    </div>
-  );
+  return <p className={styles.budget}>{budget}</p>;
 };
