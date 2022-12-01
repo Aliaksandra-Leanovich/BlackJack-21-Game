@@ -85,6 +85,7 @@ export const Game = () => {
   const createArrayOfAllPlayers = () => {
     const player = { name: email, id: uuidv4(), points: pointsPlayer };
     const dealer = { name: "dealer", id: uuidv4(), points: countDealer };
+
     return [player, dealer, ...players];
   };
 
