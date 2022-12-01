@@ -45,7 +45,7 @@ const SignUpForm = () => {
           type="email"
           label="email"
           errors={errors.email}
-          required={true}
+          required
           register={register}
           placeholder="Enter your email"
         />
@@ -53,7 +53,7 @@ const SignUpForm = () => {
           type="password"
           label="password"
           errors={errors.password}
-          required={true}
+          required
           register={register}
           placeholder="Enter your password"
         />
