@@ -22,11 +22,9 @@ export const PlayerHand = ({ cards }: IProps) => {
 
   return (
     <div className={styles.hand}>
-      <div className={styles.container}>
-        {hand.map((card) => (
-          <Card key={card.code} card={card} />
-        ))}
-      </div>
+      {hand.map((card) => (
+        <Card key={card.code} card={card} />
+      ))}
     </div>
   );
 };

@@ -1,8 +1,8 @@
+import { clsx } from "clsx";
 import React from "react";
-import { ILinkProps } from "./types";
 import { Link } from "react-router-dom";
 import styles from "./Link.module.scss";
-import { clsx } from "clsx";
+import { ILinkProps } from "./types";
 
 export const LinkTemplate = ({
   children,

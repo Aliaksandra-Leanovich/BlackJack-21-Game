@@ -31,10 +31,10 @@ const SignUpForm = () => {
   });
 
   const onSubmit = () => {
-    const data = getValues();
-    dispatch(setUserEmail(data.email));
-    dispatch(setUserPassword(data.password));
-    localStorage.setItem("user", data.email);
+    const { email, password } = getValues();
+    dispatch(setUserEmail(email));
+    dispatch(setUserPassword(password));
+    localStorage.setItem("user", email);
     navigate(routes.HOME);
   };
 

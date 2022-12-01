@@ -34,9 +34,7 @@ export const Game = () => {
   const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
   const [winner, setWinner] = useState<IPlayer[]>();
   const [playerWin, setPlayerWin] = useState(false);
-  const [gameStatus, setGameStatus] = useState<GameStatus>(
-    GameStatus.notstarted
-  );
+  const [gameStatus, setGameStatus] = useState(GameStatus.notstarted);
 
   const setDealersHand = async (initialScore: number = 0): Promise<number> => {
     const card: ICard[] = await cardsApi.getNewCard(deckId, 1);
@@ -116,7 +114,7 @@ export const Game = () => {
   };
 
   const setResultForPlayer = (winner: IPlayer[]) => {
-    let user = winner.find((player: IPlayer) => player.name == email);
+    let user = winner.find((player) => player.name == email);
     if (user?.name) {
       setPlayerWin(true);
     }

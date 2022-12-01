@@ -20,7 +20,7 @@ export const BetForm = ({
 
   const { handleSubmit } = useForm();
 
-  const [state, setState] = useState<number>(budget);
+  const [state, setState] = useState(budget);
 
   useEffect(() => {
     if (winner) {
