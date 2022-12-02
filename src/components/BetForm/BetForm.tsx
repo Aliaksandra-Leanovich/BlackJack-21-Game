@@ -24,12 +24,12 @@ export const BetForm = ({
 
   useEffect(() => {
     if (winner) {
-      dispatch(setBudget((budget = budget + state * 2)));
+      dispatch(setBudget((budget += state * 2)));
     }
   }, [dispatch, winner]);
 
   const countBudget = () => {
-    dispatch(setBudget((budget = budget - state)));
+    dispatch(setBudget((budget -= state)));
   };
 
   const onSubmit = () => {

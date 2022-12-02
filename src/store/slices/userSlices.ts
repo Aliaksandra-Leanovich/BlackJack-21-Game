@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ICard, IUserStore } from "../types";
+import { v4 as uuidv4 } from "uuid";
 
 const initialState: IUserStore = {
   isAuthorized: null,
@@ -7,6 +8,7 @@ const initialState: IUserStore = {
   hand: [],
   points: 0,
   password: "",
+  id: uuidv4(),
   budget: 10000,
 };
 

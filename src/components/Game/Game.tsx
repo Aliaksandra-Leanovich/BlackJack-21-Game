@@ -27,7 +27,7 @@ export const Game = () => {
   const { deckId } = useAppSelector(getDeckId);
   const budget = useAppSelector(getUserBudget);
 
-  const { email } = useAppSelector(getUserInfo);
+  const { email, id } = useAppSelector(getUserInfo);
   const { players } = useAppSelector(getPlayers);
 
   const [countDealer, setCountDealer] = useState(0);
@@ -81,7 +81,7 @@ export const Game = () => {
   };
 
   const createArrayOfAllPlayers = () => {
-    const player = { name: email, id: uuidv4(), points: pointsPlayer };
+    const player = { name: email, id: id, points: pointsPlayer };
     const dealer = { name: "dealer", id: uuidv4(), points: countDealer };
 
     return [player, dealer, ...players];
@@ -114,8 +114,8 @@ export const Game = () => {
   };
 
   const setResultForPlayer = (winner: IPlayer[]) => {
-    let user = winner.find((player) => player.name == email);
-    if (user?.name) {
+    let user = winner.find((player) => player.id == id);
+    if (user?.id) {
       setPlayerWin(true);
     }
   };

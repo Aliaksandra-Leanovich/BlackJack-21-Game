@@ -46,6 +46,7 @@ export interface IDealer {
 export interface IUserStore {
   isAuthorized: string | null | void;
   email: string;
+  id: string;
   password: string;
   hand: ICard[] | [];
   points: number;
