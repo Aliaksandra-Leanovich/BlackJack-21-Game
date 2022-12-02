@@ -133,7 +133,9 @@ export const Game = () => {
             <div className={styles.message}>
               the winner is...
               {winner?.map((player) => (
-                <p key={player.id}>{player.name}</p>
+                <p key={player.id}>
+                  {player.name} with {player.points} points
+                </p>
               ))}
             </div>
           ) : (
