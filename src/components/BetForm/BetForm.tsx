@@ -57,6 +57,7 @@ export const BetForm = ({
               min={100}
               max={budget}
               value={state}
+              className={styles.input}
               onChange={handleChange}
               step={100}
             />

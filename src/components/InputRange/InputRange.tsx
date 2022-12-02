@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import styles from "./InputRange.module.scss";
 import { IInputProps } from "./types";
 
@@ -6,6 +7,7 @@ export const InputRange = ({
   onChange,
   value,
   min,
+  className,
   max,
   step,
 }: IInputProps) => {
@@ -19,7 +21,7 @@ export const InputRange = ({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
-        className={styles.input_range}
+        className={clsx(styles.input, className)}
       />
     </div>
   );
