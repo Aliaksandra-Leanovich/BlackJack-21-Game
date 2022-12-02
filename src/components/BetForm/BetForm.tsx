@@ -42,14 +42,8 @@ export const BetForm = ({
   };
 
   return (
-    <div
-      className={
-        gameStatus == GameStatus.finished || gameStatus == GameStatus.notstarted
-          ? styles.hidden
-          : styles.visible
-      }
-    >
-      {gameStatus == GameStatus.start ? (
+    <>
+      {gameStatus === GameStatus.start && (
         <div className={styles.bet}>
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             <label className={styles.label}>enter your bet</label>
@@ -67,12 +61,13 @@ export const BetForm = ({
             </Button>
           </form>
         </div>
-      ) : (
+      )}
+      {gameStatus === GameStatus.inprogress && (
         <div className={styles.state}>
           <div className={styles.chip}></div>
           <p className={styles.count}> {state}</p>
         </div>
       )}
-    </div>
+    </>
   );
 };

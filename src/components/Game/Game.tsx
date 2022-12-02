@@ -137,22 +137,16 @@ export const Game = () => {
           )}
         </div>
       </div>
-      <div
-        className={
-          gameStatus == GameStatus.notstarted ||
-          gameStatus == GameStatus.finished
-            ? styles.visible
-            : styles.hidden
-        }
-      >
-        {!budget ? (
+
+      {(gameStatus === GameStatus.notstarted ||
+        gameStatus === GameStatus.finished) &&
+        (!budget ? (
           <p className={styles.message}>sorry, you dont have money left</p>
         ) : (
           <Button type="submit" handleClick={onStartNewGameSubmit}>
             START NEW GAME
           </Button>
-        )}
-      </div>
+        ))}
 
       <BetForm
         winner={playerWin}
@@ -160,32 +154,26 @@ export const Game = () => {
         gameStatus={gameStatus}
       />
 
-      <div
-        className={
-          gameStatus == GameStatus.inprogress ? styles.visible : styles.hidden
-        }
-      >
-        <Button type="submit" handleClick={onStaySubmit}>
-          stay
-        </Button>
-        <Button type="submit" handleClick={onHitSubmit}>
-          hit
-        </Button>
-
-        <p className={styles.message}>your points: {pointsPlayer}</p>
-      </div>
+      {gameStatus === GameStatus.inprogress && (
+        <div>
+          <Button type="submit" handleClick={onStaySubmit}>
+            stay
+          </Button>
+          <Button type="submit" handleClick={onHitSubmit}>
+            hit
+          </Button>
+          <p className={styles.message}>your points: {pointsPlayer}</p>
+        </div>
+      )}
 
       <PlayerHand cards={cardsForPlayer} />
-      <div>
-        {gameStatus == GameStatus.finished ? (
-          <div>
-            <p className={styles.result}>dealer's points: {countDealer}</p>
-            <p className={styles.result}>player's points: {pointsPlayer}</p>
-          </div>
-        ) : (
-          " "
-        )}
-      </div>
+
+      {gameStatus === GameStatus.finished && (
+        <div>
+          <p className={styles.result}>dealer's points: {countDealer}</p>
+          <p className={styles.result}>player's points: {pointsPlayer}</p>
+        </div>
+      )}
     </div>
   );
 };
