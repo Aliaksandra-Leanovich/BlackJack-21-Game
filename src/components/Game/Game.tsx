@@ -177,7 +177,7 @@ export const Game = () => {
       {gameStatus === GameStatus.finished && (
         <div>
           <p className={styles.result}>dealer's points: {countDealer}</p>
-          <p className={styles.result}>player's points: {pointsPlayer}</p>
+          <p className={styles.result}>your points: {pointsPlayer}</p>
         </div>
       )}
     </div>
