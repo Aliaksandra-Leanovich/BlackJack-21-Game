@@ -3,7 +3,7 @@ import { ICard, IUserStore } from "../types";
 import { v4 as uuidv4 } from "uuid";
 
 const initialState: IUserStore = {
-  isAuthorized: null,
+  isAuthorized: localStorage.getItem("user"),
   email: "",
   hand: [],
   points: 0,
