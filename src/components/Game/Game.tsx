@@ -130,14 +130,20 @@ export const Game = () => {
         <Robot />
         <div className={styles.comment}>
           {gameStatus == GameStatus.finished ? (
-            <div className={styles.message}>
-              the winner is...
-              {winner?.map((player) => (
-                <p key={player.id}>
-                  {player.name} with {player.points} points
-                </p>
-              ))}
-            </div>
+            <>
+              <p className={styles.result}>dealer's points: {countDealer}</p>
+              <p className={styles.result}>
+                {email} points: {pointsPlayer}
+              </p>
+              <div className={styles.message}>
+                the winner is...
+                {winner?.map((player) => (
+                  <p key={player.id}>
+                    {player.name} with {player.points} points
+                  </p>
+                ))}
+              </div>
+            </>
           ) : (
             <p className={styles.message}>good luck!</p>
           )}
@@ -173,15 +179,6 @@ export const Game = () => {
       )}
 
       <PlayerHand cards={cardsForPlayer} />
-
-      {gameStatus === GameStatus.finished && (
-        <div>
-          <p className={styles.result}>dealer's points: {countDealer}</p>
-          <p className={styles.result}>
-            {email} points: {pointsPlayer}
-          </p>
-        </div>
-      )}
     </div>
   );
 };

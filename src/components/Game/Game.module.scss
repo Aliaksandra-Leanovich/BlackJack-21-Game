@@ -17,8 +17,9 @@
 
 .comment {
   margin-left: 40px;
-  width: 250px;
-  height: 120px;
+  width: 280px;
+  min-height: 120px;
+  height: 100%;
   padding: 20px;
 
   background: $errorColor;
@@ -30,6 +31,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   text-align: center;
 
   transition: transform 0.5s ease-out;
@@ -60,8 +62,9 @@
 }
 
 .result {
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 600;
 
   color: $infoLightColor;
 }
