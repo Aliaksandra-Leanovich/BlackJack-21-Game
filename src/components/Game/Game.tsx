@@ -54,10 +54,14 @@ export const Game = () => {
   }, [dispatch]);
 
   const onStartNewGameSubmit = () => {
+    setGameStatus(GameStatus.start);
+    unsetPreviousGame();
+  };
+
+  const unsetPreviousGame = () => {
     setWinner([]);
     setCountDealer(0);
     setPlayerWin(false);
-    setGameStatus(GameStatus.start);
     dispatch(unsetUserHand());
     setCardsForPlayer([]);
   };
