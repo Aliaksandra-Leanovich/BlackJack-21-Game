@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes/routes";
 import { useAppDispatch } from "../../store/hooks";
-import { setUserEmail, setUserPassword } from "../../store/slices/userSlices";
+import { setUserEmail } from "../../store/slices/userSlices";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import * as Yup from "yup";
@@ -31,9 +31,8 @@ const SignUpForm = () => {
   });
 
   const onSubmit = () => {
-    const { email, password } = getValues();
+    const { email } = getValues();
     dispatch(setUserEmail(email));
-    dispatch(setUserPassword(password));
     localStorage.setItem("user", email);
     navigate(routes.HOME);
   };
