@@ -45,8 +45,8 @@ export const BetForm = ({
     <div
       className={
         gameStatus == GameStatus.finished || gameStatus == GameStatus.notstarted
-          ? styles.block__hidden
-          : styles.block__visible
+          ? styles.hidden
+          : styles.visible
       }
     >
       {gameStatus == GameStatus.start ? (

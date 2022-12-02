@@ -141,8 +141,8 @@ export const Game = () => {
         className={
           gameStatus == GameStatus.notstarted ||
           gameStatus == GameStatus.finished
-            ? styles.block__visible
-            : styles.block__hidden
+            ? styles.visible
+            : styles.hidden
         }
       >
         {!budget ? (
@@ -162,9 +162,7 @@ export const Game = () => {
 
       <div
         className={
-          gameStatus == GameStatus.inprogress
-            ? styles.block__visible
-            : styles.block__hidden
+          gameStatus == GameStatus.inprogress ? styles.visible : styles.hidden
         }
       >
         <Button type="submit" handleClick={onSubmit}>

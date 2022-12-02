@@ -38,7 +38,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className={styles.sign_up}>
+    <div className={styles.signUp}>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Input
           type="email"
