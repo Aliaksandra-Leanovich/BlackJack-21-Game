@@ -12,7 +12,7 @@ import { IBetFormProps } from "./types";
 export const BetForm = ({
   winner,
   gameStatus,
-  onFirstSubmit,
+  onBetFormSubmit,
 }: IBetFormProps) => {
   const dispatch = useAppDispatch();
 
@@ -34,7 +34,7 @@ export const BetForm = ({
 
   const onSubmit = () => {
     countBudget();
-    onFirstSubmit();
+    onBetFormSubmit();
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

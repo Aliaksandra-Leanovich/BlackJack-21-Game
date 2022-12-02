@@ -53,7 +53,7 @@ export const Game = () => {
     dispatch(fetchDeckId());
   }, [dispatch]);
 
-  const onStartSubmit = () => {
+  const onStartNewGameSubmit = () => {
     setWinner([]);
     setCountDealer(0);
     setPlayerWin(false);
@@ -62,17 +62,17 @@ export const Game = () => {
     setCardsForPlayer([]);
   };
 
-  const onFirstSubmit = async () => {
+  const onBetFormSubmit = async () => {
     setGameStatus(GameStatus.inprogress);
     setCardsForPlayer(await cardsApi.getNewCard(deckId, 2));
     setCountDealer(await setDealersHand());
   };
 
-  const onSubmit = async () => {
+  const onStaySubmit = async () => {
     setCardsForPlayer(await cardsApi.getNewCard(deckId, 1));
   };
 
-  const onStopSubmit = () => {
+  const onHitSubmit = () => {
     setGameStatus(GameStatus.finished);
 
     setWinner(findWinner());
@@ -148,7 +148,7 @@ export const Game = () => {
         {!budget ? (
           <p className={styles.message}>sorry, you dont have money left</p>
         ) : (
-          <Button type="submit" handleClick={onStartSubmit}>
+          <Button type="submit" handleClick={onStartNewGameSubmit}>
             START NEW GAME
           </Button>
         )}
@@ -156,7 +156,7 @@ export const Game = () => {
 
       <BetForm
         winner={playerWin}
-        onFirstSubmit={onFirstSubmit}
+        onBetFormSubmit={onBetFormSubmit}
         gameStatus={gameStatus}
       />
 
@@ -165,10 +165,10 @@ export const Game = () => {
           gameStatus == GameStatus.inprogress ? styles.visible : styles.hidden
         }
       >
-        <Button type="submit" handleClick={onSubmit}>
+        <Button type="submit" handleClick={onStaySubmit}>
           stay
         </Button>
-        <Button type="submit" handleClick={onStopSubmit}>
+        <Button type="submit" handleClick={onHitSubmit}>
           hit
         </Button>
 
