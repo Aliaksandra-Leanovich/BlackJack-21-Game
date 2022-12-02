@@ -129,7 +129,7 @@ export const Game = () => {
       <div className={styles.robot}>
         <Robot />
         <div className={styles.comment}>
-          {gameStatus == GameStatus.finished ? (
+          {gameStatus === GameStatus.finished ? (
             <>
               <p className={styles.result}>dealer's points: {countDealer}</p>
               <p className={styles.result}>
