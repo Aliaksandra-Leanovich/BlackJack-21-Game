@@ -125,7 +125,7 @@ export const Game = () => {
   };
 
   const setResultForPlayer = (winner: IPlayer[]) => {
-    let user = winner.find((player) => player.id == id);
+    let user = winner.find((player) => player.id === id);
     if (user?.id) {
       setPlayerWin(true);
     }
