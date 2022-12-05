@@ -13,7 +13,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     dispatch(unsetUser());
-    navigate("/sign-up");
+    navigate(routes.SIGNIN);
   };
 
   const handleBack = () => {

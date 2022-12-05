@@ -8,7 +8,7 @@ import { Input } from "../Input";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IRegister } from "../Input/types";
-import styles from "./SignUpForm.module.scss";
+import styles from "./SignInForm.module.scss";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("Email is required").email("Email is invalid"),
@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
     .max(40, "Password must not exceed 40 characters"),
 });
 
-const SignUpForm = () => {
+export const SignInForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {
@@ -38,7 +38,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className={styles.signUp}>
+    <div className={styles.signIn}>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Input
           type="email"
@@ -56,9 +56,8 @@ const SignUpForm = () => {
           register={register}
           placeholder="Enter your password"
         />
-        <Button type="submit">Sign up</Button>
+        <Button type="submit">Sign in</Button>
       </form>
     </div>
   );
 };
-export default SignUpForm;

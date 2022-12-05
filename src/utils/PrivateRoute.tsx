@@ -6,5 +6,5 @@ import { getUserInfo } from "../store/selectors";
 export const PrivateRoute = () => {
   const { isAuthorized } = useAppSelector(getUserInfo);
 
-  return isAuthorized ? <Outlet /> : <Navigate to={routes.SIGNUP} />;
+  return isAuthorized ? <Outlet /> : <Navigate to={routes.SIGNIN} />;
 };
