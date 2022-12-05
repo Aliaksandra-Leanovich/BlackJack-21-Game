@@ -1,5 +1,3 @@
-$error-color: #2b2d42;
-
 .input {
   padding: 18px 16px;
   width: 100%;
@@ -14,5 +12,5 @@ $error-color: #2b2d42;
 .error {
   position: absolute;
   font-weight: 700;
-  color: $error-color;
+  color: $secondaryColor;
 }
