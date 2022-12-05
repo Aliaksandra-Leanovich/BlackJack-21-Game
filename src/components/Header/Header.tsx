@@ -4,7 +4,7 @@ import { useAppDispatch } from "../../store/hooks";
 import { unsetUser } from "../../store/slices/userSlices";
 import { BudgetPlayer } from "../BudgetPlayer/BudgetPlayer";
 import { Button } from "../Button";
-import { LinkTemplate } from "../Link";
+import { Link } from "../Link";
 import styles from "./Header.module.scss";
 
 export const Header = () => {
@@ -25,7 +25,7 @@ export const Header = () => {
       <Button type="submit" handleClick={handleBack}>
         Back
       </Button>
-      <LinkTemplate to={routes.ACCOUNT}>My Account</LinkTemplate>
+      <Link to={routes.ACCOUNT}>My Account</Link>
       <BudgetPlayer />
       <Button type="submit" handleClick={handleLogout}>
         Log Out

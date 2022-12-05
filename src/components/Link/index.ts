@@ -1,1 +1,1 @@
-export { LinkTemplate } from "./Link";
+export { Link } from "./Link";

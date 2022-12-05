@@ -1,5 +1,5 @@
 import { Header } from "../../components/Header/Header";
-import { LinkTemplate } from "../../components/Link";
+import { Link } from "../../components/Link";
 import { Robot } from "../../components/Robot/Robot";
 import { routes } from "../../routes/routes";
 import styles from "./Home.module.scss";
@@ -10,7 +10,7 @@ export const Home = () => {
       <Header />
       <div className={styles.home}>
         <Robot />
-        <LinkTemplate to={routes.BLACKJACK}>Play Game</LinkTemplate>
+        <Link to={routes.BLACKJACK}>Play Game</Link>
       </div>
     </>
   );
