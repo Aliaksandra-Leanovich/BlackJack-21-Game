@@ -60,8 +60,8 @@
 
   &:hover {
     transform: translateY(0px);
-    border: 2px solid $errorColor;
-    background-color: $errorColor;
+    border: 2px solid $hoverColor;
+    background-color: $hoverColor;
   }
 }
 

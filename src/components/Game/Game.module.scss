@@ -20,7 +20,7 @@
   height: 100%;
   padding: 20px;
 
-  background: $errorColor;
+  background: $hoverColor;
 
   position: relative;
 
@@ -42,7 +42,7 @@
     width: 0;
     height: 0;
     border-top: 10px solid transparent;
-    border-right: 18px solid $errorColor;
+    border-right: 18px solid $hoverColor;
     border-bottom: 10px solid transparent;
   }
 

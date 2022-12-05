@@ -12,7 +12,7 @@ export default defineConfig({
         additionalData: `$primaryColor: #000000;
         $secondaryColor: #343a40;
         $secondaryLightColor: #6c757d;
-        $errorColor: #ffd166;
+        $hoverColor: #ffd166;
         $infoColor: #cedbdd;
         $infoLightColor: #ffffff;
         $bg-color: #ff006e;
