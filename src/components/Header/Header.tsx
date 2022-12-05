@@ -28,7 +28,7 @@ export const Header = () => {
       <Link to={routes.ACCOUNT}>My Account</Link>
       <BudgetPlayer />
       <Button type="submit" handleClick={handleLogout}>
-        Log Out
+        Sign Out
       </Button>
     </div>
   );
