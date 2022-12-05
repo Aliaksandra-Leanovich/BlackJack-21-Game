@@ -36,6 +36,8 @@ export const Game = () => {
   const [playerWin, setPlayerWin] = useState(false);
   const [gameStatus, setGameStatus] = useState(GameStatus.notstarted);
 
+  const dealer = { name: "dealer", id: uuidv4(), points: countDealer };
+
   const setDealersHand = async (initialScore: number = 0): Promise<number> => {
     const card: ICard[] = await cardsApi.getNewCard(deckId, 1);
     const cardScore = getCardScore(card[0]);
@@ -86,7 +88,6 @@ export const Game = () => {
 
   const createArrayOfAllPlayers = () => {
     const player = { name: email, id: id, points: pointsPlayer };
-    const dealer = { name: "dealer", id: uuidv4(), points: countDealer };
 
     return [player, dealer, ...players];
   };
