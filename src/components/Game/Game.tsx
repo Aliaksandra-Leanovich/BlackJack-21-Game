@@ -67,7 +67,7 @@ export const Game = () => {
   };
 
   const onBetFormSubmit = async () => {
-    setGameStatus(GameStatus.inprogress);
+    setGameStatus(GameStatus.inProgress);
     setCardsForPlayer(await cardsApi.getNewCard(deckId, 2));
     setCountDealer(await setDealersHand());
   };
@@ -173,7 +173,7 @@ export const Game = () => {
         gameStatus={gameStatus}
       />
 
-      {gameStatus === GameStatus.inprogress && (
+      {gameStatus === GameStatus.inProgress && (
         <div>
           <Button type="submit" handleClick={onStaySubmit}>
             stay

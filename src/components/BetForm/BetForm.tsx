@@ -62,7 +62,7 @@ export const BetForm = ({
           </form>
         </div>
       )}
-      {gameStatus === GameStatus.inprogress && (
+      {gameStatus === GameStatus.inProgress && (
         <div className={styles.state}>
           <div className={styles.chip}></div>
           <p className={styles.count}> {state}</p>
