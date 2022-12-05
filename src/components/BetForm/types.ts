@@ -1,5 +1,7 @@
+import { GameStatus } from "../Game/types";
+
 export interface IBetFormProps {
-  winner?: boolean;
-  gameStatus: string;
+  winner: boolean;
+  gameStatus: GameStatus;
   onBetFormSubmit: () => void;
 }
