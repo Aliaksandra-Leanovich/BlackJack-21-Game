@@ -96,20 +96,27 @@ export const Game = () => {
 
     const players = createArrayOfAllPlayers();
 
-    const lessThan21 = players.filter((player) => player.points < 21);
-    const equal21 = players.filter((player) => player.points == 21);
+    const playersWithPointsLessThan21 = players.filter(
+      (player) => player.points < 21
+    );
+    const playersWithPointsEqual21 = players.filter(
+      (player) => player.points == 21
+    );
 
-    if (equal21.length) {
-      return winner.concat(equal21);
+    if (playersWithPointsEqual21.length) {
+      return winner.concat(playersWithPointsEqual21);
     }
 
-    if (!equal21.length && lessThan21.length) {
-      const users = lessThan21.filter(
+    if (
+      !playersWithPointsEqual21.length &&
+      playersWithPointsLessThan21.length
+    ) {
+      const users = playersWithPointsLessThan21.filter(
         (user) =>
-          user.points ==
+          user.points ===
           Math.max.apply(
             Math,
-            lessThan21.map((players) => players.points)
+            playersWithPointsLessThan21.map((players) => players.points)
           )
       );
       return winner.concat(users);
