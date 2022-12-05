@@ -1,9 +1,6 @@
 @font-face {
-  font-family: "Custom Font";
-  font-weight: 400;
-  font-style: normal;
-  src: local("Custom Font"),
-    url("/public/fonts/Inter/Inter-Regular.woff2") format("woff2");
+  font-family: "InterFont";
+  src: local("InterFont"), url("/public/fonts/Fonts.ts") format("woff2");
 }
 
 * {
@@ -19,9 +16,8 @@ body {
 
 body {
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
 
-  font-family: "Inter", sans-serif;
+  font-family: "InterFont", Inter, sans-serif;
 
   background: $bg-color;
   background-repeat: no-repeat;
