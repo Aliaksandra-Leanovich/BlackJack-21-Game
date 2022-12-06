@@ -115,9 +115,8 @@ export const Game = () => {
       const users = playersWithPointsLessThan21.filter(
         (user) =>
           user.points ===
-          Math.max.apply(
-            Math,
-            playersWithPointsLessThan21.map((players) => players.points)
+          Math.max(
+            ...playersWithPointsLessThan21.map((players) => players.points)
           )
       );
       return winner.concat(users);
