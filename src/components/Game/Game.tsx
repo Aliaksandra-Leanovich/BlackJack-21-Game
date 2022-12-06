@@ -74,11 +74,11 @@ export const Game = () => {
     setCountDealer(await setDealersHand());
   };
 
-  const onStaySubmit = async () => {
+  const onHitSubmit = async () => {
     setCardsForPlayer(await cardsApi.getNewCard(deckId, 1));
   };
 
-  const onHitSubmit = () => {
+  const onStaySubmit = () => {
     setGameStatus(GameStatus.finished);
 
     setWinner(findWinner());
@@ -175,11 +175,11 @@ export const Game = () => {
 
       {gameStatus === GameStatus.inProgress && (
         <div>
-          <Button type="submit" handleClick={onStaySubmit}>
-            stay
-          </Button>
           <Button type="submit" handleClick={onHitSubmit}>
             hit
+          </Button>
+          <Button type="submit" handleClick={onStaySubmit}>
+            stay
           </Button>
           <p className={styles.message}>your points: {pointsPlayer}</p>
         </div>
