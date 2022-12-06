@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { GameStatus } from "../../enums";
 import { cardsApi } from "../../services/CardsService";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
@@ -18,7 +19,6 @@ import { PlayerHand } from "../PlayerHand";
 import { Robot } from "../Robot/Robot";
 import { getCardScore } from "./countPoints";
 import styles from "./Game.module.scss";
-import { GameStatus } from "./types";
 
 export const Game = () => {
   const dispatch = useAppDispatch();

@@ -1,10 +1,11 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { GameStatus } from "../../enums";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getUserBudget } from "../../store/selectors";
 import { setBudget } from "../../store/slices/userSlices";
 import { Button } from "../Button";
-import { GameStatus } from "../Game/types";
+
 import { InputRange } from "../InputRange";
 import styles from "./BetForm.module.scss";
 import { IBetFormProps } from "./types";
