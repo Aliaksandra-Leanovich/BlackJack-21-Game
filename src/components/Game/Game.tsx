@@ -34,7 +34,7 @@ export const Game = () => {
   const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
   const [winner, setWinner] = useState<IPlayer[]>();
   const [playerWin, setPlayerWin] = useState(false);
-  const [gameStatus, setGameStatus] = useState(GameStatus.notstarted);
+  const [gameStatus, setGameStatus] = useState(GameStatus.notStarted);
 
   const dealer = { name: "dealer", id: uuidv4(), points: countDealer };
 
@@ -87,7 +87,7 @@ export const Game = () => {
   };
 
   const createArrayOfAllPlayers = () => {
-    const player = { name: email, id: id, points: pointsPlayer };
+    const player = { name: email, id, points: pointsPlayer };
 
     return [player, dealer, ...players];
   };
@@ -101,7 +101,7 @@ export const Game = () => {
       (player) => player.points < 21
     );
     const playersWithPointsEqual21 = players.filter(
-      (player) => player.points == 21
+      (player) => player.points === 21
     );
 
     if (playersWithPointsEqual21.length) {
@@ -157,7 +157,7 @@ export const Game = () => {
         </div>
       </div>
 
-      {(gameStatus === GameStatus.notstarted ||
+      {(gameStatus === GameStatus.notStarted ||
         gameStatus === GameStatus.finished) &&
         (!budget ? (
           <p className={styles.message}>sorry, you dont have money left</p>
