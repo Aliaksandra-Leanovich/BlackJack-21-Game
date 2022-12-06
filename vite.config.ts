@@ -15,7 +15,7 @@ export default defineConfig({
         $hoverColor: #ffd166;
         $infoColor: #cedbdd;
         $infoLightColor: #ffffff;
-        $bg-color: #ff006e;
+        $bgColor: #ff006e;
         $robotTongueColor: #f9bbbb;`,
       },
     },
