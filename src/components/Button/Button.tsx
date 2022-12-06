@@ -7,7 +7,6 @@ export const Button = ({
   children,
   type,
   className,
-
   handleClick,
 }: React.PropsWithChildren<IButton>) => {
   return (

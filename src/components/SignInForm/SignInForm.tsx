@@ -1,16 +1,15 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 import { routes } from "../../routes/routes";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { getUserInfo } from "../../store/selectors";
 import { setUserEmail } from "../../store/slices/userSlices";
 import { Button } from "../Button";
 import { Input } from "../Input";
-import * as Yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { IRegister } from "../Input/types";
 import styles from "./SignInForm.module.scss";
-import { useEffect } from "react";
-import { getUserInfo } from "../../store/selectors";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("Email is required").email("Email is invalid"),
@@ -21,7 +20,6 @@ const validationSchema = Yup.object().shape({
 });
 
 export const SignInForm = () => {
-  const { isAuthorized } = useAppSelector(getUserInfo);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {

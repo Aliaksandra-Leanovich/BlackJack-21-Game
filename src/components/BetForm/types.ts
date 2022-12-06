@@ -1,4 +1,4 @@
-import { GameStatus } from "../Game/types";
+import { GameStatus } from "../../enums";
 
 export interface IBetFormProps {
   winner: boolean;
