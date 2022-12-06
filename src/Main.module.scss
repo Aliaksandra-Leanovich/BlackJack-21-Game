@@ -1,6 +1,6 @@
 @font-face {
   font-family: "InterFont";
-  src: local("InterFont"), url("/public/fonts/Fonts.ts") format("woff2");
+  src: local("InterFont"), font-url("/public/fonts/Fonts.ts") format("woff2");
 }
 
 * {
