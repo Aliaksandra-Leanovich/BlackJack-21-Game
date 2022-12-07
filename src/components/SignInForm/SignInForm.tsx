@@ -1,10 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { routes } from "../../routes/routes";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { getUserInfo } from "../../store/selectors";
+import { useAppDispatch } from "../../store/hooks";
 import { setUserEmail } from "../../store/slices/userSlices";
 import { Button } from "../Button";
 import { Input } from "../Input";
@@ -31,15 +31,16 @@ export const SignInForm = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = () => {
-    const { email } = getValues();
+  const { email } = getValues();
+
+  const onSubmit = useCallback(() => {
     localStorage.setItem("user", email);
     dispatch(setUserEmail(email));
 
     if (localStorage.getItem("user")) {
       navigate(routes.HOME);
     }
-  };
+  }, [email]);
 
   return (
     <div className={styles.signIn}>

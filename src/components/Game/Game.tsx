@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { GameStatus } from "../../enums";
 import { cardsApi } from "../../services/CardsService";
@@ -51,11 +51,11 @@ export const Game = () => {
     return actualScore;
   };
 
-  const onStartNewGameSubmit = () => {
+  const onStartNewGameSubmit = useCallback(() => {
     setGameStatus(GameStatus.start);
     dispatch(fetchDeckId());
     unsetPreviousGame();
-  };
+  }, [gameStatus, deckId]);
 
   const unsetPreviousGame = () => {
     setWinner([]);
@@ -75,13 +75,13 @@ export const Game = () => {
     setCardsForPlayer(await cardsApi.getNewCard(deckId, 1));
   };
 
-  const onStaySubmit = () => {
+  const onStaySubmit = useCallback(() => {
     setGameStatus(GameStatus.finished);
 
     setWinner(findWinner());
 
     setResultForPlayer(findWinner());
-  };
+  }, [gameStatus, winner]);
 
   const createArrayOfAllPlayers = () => {
     const player = { name: email, id, points: pointsPlayer };
