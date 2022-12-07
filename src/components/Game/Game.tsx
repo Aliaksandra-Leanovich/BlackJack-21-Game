@@ -51,12 +51,9 @@ export const Game = () => {
     return actualScore;
   };
 
-  useEffect(() => {
-    dispatch(fetchDeckId());
-  }, [dispatch]);
-
   const onStartNewGameSubmit = () => {
     setGameStatus(GameStatus.start);
+    dispatch(fetchDeckId());
     unsetPreviousGame();
   };
 

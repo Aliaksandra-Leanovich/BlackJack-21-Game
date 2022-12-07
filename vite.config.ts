@@ -9,14 +9,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `$primaryColor: #000000;
-        $secondaryColor: #343a40;
-        $secondaryLightColor: #6c757d;
-        $hoverColor: #ffd166;
-        $infoColor: #cedbdd;
-        $infoLightColor: #ffffff;
-        $bgColor: #ff006e;
-        $robotTongueColor: #f9bbbb;`,
+        additionalData: `@import "/src/css/global.scss";`,
       },
     },
   },
