@@ -31,16 +31,15 @@ export const SignInForm = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const { email } = getValues();
-
-  const onSubmit = useCallback(() => {
+  const onSubmit = () => {
+    const { email } = getValues();
     localStorage.setItem("user", email);
     dispatch(setUserEmail(email));
 
     if (localStorage.getItem("user")) {
       navigate(routes.HOME);
     }
-  }, [email]);
+  };
 
   return (
     <div className={styles.signIn}>
