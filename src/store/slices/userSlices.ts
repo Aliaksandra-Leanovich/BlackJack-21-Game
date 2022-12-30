@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ICard, IUserStore } from "../types";
+import { v4 as uuidv4 } from "uuid";
 
 const initialState: IUserStore = {
-  isAuthorized: null,
+  isAuthorized: localStorage.getItem("user"),
   email: "",
   hand: [],
   points: 0,
-  password: "",
+  id: uuidv4(),
   budget: 10000,
 };
 
@@ -30,9 +31,6 @@ const userSlice = createSlice({
     setUserPoints: (state, action) => {
       state.points = action.payload;
     },
-    setUserPassword: (state, action) => {
-      state.password = action.payload;
-    },
     setBudget: (state, action) => {
       state.budget = action.payload;
     },
@@ -40,7 +38,6 @@ const userSlice = createSlice({
     unsetUser: (state) => {
       state.isAuthorized = localStorage.removeItem("user");
       state.email = "";
-      state.password = "";
     },
   },
 });
@@ -50,7 +47,6 @@ export const {
   unsetUserHand,
   setBudget,
   setUserPoints,
-  setUserPassword,
   setUserHand,
 } = userSlice.actions;
 export default userSlice.reducer;

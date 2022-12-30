@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { GameStatus } from "../../enums";
 import { cardsApi } from "../../services/CardsService";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
@@ -17,8 +18,7 @@ import { Button } from "../Button";
 import { PlayerHand } from "../PlayerHand";
 import { Robot } from "../Robot/Robot";
 import { getCardScore } from "./countPoints";
-import "./style.scss";
-import { GameStatus } from "./types";
+import styles from "./Game.module.scss";
 
 export const Game = () => {
   const dispatch = useAppDispatch();
@@ -27,16 +27,16 @@ export const Game = () => {
   const { deckId } = useAppSelector(getDeckId);
   const budget = useAppSelector(getUserBudget);
 
-  const { email } = useAppSelector(getUserInfo);
+  const { email, id } = useAppSelector(getUserInfo);
   const { players } = useAppSelector(getPlayers);
 
   const [countDealer, setCountDealer] = useState(0);
   const [cardsForPlayer, setCardsForPlayer] = useState<ICard[]>([]);
   const [winner, setWinner] = useState<IPlayer[]>();
-  const [playerWin, setPlayerWin] = useState<boolean>();
-  const [gameStatus, setGameStatus] = useState<GameStatus>(
-    GameStatus.notstarted
-  );
+  const [playerWin, setPlayerWin] = useState(false);
+  const [gameStatus, setGameStatus] = useState(GameStatus.notStarted);
+
+  const dealer = { name: "dealer", id: uuidv4(), points: countDealer };
 
   const setDealersHand = async (initialScore: number = 0): Promise<number> => {
     const card: ICard[] = await cardsApi.getNewCard(deckId, 1);
@@ -51,48 +51,41 @@ export const Game = () => {
     return actualScore;
   };
 
-  useEffect(() => {
-    dispatch(fetchDeckId());
-  }, [dispatch]);
-
-  const onStartSubmit = () => {
-    setWinner([]);
-    // setCountDealer(0);
-    setPlayerWin(false);
+  const onStartNewGameSubmit = useCallback(() => {
     setGameStatus(GameStatus.start);
+    dispatch(fetchDeckId());
+    unsetPreviousGame();
+  }, [gameStatus, deckId]);
+
+  const unsetPreviousGame = () => {
+    setWinner([]);
+    setCountDealer(0);
+    setPlayerWin(false);
     dispatch(unsetUserHand());
     setCardsForPlayer([]);
   };
 
-  const onFirstSubmit = async () => {
-    setGameStatus(GameStatus.inprogress);
+  const onBetFormSubmit = async () => {
+    setGameStatus(GameStatus.inProgress);
     setCardsForPlayer(await cardsApi.getNewCard(deckId, 2));
+    setCountDealer(await setDealersHand());
   };
 
-  const onSubmit = async () => {
+  const onHitSubmit = async () => {
     setCardsForPlayer(await cardsApi.getNewCard(deckId, 1));
   };
 
-  const setResultForPlayer = () => {
-    winner?.forEach((player) => {
-      player.name === email ? setPlayerWin(true) : setPlayerWin(false);
-    });
-    // do not changes into true
-  };
-
-  const onStopSubmit = async () => {
+  const onStaySubmit = useCallback(() => {
     setGameStatus(GameStatus.finished);
-
-    setCountDealer(await setDealersHand());
 
     setWinner(findWinner());
 
-    setResultForPlayer();
-  };
+    setResultForPlayer(findWinner());
+  }, [gameStatus, winner]);
 
   const createArrayOfAllPlayers = () => {
-    const player = { name: email, id: uuidv4(), points: pointsPlayer };
-    const dealer = { name: "dealer", id: uuidv4(), points: countDealer }; ///!!!!!
+    const player = { name: email, id, points: pointsPlayer };
+
     return [player, dealer, ...players];
   };
 
@@ -100,20 +93,27 @@ export const Game = () => {
     let winner: IPlayer[] = [];
 
     const players = createArrayOfAllPlayers();
-    console.log(players);
-    const lessThan21 = players.filter((player) => player!.points < 21);
-    const equal21 = players.filter((player) => player!.points === 21);
 
-    if (equal21.length > 0) {
-      return winner.concat(equal21);
+    const playersWithPointsLessThan21 = players.filter(
+      (player) => player.points < 21
+    );
+    const playersWithPointsEqual21 = players.filter(
+      (player) => player.points === 21
+    );
+
+    if (playersWithPointsEqual21.length) {
+      return winner.concat(playersWithPointsEqual21);
     }
-    if (equal21.length === 0 && lessThan21.length > 0) {
-      const users = lessThan21.filter(
+
+    if (
+      !playersWithPointsEqual21.length &&
+      playersWithPointsLessThan21.length
+    ) {
+      const users = playersWithPointsLessThan21.filter(
         (user) =>
           user.points ===
-          Math.max.apply(
-            Math,
-            lessThan21.map((players) => players.points)
+          Math.max(
+            ...playersWithPointsLessThan21.map((players) => players.points)
           )
       );
       return winner.concat(users);
@@ -121,93 +121,68 @@ export const Game = () => {
     return winner;
   };
 
+  const setResultForPlayer = (winner: IPlayer[]) => {
+    let user = winner.find((player) => player.id === id);
+    if (user?.id) {
+      setPlayerWin(true);
+    }
+  };
+
   return (
-    <div className="game">
-      <div className="game__robot">
+    <div className={styles.game}>
+      <div className={styles.robot}>
         <Robot />
-        <div className="game__comment">
-          {gameStatus === "finished" ? (
-            <div className="game__message">
-              the winner is...
-              {winner?.map((player) => (
-                <p key={player.id}>{player.name}</p>
-              ))}
-            </div>
+        <div className={styles.comment}>
+          {gameStatus === GameStatus.finished ? (
+            <>
+              <p className={styles.result}>dealer's points: {countDealer}</p>
+              <p className={styles.result}>
+                {email} points: {pointsPlayer}
+              </p>
+              <div className={styles.message}>
+                the winner is...
+                {winner?.map((player) => (
+                  <p key={player.id}>
+                    {player.name} with {player.points} points
+                  </p>
+                ))}
+              </div>
+            </>
           ) : (
-            <p className="game__message">good luck!</p>
+            <p className={styles.message}>good luck!</p>
           )}
         </div>
       </div>
-      <div
-        className={
-          gameStatus === "notstarted" || gameStatus === "finished"
-            ? "block-start"
-            : "block-start-hidden"
-        }
-      >
-        {budget === 0 ? (
-          <p className="game__message">sorry, you dont have money left</p>
+
+      {(gameStatus === GameStatus.notStarted ||
+        gameStatus === GameStatus.finished) &&
+        (!budget ? (
+          <p className={styles.message}>sorry, you dont have money left</p>
         ) : (
-          <Button
-            type="submit"
-            handleClick={onStartSubmit}
-            className="new-game"
-          >
+          <Button type="submit" handleClick={onStartNewGameSubmit}>
             START NEW GAME
           </Button>
-        )}
-      </div>
+        ))}
 
       <BetForm
         winner={playerWin}
-        onFirstSubmit={onFirstSubmit}
+        onBetFormSubmit={onBetFormSubmit}
         gameStatus={gameStatus}
       />
 
-      <div
-        className={
-          gameStatus === "inprogress" ? "block-start" : "block-start-hidden "
-        }
-      >
-        <Button
-          type="submit"
-          handleClick={onSubmit}
-          disabled={
-            gameStatus === "notstarted" || gameStatus === "finished"
-              ? true
-              : false
-          }
-          className="stay"
-        >
-          stay
-        </Button>
-        <Button
-          type="submit"
-          handleClick={onStopSubmit}
-          disabled={
-            gameStatus === "notstarted" || gameStatus === "finished"
-              ? true
-              : false
-          }
-          className="stay"
-        >
-          hit
-        </Button>
-
-        <p className="game__message">your points: {pointsPlayer}</p>
-      </div>
+      {gameStatus === GameStatus.inProgress && (
+        <div>
+          <Button type="submit" handleClick={onHitSubmit}>
+            hit
+          </Button>
+          <Button type="submit" handleClick={onStaySubmit}>
+            stay
+          </Button>
+          <p className={styles.message}>your points: {pointsPlayer}</p>
+        </div>
+      )}
 
       <PlayerHand cards={cardsForPlayer} />
-      <div>
-        {gameStatus === "finished" && countDealer > 0 ? (
-          <div>
-            <p className="game__result">dealer's points: {countDealer}</p>
-            <p className="game__result">player's points: {pointsPlayer}</p>
-          </div>
-        ) : (
-          " "
-        )}
-      </div>
     </div>
   );
 };

@@ -4,8 +4,8 @@ import { useAppDispatch } from "../../store/hooks";
 import { unsetUser } from "../../store/slices/userSlices";
 import { BudgetPlayer } from "../BudgetPlayer/BudgetPlayer";
 import { Button } from "../Button";
-import { LinkTemplate } from "../LinkTemplate";
-import "./style.scss";
+import { Link } from "../Link";
+import styles from "./Header.module.scss";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     dispatch(unsetUser());
-    navigate("/sign-up");
+    navigate(routes.SIGNIN);
   };
 
   const handleBack = () => {
@@ -21,14 +21,14 @@ export const Header = () => {
   };
 
   return (
-    <div className="buttons">
-      <Button type="submit" handleClick={handleBack} className="back">
+    <div className={styles.container}>
+      <Button type="submit" handleClick={handleBack}>
         Back
       </Button>
-      <LinkTemplate to={routes.ACCOUNT}>My Account</LinkTemplate>
+      <Link to={routes.ACCOUNT}>My Account</Link>
       <BudgetPlayer />
-      <Button type="submit" handleClick={handleLogout} className="logout">
-        Log Out
+      <Button type="submit" handleClick={handleLogout}>
+        Sign Out
       </Button>
     </div>
   );

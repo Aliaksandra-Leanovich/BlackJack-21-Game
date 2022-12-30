@@ -1,19 +1,20 @@
-import "./style.scss";
+import styles from "./Robot.module.scss";
+import { clsx } from "clsx";
 
 export const Robot = () => {
   return (
-    <div className="cute-robot-v1 bounce">
-      <div className="circle-bg">
-        <div className="robot-ear left"></div>
-        <div className="robot-head">
-          <div className="robot-face">
-            <div className="eyes left"></div>
-            <div className="eyes right"></div>
-            <div className="mouth"></div>
+    <div className={clsx(styles.robot, styles.bounce)}>
+      <div className={styles.circle}>
+        <div className={clsx(styles.ear, styles.left)}></div>
+        <div className={styles.head}>
+          <div className={styles.face}>
+            <div className={clsx(styles.eyes, styles.left)}></div>
+            <div className={clsx(styles.eyes, styles.right)}></div>
+            <div className={styles.mouth}></div>
           </div>
         </div>
-        <div className="robot-ear right"></div>
-        <div className="robot-body"></div>
+        <div className={clsx(styles.ear, styles.right)}></div>
+        <div className={styles.body}></div>
       </div>
     </div>
   );

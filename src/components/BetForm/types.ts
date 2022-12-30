@@ -1,5 +1,7 @@
+import { GameStatus } from "../../enums";
+
 export interface IBetFormProps {
-  winner?: boolean;
-  gameStatus: string;
-  onFirstSubmit: () => void;
+  winner: boolean;
+  gameStatus: GameStatus;
+  onBetFormSubmit: () => void;
 }

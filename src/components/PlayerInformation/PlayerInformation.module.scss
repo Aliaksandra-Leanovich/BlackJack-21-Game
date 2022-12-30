@@ -1,0 +1,19 @@
+.account {
+  width: 100%;
+  height: 60vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.email {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 600;
+
+  color: $infoColor;
+
+  margin-bottom: 10px;
+}

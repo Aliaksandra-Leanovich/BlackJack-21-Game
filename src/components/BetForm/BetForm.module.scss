@@ -1,0 +1,86 @@
+.bet {
+  padding: 20px;
+
+  border-radius: 20px;
+  border: 6px solid $primaryColor;
+  background-color: $infoLightColor;
+}
+
+.chip {
+  display: inline-block;
+
+  position: relative;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 50%;
+  border: 3px solid $primaryColor;
+  background-color: $infoColor;
+
+  &:after {
+    content: " ";
+
+    z-index: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    border: 4px dashed $bgColor;
+    border-radius: 50%;
+
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.count {
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 600;
+
+  color: $primaryColor;
+  margin-left: 10px;
+}
+
+.state {
+  background-color: rgba(0, 0, 0, 0.379);
+
+  margin: 10px 0;
+  padding: 20px;
+  border-radius: 20px;
+
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  padding: 10px 24px;
+  border: 2px solid $primaryColor;
+
+  &:hover {
+    transform: translateY(0px);
+    border: 2px solid $hoverColor;
+    background-color: $hoverColor;
+  }
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+
+  color: $primaryColor;
+
+  margin-bottom: 16px;
+}
+.input {
+  width: 250px;
+}
