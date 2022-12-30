@@ -1,10 +1,14 @@
 #### Install
 
-`npm install`
+```sh
+npm install
+```
 
 #### Run
 
-`npm run dev`
+```sh
+npm run dev
+```
 
 ## About The Project
 
@@ -24,5 +28,5 @@ Cards were taken from https://deckofcardsapi.com/ api.
 - [Typescript](https://www.typescriptlang.org/)
 - [React-Hook-Form](https://react-hook-form.com/)
 - [React-Router-Dom](https://v5.reactrouter.com/web/guides/quick-start)
-- [Vite] (https://vitejs.dev/)
-- [Sass] (https://sass-lang.com/)
+- [Vite](https://vitejs.dev/)
+- [Sass](https://sass-lang.com/)
